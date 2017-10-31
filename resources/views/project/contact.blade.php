@@ -1,0 +1,111 @@
+@extends('project.layout.master')
+
+@section('content')
+
+<div class="abt-bg">
+    <div class="tp-banner-container">
+		<div class="tp-banner" >
+        <ul>
+        <li data-transition="fade" data-slotamount="7" data-masterspeed="1000" >
+            
+						<img src="video/inner.jpg"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+						<div class="tp-caption fullscreenvideo"
+							data-x="0"
+							data-y="0"
+							data-speed="1000"
+							data-start="1000"
+							data-easing="Power4.easeOut"
+							data-endspeed="1500"
+							data-endeasing="Power4.easeIn"
+							data-autoplay="true"
+							data-autoplayonlyfirsttime="false"
+							data-nextslideatend="true"
+							data-forceCover="1"
+							data-aspectratio="16:9"
+							data-forcerewind="on"
+                            data-muted="true"
+							style="z-index: 2">
+						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='video/inner.jpg' data-setup="{}" muted>
+						<source src='video/inner.mp4' type='video/mp4' />
+						<source src='video/inner.webm' type='video/webm' />
+						<source src='video/inner.ogv' type='video/ogg' />
+						</video>
+						</div>
+                        
+                        
+                        
+					</li>	
+        </ul>
+
+        
+<div class="tp-bannertimer"></div>	</div>
+</div>
+</div>
+
+<div class="abt ">
+  <div class="container">
+    <div class="col-md-12 no-padding">
+       <div class="abt-tp con">
+         <h3>CONTACT US</h3>
+       </div>
+       
+    </div>
+  </div>
+</div>
+
+
+<div class="con-sec">
+  <div class="container">
+     <div class="col-md-12 no-padding">
+        <div class="gmap"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d66687.66019237443!2d51.567188886037854!3d25.286120630942946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sqa!4v1506842908713" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe></div>
+        
+        <div class="contact clearfix">
+          <div class="col-md-12 no-padding">
+          <div class="col-md-3">
+            <h4>Contact Details</h4>
+            <ul>
+              <li><img src="images/map.svg">Palm Tower B, Office 3205  <br> West Bay, P.O BOX 11093 <br> Doha - Qatar </li>
+              <li><a href="tel:+974 4414 6643"> <img src="images/phn.svg">  +974 4482 0250</a></li>
+              <li><a href="mailto:mail@gulf-yachts.com"> <img src="images/mail.svg">  mail@gulf-yachts.com</a></li>
+            </ul>
+          </div>
+          
+          <div class="col-md-9 no-padding">
+            <form>
+             <div class="col-md-6">
+              <div class="form-group"><input type="text" class="form-control" placeholder="Name"></div>
+              <div class="form-group"><input type="email" class="form-control" placeholder="E-Mail"></div>
+              <div class="form-group"><input type="text" class="form-control" placeholder="Phone"></div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group"><textarea class="form-control" placeholder="Message"></textarea></div>
+            </div>
+            <div class="col-md-12"><button class="butn">SEND</button></div>
+            </form>
+          </div>
+          
+          </div>
+          
+          <div class="col-md-12 no-padding cr-sec">
+             <div class="col-md-6">
+               <div class="cr">
+                 <div class="form-group"><input type="text" class="form-control" placeholder="Name"></div>
+                 <div class="form-group"><input type="text" class="form-control" placeholder="Phone"></div>
+                 <div class="form-group"><input type="text" class="form-control" placeholder="E-Mail"></div>
+                 <div class="form-group"><span id="filename">Select your file</span><label for="file-upload"><img src="images/attach.png"><input type="file" id="file-upload" class="form-control"></label></div>
+                 <div class="form-group"><button class="butn">SUBMIT</button></div>
+               </div>
+             </div>
+             <div class="col-md-6">
+               <h3>Send Your Resume</h3>
+               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+             </div>
+          </div>
+          
+        </div>
+        
+     </div>
+  </div>
+</div>        
+        
+@endsection
