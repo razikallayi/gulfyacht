@@ -41,16 +41,29 @@
   background-color: #3f51b5;
 }
 
-.bg-deep-purple{
- background-color:#a8172a !important;
-color:#FFF !important;
+.bg-project{
+ background-color:#ff7200 !important;
+ color:#FFF !important;
+}
+
+.bg-project h2{
+ color:#FFF !important; 
 }
 
 .pagination>.active>span{
-    background-color: #a8172a;
-    border-color: #a8172a;
+    background-color: #ff7200;
+    border-color: #ff7200;
 }
 
 .pagination>li>a, .pagination>li>span{
    color: #787675;
+}
+
+a{
+  font-weight: 600;
+  color:#444;
+}
+a:hover,a:focus,a:active{
+  color:#444;
+  text-decoration: none;
 }

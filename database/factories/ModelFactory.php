@@ -10,6 +10,9 @@
 | database. Just tell the factory how a default model should look.
 |
 */
+/*
+    $statuses = ['active','inactive'];
+    $status = $statuses[array_rand($statuses)];*/
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
@@ -24,46 +27,80 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
 });
 
 
-$factory->define(App\Models\Property::class, function (Faker\Generator $faker) {
-	// $faker->addProvider(new Faker\Provider\en_US\Person($faker));
+$factory->define(App\Models\Boat::class, function (Faker\Generator $faker) {
     $title = $faker->sentence($nbWords = 6, $variableNbWords = true);
     $slug = str_slug($title);
-    $typeId = App\Models\PropertyType::inRandomOrder()->first()->id;
+    $brandId = App\Models\Brand::inRandomOrder()->first()->id;
+    $typeId = App\Models\BoatType::inRandomOrder()->first()->id;
     return [
-        'title'           => $title,    
-        'slug'            => $slug,   
-        'description'     => $faker->realText(200,2),          
-        'category_id'     => ['1','2','3'][array_rand (['1','2','3'])],          
-        'property_type_id'=> $typeId,               
-        'price'           => $faker->randomNumber(6),    
-        'rental_period'   => ['Monthly','Yearly'][array_rand (['Monthly','Yearly'])],            
-        'address_1'       => $faker->streetName,        
-        'address_2'       => $faker->streetAddress,        
-        'city'            => $faker->city,   
-        'country'         => $faker->country,      
-        'bedroom'         => $faker->randomNumber(1),      
-        'bathroom'        => $faker->randomNumber(1),       
-        'area'            => $faker->randomNumber(3),   
-        'contact_number'  => $faker->e164PhoneNumber,             
-        'email'           => $faker->unique()->safeEmail,
-        'furnished'       => ['1','2','3'][array_rand (['1','2','3'])],        
-        'latitude'        => $faker->latitude,       
-        'longitude'       => $faker->longitude,        
-        'title_ar'        => $faker->title,       
-        'description_ar'  => $faker->realText(200,2),             
-        'is_featured'     => $faker->boolean,          
-        'is_published'    => $faker->boolean,           
-    ];
+        'title'            => $title,
+        'slug'             => $slug,
+        'description'      => $faker->realText(200),
+        'brand_id'         => $brandId,
+        'type_id'          => $typeId,
+        'price'            => $faker->randomNumber(6),
+        'currency'         => 'QAR',
+        'year'             => $faker->year,
+        'location'         => $faker->streetAddress,
+        'condition'        => $faker->word,
+        'email'            => $faker->unique()->safeEmail,
+        'phone'            => $faker->e164PhoneNumber,
 
-    // imageUrl($width = 640, $height = 480)
+        'length_overall'   => $faker->numberBetween(100),
+        'beam'             => $faker->randomNumber(3),
+        'draft'            => $faker->randomNumber(3),
+        'engine'           => $faker->randomNumber(3),
+        'power'            => $faker->randomNumber(4),
+        'engine_hours'     => $faker->randomNumber(1),
+        'fuel'             => $faker->randomNumber(3),
+        'max_speed'        => $faker->randomNumber(3),
+        'cruising_speed'   => $faker->randomNumber(3),
+
+        'no_of_cabins'     => $faker->randomNumber(1),
+        'no_of_berths'     => $faker->randomNumber(1),
+        'no_of_heads'      => $faker->randomNumber(1),
+        'crew'             => $faker->randomNumber(1),
+
+        'is_featured'      => $faker->boolean,
+        'is_published'     => $faker->boolean,
+        'listing_order'    => $faker->randomNumber(1),
+        'status'           => 'active',
+    ];
 });
 
 
-$factory->define(App\Models\Media::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Brand::class, function (Faker\Generator $faker) {
+    $location = 'public/'.App\Models\Brand::IMAGE_LOCATION;
+    $image = App\Helpers\Helper::uploadImage($faker->imageUrl(200,200),$location);
+    $filename = $image->getData()->filename;
+
+    $title =  $faker->word;
+    $slug = str_slug($title);
     return [
-       'image' => 'EC7wwefzipvBqPy1489838131.png',
-       'video' => null,
-       'table_name' => 'properties',
-       'item_id' => $faker->numberBetween($min = 0, $max = 50),
+       'name'           => $title,
+       'slug'            => $slug,
+       'url'             => $faker->url,
+       'image'           => $filename,
+       'description'     => $faker->sentence($nbWords = 6, $variableNbWords = true),
+       'is_featured'     => $faker->boolean,
+       'is_published'    => $faker->boolean,
+       'listing_order'   => $faker->randomNumber(1),
+       'status'          => 'active',
+    ];
+});
+
+
+
+$factory->define(App\Models\Media::class, function (Faker\Generator $faker) {
+    $location = 'public/'.App\Models\Boat::IMAGE_LOCATION;
+    $image = App\Helpers\Helper::uploadImage($faker->imageUrl(800,446),$location);
+    $filename = $image->getData()->filename;
+
+    $boatId = App\Models\Boat::inRandomOrder()->first()->id;
+    return [
+       'file_name'    => $filename,
+       'file_type'   => 'image',
+       'table_name'  => 'boats',
+       'item_id'     => $boatId,
     ];
 });

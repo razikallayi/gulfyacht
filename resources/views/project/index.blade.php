@@ -61,37 +61,7 @@
 </div>
 <div class="main-sec">
 <nav class="navbar navbar-default bootsnav">
-    <div class="container">      
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
-                <i class="fa fa-bars"></i>
-            </button>
-            <a class="navbar-brand" href="index.html"><img src="{{url('project/images/logo.png')}}" class="logo" alt=""></a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="navbar-menu">
-            <div class="button-wrap"><button data-dialog="somedialog" class="sear"><i class="fa fa-search"></i></button></div>
-            <ul class="nav navbar-nav navbar-right">
-
-                <li><a class="link link--surinami" href="index.html"><span data-letters-l="Ho" data-letters-r="me">Home</span></a></li>                    
-                <li class="dropdown"><a class="link link--surinami dropdown-toggle" href="#" data-toggle="dropdown"><span data-letters-l="Boa" data-letters-r="ts">Boats</span></a>
-                <ul class="dropdown-menu">
-                        <li><a href="new-boats.html">New Boats</a></li>
-                        <li><a href="new-boats.html">Used Boats</a></li>
-                    </ul>
-                </li>
-                <li><a class="link link--surinami" href="buy-boat.html"><span data-letters-l="Used" data-letters-r="Boats">inventory</span></a></li>
-                <li><a class="link link--surinami" href="sell-boats.html"><span data-letters-l="Sell Your" data-letters-r="Boats">Sell Your Boats</span></a></li>
-                <li><a class="link link--surinami" href="about.html"><span data-letters-l="About" data-letters-r="us">About Us</span></a></li>
-                <li><a class="link link--surinami" href="contact.html"><span data-letters-l="Contact" data-letters-r="Us">Contact Us</span></a></li>
-            </ul>
-            
-            
-        </div>
-    </div>
-    
-    
-       
+    @include('project.layout.partials.navigation')
 </nav>
 
 

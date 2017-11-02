@@ -11,12 +11,22 @@
 |
 */
 
+
+
+Route::get('clear',function(){
+	Artisan::call('view:clear');
+	Artisan::call('route:clear');
+	Artisan::call('config:clear');
+	Artisan::call('cache:clear');
+	Artisan::call('auth:clear-resets');
+	Artisan::call('clear-compiled');
+	dd('cleared cache files');
+});
+
 Route::get('/', 'MasterController@index');
 Route::get('about', 'MasterController@about');
 Route::get('boats/{slug?}', 'MasterController@boats');
-// new-boats
-// buy-boat
-// sell-boats
+
 Route::get('contact', 'MasterController@contact');
 
 Route::post('subscribe', 'MasterController@subscribe');
@@ -36,31 +46,31 @@ Route::group([
 	Route::get('my-account', 'DashboardController@myAccount');
 	Route::put('my-account', 'DashboardController@updateAccount');
 
-	Route::get('banners','BannerController@index');
-	Route::get('banners/add','BannerController@create');
-	Route::post('banners','BannerController@store');
-	Route::get('banners/edit/{id}','BannerController@edit');
-	Route::post('banners/sort','BannerController@sort');
-	Route::delete('banners/image','BannerController@deleteImage');
-	Route::post('banners/image','BannerController@saveImage');
-	Route::put('banners/{id}','BannerController@update');
-	Route::delete('banners/{id}','BannerController@destroy');
+	Route::get('boats','BoatController@index');
+	Route::get('boats/add','BoatController@create');
+	Route::post('boats','BoatController@store');
+	Route::get('boats/edit/{id}','BoatController@create');
+	Route::put('boats/edit/{id}','BoatController@update');
+	Route::get('boats/sort','BoatController@boatsCardView');
+	Route::post('boats/sort','BoatController@sort');
+	Route::delete('boats/image','BoatController@deleteImage');
+	Route::post('boats/image/sort','BoatController@sortImage');
+	Route::post('boats/image','BoatController@saveImage');
+	Route::delete('boats/{id}','BoatController@destroy');
 
-	Route::get('properties','PropertyController@index');
-	Route::get('properties/add','PropertyController@create');
-	Route::post('properties','PropertyController@store');
-	Route::get('properties/edit/{id}','PropertyController@edit');
-	Route::get('properties/sort','PropertyController@propertiesCardView');
-	Route::post('properties/sort','PropertyController@sort');
-	Route::delete('properties/image','PropertyController@deleteImage');
-	Route::post('properties/image/sort','PropertyController@sortImage');
-	Route::post('properties/image','PropertyController@saveImage');
-	Route::put('properties/{id}','PropertyController@update');
-	Route::delete('properties/{id}','PropertyController@destroy');
 
-	Route::get('propertytypes','PropertyTypeController@index');
-	Route::post('propertytypes','PropertyTypeController@store');
-	Route::delete('propertytypes/{id}','PropertyTypeController@destroy');
+	Route::get('brands','BrandController@index');
+	Route::get('brands/add','BrandController@create');
+	Route::post('brands','BrandController@store');
+	Route::get('brands/edit/{id}','BrandController@create');
+	Route::get('brands/sort','BrandController@brandsCardView');
+	Route::post('brands/sort','BrandController@sort');
+	Route::delete('brands/image','BrandController@deleteImage');
+	Route::post('brands/image/sort','BrandController@sortImage');
+	Route::post('brands/image','BrandController@saveImage');
+	Route::put('brands/{id}','BrandController@update');
+	Route::delete('brands/{id}','BrandController@destroy');
 
-	
+
+
 	});

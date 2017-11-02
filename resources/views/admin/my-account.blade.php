@@ -1,4 +1,4 @@
-﻿@extends('admin.layout.master')
+﻿@extends('admin.layout.app')
 
 @section('title', 'My Account')
 

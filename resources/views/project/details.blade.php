@@ -8,7 +8,7 @@
         <ul>
         <li data-transition="fade" data-slotamount="7" data-masterspeed="1000" >
             
-						<img src="video/inner.jpg"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+						<img src="{{url('project/video/inner.jpg')}}"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
 						<div class="tp-caption fullscreenvideo"
 							data-x="0"
 							data-y="0"
@@ -25,10 +25,10 @@
 							data-forcerewind="on"
                             data-muted="true"
 							style="z-index: 2">
-						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='video/inner.jpg' data-setup="{}" muted>
-						<source src='video/inner.mp4' type='video/mp4' />
-						<source src='video/inner.webm' type='video/webm' />
-						<source src='video/inner.ogv' type='video/ogg' />
+						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='{{url('project/video/inner.jpg')}}' data-setup="{}" muted>
+						<source src='{{url('project/video/inner.mp4')}}' type='video/mp4' />
+						<source src='{{url('project/video/inner.webm')}}' type='video/webm' />
+						<source src='{{url('project/video/inner.ogv')}}' type='video/ogg' />
 						</video>
 						</div>
                         
@@ -63,13 +63,13 @@
         <div class="sbbs">
           <h2>SELL / BUY BOATS ?</h2>
           <ul>
-            <li><a href="tel:+974 5581 3565"> <img src="images/phn.png"> +974 5581 3565</a></li>
-            <li><a href="mailto:ec@gulf-yachts.com"> <img src="images/mail.png"> ec@gulf-yachts.com</a></li>
+            <li><a href="tel:+974 5581 3565"> <img src="{{url('project/images/phn.png')}}"> +974 5581 3565</a></li>
+            <li><a href="mailto:ec@gulf-yachts.com"> <img src="{{url('project/images/mail.png')}}"> ec@gulf-yachts.com</a></li>
           </ul>
           
           <div class="bs"><a href="#">BUY</a></div>
           <div class="bs"><a href="#">SELL</a></div>
-          <div class="sbbs-img"><img src="images/sbbs.png"></div>
+          <div class="sbbs-img"><img src="{{url('project/images/sbbs.png')}}"></div>
         </div>
         </div>
         </div>
@@ -80,29 +80,29 @@
          <section class="det-slider">
         <div id="slider" class="flexslider">
           <ul class="slides">
-            <li><img src="images/ever1.jpg" class="img-responsive" /></li>
-            <li><img src="images/ever2.jpg" class="img-responsive" /></li>
-            <li><img src="images/ever3.jpg" class="img-responsive" /></li>
-            <li><img src="images/ever4.jpg" class="img-responsive" /></li>
-            <li><img src="images/ever1.jpg" class="img-responsive" /></li>
-            <li><img src="images/ever2.jpg" class="img-responsive" /></li>
-            <li><img src="images/ever3.jpg" class="img-responsive" /></li>
+            <li><img src="{{url('project/images/ever1.jpg')}}" class="img-responsive" /></li>
+            <li><img src="{{url('project/images/ever2.jpg')}}" class="img-responsive" /></li>
+            <li><img src="{{url('project/images/ever3.jpg')}}" class="img-responsive" /></li>
+            <li><img src="{{url('project/images/ever4.jpg')}}" class="img-responsive" /></li>
+            <li><img src="{{url('project/images/ever1.jpg')}}" class="img-responsive" /></li>
+            <li><img src="{{url('project/images/ever2.jpg')}}" class="img-responsive" /></li>
+            <li><img src="{{url('project/images/ever3.jpg')}}" class="img-responsive" /></li>
           </ul>
         </div>
         <div id="carousel" class="flexslider">
           <ul class="slides round">
-            <li><img src="images/ever1.jpg" /></li>
-            <li><img src="images/ever2.jpg" /></li>
-            <li><img src="images/ever3.jpg" /></li>
-            <li><img src="images/ever4.jpg" /></li>
-            <li><img src="images/ever1.jpg" /></li>
-            <li><img src="images/ever2.jpg" /></li>
-            <li><img src="images/ever3.jpg" /></li>
+            <li><img src="{{url('project/images/ever1.jpg')}}" /></li>
+            <li><img src="{{url('project/images/ever2.jpg')}}" /></li>
+            <li><img src="{{url('project/images/ever3.jpg')}}" /></li>
+            <li><img src="{{url('project/images/ever4.jpg')}}" /></li>
+            <li><img src="{{url('project/images/ever1.jpg')}}" /></li>
+            <li><img src="{{url('project/images/ever2.jpg')}}" /></li>
+            <li><img src="{{url('project/images/ever3.jpg')}}" /></li>
           </ul>
         </div>
         <div class="pm">
-           <div class="pm-sec"><a href="#" data-toggle="modal" data-target="#myModal"><img src="images/phn.png"></a></div>
-           <div class="pm-sec"><a href="mailto:ec@gulf-yachts.com"><img src="images/mail.png"></a></div>
+           <div class="pm-sec"><a href="#" data-toggle="modal" data-target="#myModal"><img src="{{url('project/images/phn.png')}}"></a></div>
+           <div class="pm-sec"><a href="mailto:ec@gulf-yachts.com"><img src="{{url('project/images/mail.png')}}"></a></div>
         </div>
       </section>
          
@@ -146,4 +146,38 @@
    </div>
 </div>        
         
+@endsection
+
+@section('scripts')
+<script type="text/javascript" src="{{url('project/js/price.js')}}"></script>
+<script defer src="{{url('project/js/jquery.flexslider.js')}}"></script>
+
+  <script type="text/javascript">
+    $(function(){
+      SyntaxHighlighter.all();
+    });
+    $(window).load(function(){
+      $('#carousel').flexslider({
+        animation: "slide",
+        controlNav: false,
+        animationLoop: false,
+        slideshow: false,
+        itemWidth: 90,
+        itemMargin: 10,
+        asNavFor: '#slider'
+      });
+
+      $('#slider').flexslider({
+        animation: "slide",
+        controlNav: false,
+        animationLoop: false,
+        slideshow: false,
+        sync: "#carousel",
+        start: function(slider){
+          $('body').removeClass('loading');
+        }
+      });
+    });
+  </script>
+
 @endsection

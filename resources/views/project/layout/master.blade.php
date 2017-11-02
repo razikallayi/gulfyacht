@@ -9,8 +9,6 @@
     <meta name="theme-color" content="#a8172a">
 @section('styles')
 
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-
 <link rel="stylesheet" type="text/css" href="{{url('project/css/bootstrap.min.css')}}" media="all">
 <link rel="stylesheet" type="text/css" href="{{url('project/css/bootsnav.css')}}" media="all">
 <link rel="stylesheet" type="text/css" href="{{url('project/css/font-awesome.css')}}" media="screen" />
@@ -32,36 +30,8 @@
 
 @section('header')
 <nav class="navbar navbar-default bootsnav navbar-fixed">
-    <div class="container">      
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
-                <i class="fa fa-bars"></i>
-            </button>
-            <a class="navbar-brand" href="{{url('/')}}"><img src="{{url('project/images/logo.png')}}" class="logo" alt=""></a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="navbar-menu">
-            <div class="button-wrap"><button data-dialog="somedialog" class="sear"><i class="fa fa-search"></i></button></div>
-            <ul class="nav navbar-nav navbar-right">
-
-                <li><a class="link link--surinami" href="{{url('/')}}"><span data-letters-l="Ho" data-letters-r="me">Home</span></a></li>                    
-                <li class="dropdown"><a class="link link--surinami dropdown-toggle" href="#" data-toggle="dropdown"><span data-letters-l="Boa" data-letters-r="ts">Boats</span></a>
-                <ul class="dropdown-menu">
-                        <li><a href="{{url('boats/new')}}">New Boats</a></li>
-                        <li><a href="{{url('boats/new')}}">Used Boats</a></li>
-                    </ul>
-                </li>
-                <li><a class="link link--surinami" href="{{url('boats/buy')}}"><span data-letters-l="Used" data-letters-r="Boats">inventory</span></a></li>
-                <li><a class="link link--surinami" href="{{url('boats/sell')}}"><span data-letters-l="Sell Your" data-letters-r="Boats">Sell Your Boats</span></a></li>
-                <li><a class="link link--surinami" href="{{url('about')}}"><span data-letters-l="About" data-letters-r="us">About Us</span></a></li>
-                <li><a class="link link--surinami" href="{{url('contact')}}"><span data-letters-l="Contact" data-letters-r="Us">Contact Us</span></a></li>
-            </ul>
-            
-            
-        </div>
-    </div>
     
-    
+    @include('project.layout.partials.navigation')
        
 </nav>
 

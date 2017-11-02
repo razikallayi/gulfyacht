@@ -1,7 +1,7 @@
     <!--Left Sidebar -->
     <aside id="leftsidebar" class="sidebar">
         <!-- User Info -->
-        <div class="user-info" style="background:#111111;">
+        <div class="user-info" style="background:#FFF;">
                 <div class="text-center" style="margin-top:30px">
                     <img src="{{url(config('whyte.project.logo'))}}" alt="User" />
                 </div>

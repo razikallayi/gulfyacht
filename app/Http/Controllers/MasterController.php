@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Helpers\Helper;
-use Validator;
 use App\Mail\ContactMail;
 use App\Mail\CareerMail;
 use Mail;
 use Session;
 use Redirect;
+use App\Models\Boat;
 
 class MasterController extends Controller
 {
@@ -31,37 +30,34 @@ class MasterController extends Controller
     }
 
 
-    public function boats($slug)
+    public function boats($slug=null)
     {
-        
-        switch ($slug) {
-              case 'buy':
-                  # code...
-                  break;
-              
-              case 'sell':
-                  # code...
-                  break;
 
-              case 'new':
-                  # code...
-                  break;
-              
-              default:
-                  # code...
-                  break;
-          }  
-        return view('project.details');
+        $boats=Boat::paginate(8);
+      switch ($slug) {
+        case 'buy':
+        $view= view('project.inventory');
+        break;
+
+        case 'sell':
+        $view=  view('project.boats');
+        break;
+
+        case 'used':
+        $view=  view('project.boats');
+        break;
+
+        case 'new':
+        $view=  view('project.boats');
+        break;
+
+        default:
+        $view= view('project.details');
+        break;
+      }
+      return $view->with(['boats'=>$boats]);
     }
-
-    public function detail($slug)
-    {
-       
-        return view('project.details');
-    }
-
-
-
+    
     public function contact()
     {
         return view('project.contact');
