@@ -348,7 +348,10 @@
 
   });
 
-$(document).ready(function() {
+  $(document).ready(function() {
+   $('#searchForm').submit();
+ });
+  $('input[name="brands[]"').change(function() {
    $('#searchForm').submit();
  });
 

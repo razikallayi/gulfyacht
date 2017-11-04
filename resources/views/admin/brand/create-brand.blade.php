@@ -73,7 +73,7 @@
 										<input type="hidden" id="image-input-{{substr( old('image'),0,-4)}}" name = "image" value="{{ old('image')}}">
 										<div id="image-preview-{{substr( old('image'),0,-4)}}" class="col-lg-3 col-md-4 col-sm-6 m-t-30" style="min-height:80px"><span><img class="img-responsive" src="{{url(App\Models\Brand::IMAGE_LOCATION)."/". old('image')}}"></span></div>
 										@endif
-										@if(null != $brand->image)
+										@if(isset($brand) && $brand->image !=null )
 										<input type="hidden" id="image-input-{{substr($brand->image,0,-4)}}" name = "image" value="{{$brand->image}}">
 										<div id="image-preview-{{substr($brand->image,0,-4)}}" class="col-lg-3 col-md-4 col-sm-6 m-t-30" style="min-height:80px"><span><img class="img-responsive" src="{{url(App\Models\Brand::IMAGE_LOCATION)."/".$brand->image}}"></span></div>
 										@endif
