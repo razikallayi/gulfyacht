@@ -25,7 +25,9 @@ Route::get('clear',function(){
 
 Route::get('/', 'MasterController@index');
 Route::get('about', 'MasterController@about');
-Route::get('boats/{slug?}', 'MasterController@boats');
+Route::get('boats', 'MasterController@search');
+Route::get('boats/{slug}', 'MasterController@boats');
+Route::get('sell', 'MasterController@sell');
 
 Route::get('contact', 'MasterController@contact');
 

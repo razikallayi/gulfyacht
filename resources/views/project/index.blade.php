@@ -154,72 +154,20 @@
       
       <div class="band-sec">
         <div id="owl-demo" class="owl-carousel">
-            <div class="item">
-              <span class="tooltip tooltip-effect-1">
-                  <span class="tooltip-item"><a href="#"><img src="{{url('project/images/brand1.png')}}"></a></span>
-                  <span class="tooltip-content clearfix">
-                      <span class="tooltip-text">
-                        <a href="#"><img src="{{url('project/images/bay1.jpg')}}" class="img-responsive"><p>2015 Prestige 550 Fly - Yacht</p></a>
-                        <a href="#"><img src="{{url('project/images/bay2.jpg')}}" class="img-responsive"><p>2015 Prestige 550 Fly - Yacht</p></a>
-                      </span>
-                  </span>
+@foreach($brands as $brand)
+          <div class="item">
+            <span class="tooltip tooltip-effect-1">
+              <span class="tooltip-item"><a href="{{$brand->detailPageUrl()}}"><img src="{{$brand->imageUrl()}}"></a></span>
+              <span class="tooltip-content clearfix">
+                <span class="tooltip-text">
+                  @foreach($brand->boats as $boat)
+                  <a href="{{$boat->detailPageUrl()}}"><img src="{{$boat->imageUrl()}}" class="img-responsive"><p>{{$boat->title}}</p></a>
+                  @endforeach
+                </span>
               </span>
-            </div>
-        <div class="item">
-              <span class="tooltip tooltip-effect-1">
-                  <span class="tooltip-item"><a href="#"><img src="{{url('project/images/brand2.png')}}"></a></span>
-                  <span class="tooltip-content clearfix">
-                      <span class="tooltip-text">
-                        <a href="#"><img src="{{url('project/images/pre1.jpg')}}" class="img-responsive"><p>2015 Prestige 550 Fly - Yacht</p></a>
-                        <a href="#"><img src="{{url('project/images/pre2.jpg')}}" class="img-responsive"><p>2015 Prestige 550 Fly - Yacht</p></a>
-                      </span>
-                  </span>
-              </span>
-            </div>
-            
-            <div class="item">
-              <span class="tooltip tooltip-effect-1">
-                  <span class="tooltip-item"><a href="#"><img src="{{url('project/images/brand3.png')}}"></a></span>
-                  <span class="tooltip-content clearfix">
-                      <span class="tooltip-text">
-                        <a href="#"><img src="{{url('project/images/ever1.jpg')}}" class="img-responsive"><p>2015 Prestige 550 Fly - Yacht</p></a>
-                        <a href="#"><img src="{{url('project/images/ever2.jpg')}}" class="img-responsive"><p>2015 Prestige 550 Fly - Yacht</p></a>
-                      </span>
-                  </span>
-              </span>
-            </div>
-            
-            <div class="item">
-              <span class="tooltip tooltip-effect-1">
-                  <span class="tooltip-item"><a href="#"><img src="{{url('project/images/brand4.png')}}"></a></span>
-                  <span class="tooltip-content clearfix">
-                      <span class="tooltip-text">
-                        <a href="#"><img src="{{url('project/images/jea1.jpg')}}" class="img-responsive"><p>2015 Prestige 550 Fly - Yacht</p></a>
-                        <a href="#"><img src="{{url('project/images/jea2.jpg')}}" class="img-responsive"><p>2015 Prestige 550 Fly - Yacht</p></a>
-                      </span>
-                  </span>
-              </span>
-            </div>
-            
-            <div class="item">
-              <span class="tooltip tooltip-effect-1">
-                  <span class="tooltip-item"><a href="http://www.chehabmarine.com/" target="_blank"><img src="{{url('project/images/brand5.png')}}"></a></span>
-                  
-              </span>
-            </div>
-            
-            <div class="item">
-              <span class="tooltip tooltip-effect-1">
-                  <span class="tooltip-item"><a href="#"><img src="{{url('project/images/brand2.png')}}"></a></span>
-                  <span class="tooltip-content clearfix">
-                      <span class="tooltip-text">
-                        <a href="#"><img src="{{url('project/images/pre1.jpg')}}" class="img-responsive"><p>2015 Prestige 550 Fly - Yacht</p></a>
-                        <a href="#"><img src="{{url('project/images/pre2.jpg')}}" class="img-responsive"><p>2015 Prestige 550 Fly - Yacht</p></a>
-                      </span>
-                  </span>
-              </span>
-            </div>
-            
+            </span>
+          </div>
+@endforeach
             
         
         </div>

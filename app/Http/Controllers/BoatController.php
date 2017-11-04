@@ -50,39 +50,43 @@ class BoatController extends Controller
   {
     $this->validate($request, [
       'title'             =>'required|unique:boats',
-      'description'       =>'nullable',
       'type_id'           =>'required',
+      'brand_id'          =>'required',
+      
+      'length'            =>'numeric|nullable',
       'price'             =>'numeric|nullable',
-      'year'              =>'numeric|nullable',
-      'location'          =>'',
-      'condition'         =>'',
-      'email'             =>'',
-      'phone'             =>'',
-      'length_overall'    =>'',
-      'beam'              =>'',
-      'draft'             =>'',
-      'engine'            =>'',
-      'power'             =>'',
-      'engine_hours'      =>'',
-      'fuel'              =>'',
-      'max_speed'         =>'',
-      'cruising_speed'    =>'',
-      'no_of_cabins'      =>'',
-      'no_of_berths'      =>'',
-      'no_of_heads'       =>'',
-      'crew'              =>'',
-      'is_featured'       =>'',
-      'is_published'      =>'',
+      'currency'          =>'nullable',
+      'year'              =>'numeric|nullable|date_format:Y',
+      'location'          =>'nullable|',
+      'condition'         =>'nullable|',
+      
+      'email'             =>'nullable|email',
+      'phone'             =>'nullable|',
+      'description'       =>'nullable',
+      
+      'length_overall'    =>'nullable|',
+      'beam'              =>'nullable|',
+      'draft'             =>'nullable|',
+      'engine'            =>'nullable|',
+      'power'             =>'nullable|',
+      'engine_hours'      =>'nullable|',
+      'fuel'              =>'nullable|',
+      'max_speed'         =>'nullable|',
+      'cruising_speed'    =>'nullable|',
+      
+      'no_of_cabins'      =>'nullable|',
+      'no_of_berths'      =>'nullable|',
+      'no_of_heads'       =>'nullable|',
+      'crew'              =>'nullable|',
+      'is_featured'       =>'nullable|',
+      'is_published'      =>'nullable|',
     ]);
 
 
 
     $request['slug'] = str_slug($request->title);
     $boat=Boat::create($request->all());
-    if(is_array($request->amenty)){
-      $amenties = Amenty::find(array_keys($request->amenty));
-      $boat->amenties()->saveMany($amenties);
-    }
+    
     if($request->hasFile('image')){
       $location=Boat::IMAGE_LOCATION;
       foreach($request->image as $img) 
@@ -98,13 +102,8 @@ class BoatController extends Controller
       }
     }
 
-        // if($request->has('is_thumbnail')){
-        //  $media = Media::where('image',$request->is_thumbnail)->first();
-        //  $media->is_thumbnail = true;
-        //  $media->save();
-        // }
 
-    if($boat){
+   if($boat){
      session()->flash('status','alert-success');
      session()->flash('message','Successfully Added <b>'.$boat->title.'</b>!');
    }else{
@@ -124,78 +123,35 @@ class BoatController extends Controller
 public function update($id,Request $request)
 {
    $boat=Boat::find($id);
-   $validator = Validator::make($request->all(), [
+   $this->validate($request, [
      'title'            => 'required|unique:boats,title,'.$boat->id,
-     'reference_id'            => 'required',
-             'category_id'      => 'required',
-             // 'image'            => 'required',
-              'image.*'            => 'image|max:2048',
-             'reference_id' => 'required',
-             'boat_type_id' => 'required',
-             // 'description'      => '',
-             'price'            => 'nullable|numeric|min:0',
-             'currency'            => 'nullable',
-             // 'address_1'        => '',
-             // 'address_2'        => '',
-             // 'city'             => '',
-             // 'country'          => '',
-             'bedroom'          => 'nullable|numeric|min:-1',
-             'bathroom'         => 'nullable|numeric|min:0',
-             // 'area'             => '',
-             // 'contact_number'   => '',
-             'email'            => 'nullable|email',
-             // 'amenties'         => '',
-             // 'furnished'        => '',
-             // 'latitude'         => '',
-             // 'longitude'        => '',
-             // 'title_ar'         => '',
-             // 'description_ar'   => '',
-             // 'is_featured'      => '',
-             // 'is_published'     => '',
-     ])->validate();
+     'description'       =>'nullable',
+     'type_id'           =>'required',
+     'price'             =>'numeric|nullable',
+     'year'              =>'numeric|nullable|date_format:Y',
+     'location'          =>'nullable|',
+     'condition'         =>'nullable|',
+     'email'             =>'nullable|email',
+     'phone'             =>'nullable|',
+     'length_overall'    =>'nullable|',
+     'beam'              =>'nullable|',
+     'draft'             =>'nullable|',
+     'engine'            =>'nullable|',
+     'power'             =>'nullable|',
+     'engine_hours'      =>'nullable|',
+     'fuel'              =>'nullable|',
+     'max_speed'         =>'nullable|',
+     'cruising_speed'    =>'nullable|',
+     'no_of_cabins'      =>'nullable|',
+     'no_of_berths'      =>'nullable|',
+     'no_of_heads'       =>'nullable|',
+     'crew'              =>'nullable|',
+     'is_featured'       =>'nullable|',
+     'is_published'      =>'nullable|',
+   ]);
 
-     $boat->reference_id            = $request->reference_id;
-     $boat->title            = $request->title;
-     $boat->slug             = str_slug($request->title);
-     $boat->description      = $request->description;
-     $boat->category_id      = $request->category_id;
-     $boat->boat_type_id = $request->boat_type_id;
-     $boat->price            = $request->price;
-     $boat->currency            = $request->currency;
-     $boat->rental_period            = $request->rental_period;
-     $boat->address_1        = $request->address_1;
-     $boat->address_2        = $request->address_2;
-     $boat->city             = $request->city;
-     $boat->country          = $request->country;
-     $boat->bedroom          = $request->bedroom;
-     $boat->bathroom         = $request->bathroom;
-     $boat->area             = $request->area;
-     $boat->contact_number   = $request->contact_number;
-     $boat->email            = $request->email;
-     $boat->furnished        = $request->furnished;
-     $boat->latitude         = $request->latitude;
-     $boat->longitude        = $request->longitude;
-     $boat->title_ar         = $request->title_ar;
-     $boat->description_ar   = $request->description_ar;
-     $boat->is_featured      = $request->is_featured?true:false;
-     $boat->is_published     = $request->is_published?true:false;
-     $boat->save();
-
-      $boat->amenties()->detach();
-      if(is_array($request->amenty)){
-        $amenties = Amenty::find(array_keys($request->amenty));
-        $boat->amenties()->saveMany($amenties);
-      }
-
-            // if($request->has('image')){
-            //     foreach ($request->image as $image) {
-            //         $media = new Media;
-            //         $media->image = $image;
-            //         $media->table_name = $boat->getTable();
-            //         $media->item_id = $boat->id;
-            //         $media->save();
-            //     }
-            // }
+     
+     $boat->update($request->all());
 
     if($request->hasFile('image')){
       $location=Boat::IMAGE_LOCATION;

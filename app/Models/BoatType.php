@@ -10,4 +10,10 @@ class BoatType extends Model
         'name',
         'is_published',
         ];
+
+        public static function getIdByName($slug){
+        	$first = self::where('name',$slug)->firstOrFail();
+        	return $first->id;
+        }
+
 }

@@ -37,6 +37,7 @@
 						<th width="10">Sl.No</th>
 						<th  width="10">Image</th>
 						<th>Title</th>
+						<th>Brand</th>
 						<th>Boat Type</th>
 						<th>Price</th>
 						<th width="10">Edit</th>
@@ -55,6 +56,7 @@
 						@endif
 						</td>
 						<td><a href="{{$boat->detailPageUrl()}}" target="_blank">{{$boat->title}}</a></td>
+						<td>{{@$boat->brand->name}}</td>
 						<td>{{@$boat->type->name}}</td>
 						<td>{{number_format($boat->price)}} {{$boat->currency}}</td>
 						<td><a href="{{url('admin/boats/edit/'.$boat->id)}}"><i class="material-icons">edit</i></a></td>

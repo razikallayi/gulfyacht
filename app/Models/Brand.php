@@ -25,6 +25,11 @@ class Brand extends Model
         return $this->url;
     }
 
+    public static function getIdByName($names){
+        return self::whereIn('name',$names)->pluck('id');
+    }
+
+
     public function boats(){
         return $this->hasmany('App\Models\Boat','brand_id','id');
     }

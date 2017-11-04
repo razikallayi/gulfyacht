@@ -12,15 +12,17 @@ class Boat extends Model
         protected $fillable = [
         'title',
         'slug',
-        'description',
         'type_id',
+        'brand_id',
         'price',
         'currency',
-        'year',
         'location',
+        'year',
+        'length',
         'condition',
         'email',
         'phone',
+        'description',
         'length_overall',
         'beam',
         'draft',
@@ -69,9 +71,16 @@ class Boat extends Model
         return url('boats/'.$this->slug);
     }
 
+    public function increasePopularity(){
+
+        $this->popularity =  $this->popularity +0.001;
+        $this->save();
+        return $this->popularity;
+    }
+
     public function imageUrl($imageName=null,$width=null,$height=null){
         if(is_null($imageName)){
-            if(is_null($this->images)){
+            if(is_null($this->images) || $this->images->isEmpty()){
                 return;
             }
             $imageName= $this->images->first()->file_name;

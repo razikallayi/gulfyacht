@@ -18,16 +18,20 @@ class CreateBoatsTable extends Migration
 
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
-            $table->text('description')->nullable();
+            
             $table->string('brand_id')->nullable();
             $table->string('type_id')->nullable();
+            
             $table->double('price')->nullable();
             $table->string('currency')->nullable();
-            $table->integer('year')->nullable();
             $table->string('location')->nullable();
+            $table->integer('year')->nullable();
+            $table->integer('length')->nullable();
             $table->string('condition')->nullable();
+            
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
+            $table->text('description')->nullable();
 
             $table->string('length_overall')->nullable();
             $table->string('beam')->nullable();
@@ -48,6 +52,9 @@ class CreateBoatsTable extends Migration
             $table->boolean('is_published')->default(true);
             $table->integer('listing_order')->nullable();
             $table->string('status')->nullable();
+
+
+            $table->double('popularity')->default(0);
 
             $table->index('slug');
 

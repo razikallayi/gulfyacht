@@ -178,7 +178,7 @@
            <li><a href="{{url('about')}}">About Us</a></li>
            <li><a href="{{url('boats/new')}}">Boats</a></li>
            <li><a href="{{url('boats/buy')}}">Used Boats</a></li>
-           <li><a href="{{url('boats/sell')}}">Sell Your Boat</a></li>
+           <li><a href="{{url('sell')}}">Sell Your Boat</a></li>
            <li><a href="{{url('contact')}}">Contact Us</a></li>
          </ul>
        </div>
@@ -196,7 +196,6 @@
 
 @show
 
-@section('scripts')
 
 <script src="{{url('project/js/bootsnav.js')}}" type="text/javascript"></script>
 <script type="text/javascript" src="{{url('project/js/jquery.themepunch.tools.min.js')}}"></script>
@@ -217,6 +216,8 @@
   }); 
 </script>
 
+
+@section('scripts')
 <script src="{{url('project/js/owl.carousel.js')}}"></script>
 <script>
 $(document).ready(function() {
@@ -287,7 +288,6 @@ $.ajaxSetup({
     } );
   })();
 </script>
-<script type="text/javascript" src="{{url('project/js/price.js')}}"></script>
 
 @show
 

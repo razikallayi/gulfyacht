@@ -33,25 +33,37 @@
 						@endif
 
 
-						@if (session()->get('message'))
-						<div class="alert alert-danger">
+						@if (session()->has('message'))
+						<div class="alert {{session()->get('status')}}">
 							<ul>
-								<li>{{session()->get('message')}}</li>
+								<li>{!!session()->get('message')!!}</li>
 							</ul>
 						</div>
-
 						@endif
 
 
 						<div class="row clearfix">
 
-							<div class="col-sm-12">
+							<div class="col-sm-6">
 								<label>Boat Type<code>*</code> </label>
 								<div class="m-t-20">
 									<select name="type_id"  class="form-control show-tick" required>
 										@if(isset($boatTypes) != false)
 										@foreach($boatTypes as $type)
-											<option value="{{$type->id}}">{{$type->name}}</option>
+										<option value="{{$type->id}}" {{ (isset($boat) && @$boat->type->id == $type->id )?' selected ':''}} >{{title_case($type->name)}}</option>
+										@endforeach
+										@endif
+									</select>
+								</div>
+							</div>
+
+							<div class="col-sm-6">
+								<label>Brand<code>*</code> </label>
+								<div class="m-t-20">
+									<select name="brand_id"  class="form-control show-tick" required>
+										@if(isset($brands) != false)
+										@foreach($brands as $brand)
+											<option value="{{$brand->id}}" {{ (isset($boat) && @$boat->brand->id == $brand->id )?' selected ':''}} >{{$brand->name}}</option>
 										@endforeach
 										@endif
 									</select>
@@ -89,16 +101,16 @@
 								<label>Year</label>
 								<div class="form-group ">
 									<div class="form-line">
-										<input type="number" value="{{$boat->year or old('year')}}" name="year" maxlength="191" class="form-control" >
+										<input type="number" value="{{$boat->year or old('year')}}" name="year" class="form-control" >
 									</div>
 								</div>
 							</div>
 
 							<div class="col-sm-6">
-								<label>Length</label>
+								<label>Length (in Ft)</label>
 								<div class="form-group ">
 									<div class="form-line">
-										<input type="text" value="{{$boat->length or old('length')}}" name="length" maxlength="191" class="form-control" >
+										<input type="number" value="{{$boat->length or old('length')}}" name="length" class="form-control" >
 									</div>
 								</div>
 							</div>
@@ -133,10 +145,10 @@
 							</div>
 
 							<div class="col-md-6">
-								<label>Mobile</label>
+								<label>Phone</label>
 								<div class="form-group ">
 									<div class="form-line">
-										<input type="number" value="{{$boat->mobile or old('mobile')}}" name="mobile" maxlength="191" class="form-control" >
+										<input type="number" value="{{$boat->phone or old('phone')}}" name="phone" maxlength="191" class="form-control" >
 									</div>
 								</div>
 							</div>

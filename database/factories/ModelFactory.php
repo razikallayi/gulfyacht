@@ -35,16 +35,18 @@ $factory->define(App\Models\Boat::class, function (Faker\Generator $faker) {
     return [
         'title'            => $title,
         'slug'             => $slug,
-        'description'      => $faker->realText(200),
         'brand_id'         => $brandId,
         'type_id'          => $typeId,
+        'location'         => $faker->streetAddress,
         'price'            => $faker->randomNumber(6),
         'currency'         => 'QAR',
+        'length'           => $faker->randomNumber(3),
         'year'             => $faker->year,
-        'location'         => $faker->streetAddress,
         'condition'        => $faker->word,
+        
         'email'            => $faker->unique()->safeEmail,
         'phone'            => $faker->e164PhoneNumber,
+        'description'      => $faker->realText(200),
 
         'length_overall'   => $faker->numberBetween(100),
         'beam'             => $faker->randomNumber(3),

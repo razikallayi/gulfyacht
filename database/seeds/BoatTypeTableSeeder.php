@@ -12,10 +12,9 @@ class BoatTypeTableSeeder extends Seeder
     public function run()
     {
        $boatTypes = [
-           ['name' => 'New'],
-           ['name' => 'Used'],
-           ['name' => 'Sell'],
-           ['name' => 'Buy'],
+           ['name' => 'new'],
+           ['name' => 'used'],
+           ['name' => 'buy'],
        ];
 
        DB::table('boat_types')->insert($boatTypes);
