@@ -13,8 +13,7 @@ class BoatTypeTableSeeder extends Seeder
     {
        $boatTypes = [
            ['name' => 'new'],
-           ['name' => 'used'],
-           ['name' => 'buy'],
+           ['name' => 'used']
        ];
 
        DB::table('boat_types')->insert($boatTypes);

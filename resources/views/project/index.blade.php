@@ -160,8 +160,8 @@
               <span class="tooltip-item"><a href="{{$brand->detailPageUrl()}}"><img src="{{$brand->imageUrl()}}"></a></span>
               <span class="tooltip-content clearfix">
                 <span class="tooltip-text">
-                  @foreach($brand->boats as $boat)
-                  <a href="{{$boat->detailPageUrl()}}"><img src="{{$boat->imageUrl()}}" class="img-responsive"><p>{{$boat->title}}</p></a>
+                  @foreach($brand->products->take(2) as $product)
+                  <a href="{{$product->detailPageUrl()}}"><img src="{{$product->imageUrl()}}" class="img-responsive"><p>{{$product->name}}</p></a>
                   @endforeach
                 </span>
               </span>

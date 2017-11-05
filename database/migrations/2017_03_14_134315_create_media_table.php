@@ -18,6 +18,7 @@ class CreateMediaTable extends Migration
 
             $table->string('file_name')->nullable();
             $table->string('file_type')->nullable();
+            $table->string('location')->nullable();
             $table->string('table_name')->nullable();
             $table->string('item_id')->nullable();
             $table->boolean('is_thumbnail')->default(false);

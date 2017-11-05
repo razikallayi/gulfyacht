@@ -17,7 +17,7 @@ class MasterController extends Controller
 {
 
 
-    public $itemCount = 13;
+    public $itemCount = 50;
 
     public function index()
     {
@@ -74,14 +74,14 @@ class MasterController extends Controller
             $brands = $brands = Brand::orderBy('listing_order','desc')->orderBy('updated_at','desc')->get();
             return view('project.boats')->with([
                 'brands'=>$brands,
-                'page'=>strtolower($request->type),
+                'page'=>strtolower($request->get('type','buy')),
                 'filterLimits'=>$this->getFilterLimits()
             ]);
         }
 
         $boats = Boat::query();
 
-        if($request->has('type')){
+        if($request->has('type') && $request->get('type','buy') != 'buy'){
             $typeId  = BoatType::getIdByName($request->type);
             $boats= $boats->where('type_id',$typeId);
         }
@@ -137,7 +137,8 @@ class MasterController extends Controller
         }
 
 
-        $boats = $boats->select('id','title','description','price','currency','location')->paginate(8);
+        $boats = $boats->select('id','title','description','price','currency','slug','location')
+                ->paginate($this->itemCount);
 
         foreach($boats->items() as $boat){
             $boat->imageUrl = $boat->imageUrl();
@@ -148,7 +149,7 @@ class MasterController extends Controller
 
         $search = [ 
             'boats'=> $boats,
-            'page'=>$request->type?strtolower($request->type):'new'];
+            'page'=>$request->type?strtolower($request->type):'buy'];
         return $search;
         }
 
@@ -191,80 +192,4 @@ class MasterController extends Controller
         }
 
 
-
-        public function populateLocations(Request $request){
-            if(!$request->q){
-                return;
-            };
-            $properties =  Property::where('is_published',true)
-            ->where('city','!='," ")
-            ->where('city','like',"%".$request->q."%")
-            ->select('city')
-            ->distinct()
-            ->orderBy('city')
-            ->get();
-
-            return $properties->pluck('city');
-        }
-
-
-/*
-public function search(Request $request)
-{
-$query=Property::query();
-$categoryId = 1;
-if($request->has('category')){
-$categoryId = Property::getCategoryIdFromName($request->category);
-if($categoryId !=null && $categoryId != 0){
-$query->where('category_id',$categoryId);
-}
-}
-if($request->has('type')){
-$propertyType = PropertyType::where('name',$request->type)->first();
-if($propertyType !=null){
-$query->where('property_type_id',$propertyType->id);
-}
-}
-
-if($request->has('country')){
-$query->where('country','like',$request->country);
-}
-
-if($request->has('location')){
-$query->where('city','like',$request->location)
-->orWhere('address_1','like',$request->location)
-->orWhere('address_2','like',$request->location);
-}
-
-if($request->has('min_price')){
-$query->where('price','>=',$request->min_price);
-}
-
-if($request->has('max_price')){
-$query->where('price','<=',$request->max_price);
-}
-
-if($request->has('bedroom')){
-$query->where('bedroom',$request->bedroom);
-}
-
-if($request->has('furnish')){
-$furnishId = Property::getFurnishIdFromName($request->furnish);
-if($furnishId !=null){
-$query->where('furnished',$furnishId);
-}
-}
-
-if($request->has('is_featured')){
-$query->where('is_featured',true);
-}
-
-$properties = $query->orderBy('listing_order','desc')
-->orderBy('updated_at','desc')
-->paginate($this->itemCount);
-return view('project.rent')
-->with('properties' , $properties)
-->with('categoryId' , $categoryId)
-->withInput($request->all());
-}*/
 }

@@ -46,10 +46,19 @@ class BoatController extends Controller
   }
 
 
-  public function store(Request $request)
+  public function store($id=null,Request $request)
   {
-    $this->validate($request, [
-      'title'             =>'required|unique:boats',
+    if($id==null){
+      $update = false;
+      $title_rule ='required|unique:boats';
+    }else{
+      $update= true;
+      $boat=Boat::find($id);
+      $title_rule = 'required|unique:boats,title,'.$boat->id;
+    }
+
+    $rule = [
+      'title'             =>$title_rule,
       'type_id'           =>'required',
       'brand_id'          =>'required',
       
@@ -80,119 +89,58 @@ class BoatController extends Controller
       'crew'              =>'nullable|',
       'is_featured'       =>'nullable|',
       'is_published'      =>'nullable|',
-    ]);
+    ];
 
-
+    $this->validate($request, $rule);
 
     $request['slug'] = str_slug($request->title);
-    $boat=Boat::create($request->all());
-    
+
+    if($update){
+      $updated = 'Updated';
+      $boat->update($request->all());
+    } 
+    else 
+    {
+      $updated = 'Added';
+      $boat=Boat::create($request->all());
+    }
+
     if($request->hasFile('image')){
       $location=Boat::IMAGE_LOCATION;
-      foreach($request->image as $img) 
+      foreach($request->file('image') as $img) 
       {
+       
         $imageDetails = Helper::uploadImage($img, $location);
         $filename = $imageDetails->getData()->filename;
         
         $media = new Media;
-        $media->image = $filename;
+        $media->file_name = $filename;
+        $media->file_type = 'image';
+        $media->location = $location;
         $media->table_name = $boat->getTable();
         $media->item_id = $boat->id;
         $media->save();
       }
     }
+
 
 
    if($boat){
      session()->flash('status','alert-success');
-     session()->flash('message','Successfully Added <b>'.$boat->title.'</b>!');
+     session()->flash('message','Successfully '.$updated.' <b>'.$boat->title.'</b>!');
    }else{
      session()->flash('status','alert-danger');
-     session()->flash('message', 'Adding Failed!');
+     session()->flash('message', 'Failed!');
    }
    return back();
  }
-
-
- public function edit($id)
- {
-  $boat = Boat::findOrFail($id);
-  return view('admin.boat.edit-boat',compact('boat'));
-}
-
-public function update($id,Request $request)
-{
-   $boat=Boat::find($id);
-   $this->validate($request, [
-     'title'            => 'required|unique:boats,title,'.$boat->id,
-     'description'       =>'nullable',
-     'type_id'           =>'required',
-     'price'             =>'numeric|nullable',
-     'year'              =>'numeric|nullable|date_format:Y',
-     'location'          =>'nullable|',
-     'condition'         =>'nullable|',
-     'email'             =>'nullable|email',
-     'phone'             =>'nullable|',
-     'length_overall'    =>'nullable|',
-     'beam'              =>'nullable|',
-     'draft'             =>'nullable|',
-     'engine'            =>'nullable|',
-     'power'             =>'nullable|',
-     'engine_hours'      =>'nullable|',
-     'fuel'              =>'nullable|',
-     'max_speed'         =>'nullable|',
-     'cruising_speed'    =>'nullable|',
-     'no_of_cabins'      =>'nullable|',
-     'no_of_berths'      =>'nullable|',
-     'no_of_heads'       =>'nullable|',
-     'crew'              =>'nullable|',
-     'is_featured'       =>'nullable|',
-     'is_published'      =>'nullable|',
-   ]);
-
-     
-     $boat->update($request->all());
-
-    if($request->hasFile('image')){
-      $location=Boat::IMAGE_LOCATION;
-      foreach($request->image as $img) 
-      {
-        $imageDetails = Helper::uploadImage($img, $location);
-        $filename = $imageDetails->getData()->filename;
-        
-        $media = new Media;
-        $media->image = $filename;
-        $media->table_name = $boat->getTable();
-        $media->item_id = $boat->id;
-        $media->save();
-      }
-    }
-
-            // if($request->has('is_thumbnail')){
-            //   Media::where('item_id',$boat->id)->update(['is_thumbnail'=>false]);
-            //   $media = Media::where('image',$request->is_thumbnail)->first();
-            //   $media->is_thumbnail = true;
-            //   $media->save();
-            // }
-
-    if($boat){
-     session()->flash('status','alert-success');
-     session()->flash('message','Successfully Updated <b>'.$boat->title.'</b>!');
-    }else{
-     session()->flash('status','alert-danger');
-     session()->flash('message', 'Updating Failed!');
-    }
-    return $this->index($request);
-    }
-
-
 
     public function destroy($id=null){
       if($id!=null){
         $boat = Boat::findOrFail($id);
         $location = str_finish(Boat::IMAGE_LOCATION, '/');
         foreach ($boat->medias as $media) {
-          $filename = $media->image;
+          $filename = $media->file_name;
           if($filename!=null){
             if(file_exists($location.$filename)){
               unlink($location.$filename);
@@ -221,7 +169,7 @@ public function update($id,Request $request)
       $location = str_finish(Boat::IMAGE_LOCATION, '/');
       $filename = $request->filename;
 
-      $imageid = Media::where('image',$filename)->first(['id']);
+      $imageid = Media::where('file_name',$filename)->first(['id']);
       if($imageid !=null){
         $imageid->delete();
       }
@@ -241,7 +189,7 @@ public function update($id,Request $request)
                       ]);
       $counter = Media::where('item_id',$request->boatId)->count();
       foreach ($request->sort as $image) {
-        Media::where('image', 'like',$image."%")
+        Media::where('file_name', 'like',$image."%")
         ->where('item_id',$request->boatId)
         ->update(['listing_order' => $counter--]);
       }

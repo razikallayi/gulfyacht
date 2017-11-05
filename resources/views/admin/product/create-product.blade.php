@@ -2,7 +2,7 @@
 
 @section('active_menu','mnu-brand')
 
-@section('active_submenu','add')
+@section('active_submenu','add-product')
 
 
 @section('content')
@@ -11,14 +11,14 @@
 	<div class="col-sm-12">
 		<div class="card">
 			<div class="header bg-project">
-				<h2 class="">@if(isset($brand)) {{"Edit"}} @else {{"Add"}}  @endif Brand </h2>
+				<h2 class="">@if(isset($product)) {{"Edit"}} @else {{"Add"}}  @endif Product </h2>
 			</div>
 			<div class="body">
-				@if(isset($brand))
-				<form id="form_validation" method="POST" action="{{url('admin/brands/edit/'.$brand->id)}}" enctype="multipart/form-data">
+				@if(isset($product))
+				<form id="form_validation" method="POST" action="{{url('admin/products/edit/'.$product->id)}}" enctype="multipart/form-data">
 				{{method_field('PUT')}}
 				@else
-				<form id="form_validation" method="POST" action="{{url('admin/brands')}}" enctype="multipart/form-data">
+				<form id="form_validation" method="POST" action="{{url('admin/products')}}" enctype="multipart/form-data">
 				@endif
 				{{csrf_field()}}
 
@@ -45,10 +45,23 @@
 						<div class="row clearfix">
 
 							<div class="col-sm-12">
+								<label>Brand<code>*</code> </label>
+								<div class="m-t-20">
+									<select name="brand_id"  class="form-control show-tick" required>
+										@if(isset($brands) != false)
+										@foreach($brands as $brand)
+										<option value="{{$brand->id}}" {{ (isset($product) && @$product->brand->id == $brand->id )?' selected ':''}} >{{$brand->name}}</option>
+										@endforeach
+										@endif
+									</select>
+								</div>
+							</div>
+
+							<div class="col-sm-12">
 								<label>Name<code>*</code> </label>
 								<div class="form-group ">
 									<div class="form-line">
-										<input type="text" value="{{$brand->name or old('name')}}" name="name" maxlength="191" required class="form-control" >
+										<input type="text" value="{{$product->name or old('name')}}" name="name" maxlength="191" required class="form-control" >
 									</div>
 								</div>
 							</div>
@@ -57,7 +70,7 @@
 								<label>Link</label>
 								<div class="form-group ">
 									<div class="form-line">
-										<input type="url" value="{{$brand->url or old('url')}}" name="url" maxlength="191" class="form-control" >
+										<input type="url" value="{{$product->url or old('url')}}" name="url" maxlength="191" class="form-control" >
 									</div>
 								</div>
 							</div>
@@ -71,10 +84,10 @@
 									<div id="result" class="img-preview preview-lg row">
 										@if(null != old('image'))
 										<input type="hidden" id="image-input-{{substr( old('image'),0,-4)}}" name = "image" value="{{ old('image')}}">
-										<div id="image-preview-{{substr( old('image'),0,-4)}}" class="col-lg-3 col-md-4 col-sm-6 m-t-30" style="min-height:80px"><span><img class="img-responsive" src="{{url(App\Models\Brand::IMAGE_LOCATION)."/". old('image')}}"></span></div>
+										<div id="image-preview-{{substr( old('image'),0,-4)}}" class="col-lg-3 col-md-4 col-sm-6 m-t-30" style="min-height:80px"><span><img class="img-responsive" src="{{url(App\Models\Product::IMAGE_LOCATION)."/". old('image')}}"></span></div>
 										@endif
-										@if(isset($brand) && $brand->image !=null )
-										<div id="image-preview-{{substr($brand->image,0,-4)}}" class="col-lg-3 col-md-4 col-sm-6 m-t-30" style="min-height:80px"><span><img class="img-responsive" src="{{url(App\Models\Brand::IMAGE_LOCATION)."/".$brand->image}}"></span></div>
+										@if(isset($product) && $product->image !=null )
+										<div id="image-preview-{{substr($product->image,0,-4)}}" class="col-lg-3 col-md-4 col-sm-6 m-t-30" style="min-height:80px"><span><img class="img-responsive" src="{{url(App\Models\Product::IMAGE_LOCATION)."/".$product->image}}"></span></div>
 										@endif
 									</div>
 								</div>
@@ -104,6 +117,13 @@
 @section('scripts')
 @parent
 
+			<!-- Bootstrap Select Css -->
+			<link href="{{url('md/plugins/bootstrap-select/css/bootstrap-select.css')}}" rel="stylesheet" />
+			<!-- Select Plugin Js -->
+			<script src="{{url('md/plugins/bootstrap-select/js/bootstrap-select.js')}}"></script>
+
+
+
 <link href="{{url('md/plugins/cropper/cropper.min.css')}}" rel="stylesheet">
 <script src="{{url('md/plugins/cropper/cropper.min.js')}}"></script>
 <script>
@@ -111,9 +131,9 @@
 		whyte={};
 		whyte.imageWidth = 200;
 		whyte.imageHeight = 120;
-		whyte.storageLocation= "{{App\Models\Brand::IMAGE_LOCATION}}";
+		whyte.storageLocation= "{{App\Models\Product::IMAGE_LOCATION}}";
 
-		whyte.postUrl = "{{url('admin/brands/image')}}";
+		whyte.postUrl = "{{url('admin/products/image')}}";
 		whyte.result = $('#result');
 		whyte.image = $(".featured_image > img");
 		whyte.saveButton = $("#saveButton");

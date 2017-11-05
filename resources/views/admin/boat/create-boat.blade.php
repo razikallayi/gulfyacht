@@ -4,7 +4,6 @@
 
 @section('active_submenu','add')
 
-
 @section('content')
 <div class="row">
 
@@ -304,6 +303,55 @@
 
 
 
+							<div class="col-sm-12">
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="form-group">
+											<label>Upload Images<code>*</code></label>
+											<span id ="ProgressInfo"></span>
+											<p id="CropSizeInfo" class="small help-block">Please upload images of size 800 x 445 for best appeal</p>
+											<input id="fileupload" accept="image/*" class="col-indigo glyphicon glyphicon-picture fa-5x" name="image[]" type="file" multiple="multiple" 
+											style="max-width: 75px;
+											max-height: 70px;
+											overflow: hidden;
+											cursor: pointer;
+											font-size: 5em;" />
+											<hr />
+											<b>Preview</b><br />
+											@if(isset($boat))
+											<p id="CropSizeInfo" class="small help-block">First image is shown in list views. Drag the image according to your preference</p>
+											@endif
+										</div>
+									</div>
+
+									<div id="result"  class="connectedSortable">
+										@if(null != old('image'))
+										@foreach(old('image') as $imageName)
+										<input type="hidden" id="image-input-{{substr($imageName,0,-4)}}" name = "image[]" value="{{$imageName}}">
+										<div id="image-preview-{{substr($imageName,0,-4)}}" class="col-lg-3 col-md-4 col-sm-6 m-t-30" style="min-height:100px"><span>
+											{{-- <input name="is_thumbnail" type="radio" id="radio-{{$imageName}}" value="{{$imageName}}" class="radio-col-blue" {{old('is_thumbnail') == $imageName?" checked ":""}} ><label for="radio-{{$imageName}}">Set as Thumbnail</label> --}}
+											<img class="img-responsive" src="{{url(App\Models\Property::IMAGE_LOCATION)."/".$imageName}}"></span></div>
+										@endforeach
+										@endif
+
+										@if(isset($boat) && null != $boat->images)
+										@foreach($boat->images as $image)
+										<div id="image-preview-{{substr($image->file_name,0,-4)}}" class="col-lg-3 col-md-4 col-sm-6 m-t-30 sort_handle" style="min-height:100px">
+											<span>
+												<button type="button" style="float:right;" onclick="deleteImage('{{$image->file_name}}')" class="btn btn-xs  waves-effect btn-danger pull-right"><i class="material-icons">close</i></button>
+
+												<img class="img-responsive sortable_image" style="width:100%" src="{{$boat->imageUrl($image->file_name)}}">
+											</span>
+										</div>
+										@endforeach
+										@endif
+										</div>
+
+									</div>
+								</div>
+
+
+
 
 							<div class="col-sm-12">
 								<div class="form-group">
@@ -331,233 +379,94 @@
 			@section('scripts')
 			@parent
 
-			<script src="{{url('md/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
-
 			<!-- Bootstrap Select Css -->
 			<link href="{{url('md/plugins/bootstrap-select/css/bootstrap-select.css')}}" rel="stylesheet" />
 			<!-- Select Plugin Js -->
 			<script src="{{url('md/plugins/bootstrap-select/js/bootstrap-select.js')}}"></script>
-      <script type="text/javascript">
-   document.getElementById("logo-upload").onchange = function () {
-    if (typeof (FileReader) != "undefined") {
-      var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
-      var file = this.files[0];
-          if (regex.test(file.name.toLowerCase())) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-              var img = e.target.result;
-              $("#logo").attr("src", img);
-            }
-            reader.readAsDataURL(file);
-          } else {
-            alert(file.name + " is not a valid image file.");
-  
-            return false;
-          }
 
-      } else {
-        alert("This browser does not support HTML5 FileReader.");
-      }
-    };
-
-</script>
-			<script type="text/javascript">
-				function getName() {
-
-					var fullPath = document.getElementById("fileupload").value;
-
-					document.getElementById("imgid").innerHTML = fullPath;
-				}
-
-			</script>
-			<script type="text/javascript">
-
-				var ajaxupload = function()
-				{
-
-					$('#videoupload').append('<div id="videofiles"  ><h4>Loading... <span id="percent"></span></h4></div>');
-					document.getElementById("videofile").disabled = true;
-					var formData = new FormData();
-
-
-					formData.append("videofile", event.target.files[0]);
-
-					$.ajax({
-
-						type:'POST',
-						data:formData,
-						dataType:'JSON',
-						url : "{{url('admin/ajax_audio_upload')}}",
-						async: true, 
-						cache: false,
-						processData:false,
-						contentType:false,
-
-						success:function(data){
-							console.log(data);
-							$('#videoupload').append('<input type="hidden" name="datafile" value="'+data.filename+'">');
-							$('#videofile').val('');
-							$('#videofile').prop('required',false);
-							document.getElementById("videofile").disabled = false;
-						},
-
-
-						xhr: function() {
-							
-							var xhr = $.ajaxSettings.xhr();
-							if(xhr.upload){
-								xhr.upload.addEventListener('progress',progress, false);
-							}
-							return xhr;
-						},
-
-
-						error:function(){
-
-						},
-						complete:function()
-						{
-
-							$('#videofiles').remove();
-							$('#videoupload').append('<div id="" ><h4>Uploaded !!!</h4></div>');
-						},
-
-
-
-
-					});
-				}
-
-				progress = function(e){
-					if(e.lengthComputable){
-						var max = e.total;
-						var current = e.loaded;
-
-						var Percentage = (current * 100)/max;
-						console.log(Math.floor(Percentage));
-
-						$('#percent').html(Math.floor(Percentage) + "%");
-					}
-				}
-
-
-			</script>
-
-			<script type="text/javascript">
-				$.ajaxSetup({
-					headers: {
-						'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-					}
-				});
-			</script>
-      <script type="text/javascript">
-   document.getElementById("logo-upload").onchange = function () {
-    if (typeof (FileReader) != "undefined") {
-      var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
-      var file = this.files[0];
-          if (regex.test(file.name.toLowerCase())) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-              var img = e.target.result;
-              $("#logo").attr("src", img);
-            }
-            reader.readAsDataURL(file);
-          } else {
-            alert(file.name + " is not a valid image file.");
-  
-            return false;
-          }
-
-      } else {
-        alert("This browser does not support HTML5 FileReader.");
-      }
-    };
-
-</script>
-
-<script type="text/javascript">
-  $('#logo').on('click', function() {
-    $('#logo-upload').click();
-  });
-</script>
-<script type="text/javascript">
-  function companyTypeChange (option) {
-    
-    if('individual'==option.value)
-      {
-
-        $('#genderColumn').css({'display':'block'});
-      }
-      else
-        {
-          $('#genderColumn').css({'display':'none'});
-        }
-  }
-</script>
 
 
 <script type="text/javascript">
-  window.onload = function () {
-    var fileUpload = document.getElementById("fileupload");
+	window.onload = function () {
+		var fileUpload = document.getElementById("fileupload");
 
-    fileUpload.onchange = function () {
-      if (typeof (FileReader) != "undefined") {
-        var dvPreview = $("#result");
-        dvPreview.innerHTML = "";
-        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
-        for (var i = 0; i < fileUpload.files.length; i++) {
-          var file = fileUpload.files[i];
-          //alert(file.name);
-          if (regex.test(file.name.toLowerCase())) {
+		fileUpload.onchange = function () {
+			if (typeof (FileReader) != "undefined") {
+				var dvPreview = $("#result");
+				dvPreview.innerHTML = "";
+				var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+				for (var i = 0; i < fileUpload.files.length; i++) {
+					var file = fileUpload.files[i];
+					//alert(file.name);
+					if (regex.test(file.name.toLowerCase())) {
 
-            var reader = new FileReader();
-            reader.onload = function (e) {
+						var reader = new FileReader();
+						reader.onload = function (e) {
 
-              var img = '<div class="col-lg-3 col-md-4 col-sm-6 m-t-30" style="min-height:100px"><span><a href="#fileupload" class="btn btn-xs  waves-effect btn-danger pull-right remove_pict"><i class="fa fa-close" style="color:red;font-size:20px;"></i></a><img class="img-responsive" src="' +  e.target.result + '"></span></div>';
+							var img = '<div class="col-lg-3 col-md-4 col-sm-6 m-t-30" style="min-height:100px"><span><a href="#" class="btn btn-xs  waves-effect btn-danger pull-right remove_pict"><i class="material-icons">close</i></a><img class="img-responsive" src="' +  e.target.result + '"></span></div>';
 
 
-              dvPreview.append(img);
+                      dvPreview.append(img);
                         // dvPreview.appendChild(textbox);
-                      }
-                      reader.readAsDataURL(file);
-                    } else {
-                      alert(file.name + " is not a valid image file.");
-                      dvPreview.innerHTML = "";
-                      return false;
                     }
-                  }
+                    reader.readAsDataURL(file);
                 } else {
-                  alert("This browser does not support HTML5 FileReader.");
+                	alert(file.name + " is not a valid image file.");
+                	dvPreview.innerHTML = "";
+                	return false;
                 }
-              }
-            };
-
-
-            $("#result").on( "click",".remove_pict",function(){
-
-              $(this).parent().parent().remove();
-              $('#fileupload').val("");
-            });
-          </script>
-
-          <script type="text/javascript">
-            var deleteImage = function(filename){
-
-              $.ajax({
-                url: "{{ url('admin/media/delete')}}",
-                type: 'DELETE',
-                data:{location:"{{App\Models\Boat::IMAGE_LOCATION}}",
-                filename:filename
-              },
-              success: function(){
-                $('#image-input-'+filename.slice(0,-4)).remove();
-                $('#image-preview-'+filename.slice(0,-4)).remove();
-              },
-              error: function(){
-                alert('failed');
-              }
-            });
             }
-          </script>
+        } else {
+        	alert("This browser does not support HTML5 FileReader.");
+        }
+    }
+};
 
-			@endsection
+
+$("#result").on( "click",".remove_pict",function(){
+	$(this).parent().parent().remove();
+    // $('#fileupload').val("");
+});
+</script>
+
+@if(isset($boat))
+<!-- jquery sortable Plugin Css -->
+<link href="{{url('md/plugins/jquery-sortable/jquery-sortable.min.css')}}" rel="stylesheet">
+<!-- Jquery sortable Plugin Js -->
+<script src="{{url('md/plugins/jquery-sortable/jquery-sortable.min.js')}}"></script>
+<script type="text/javascript">
+	$(".connectedSortable").sortable({
+		connectWith: ".connectedSortable",
+		revert: 200,
+		handle: ".sortable_image",
+		zIndex: 999999
+	});
+	$(".connectedSortable .sortable_image").css("cursor", "move");
+	$(".connectedSortable").on( "sortupdate", function( event, ui,i ) {
+		var order = $(this).sortable("serialize",{key:'sort[]'})+ '&boatId={{$boat->id}}';;
+		$.post("{{url('admin/boats/image/sort')}}", order);
+	});
+</script>
+@endif
+
+<script type="text/javascript">
+	var deleteImage = function(filename){
+		if(!confirm('Are you sure to delete the image?')){
+			return;
+		}
+		$.ajax({
+			url: "{{ url('admin/boats/image')}}",
+			type: 'DELETE',
+			data:{filename:filename},
+			success: function(){
+				$('#image-input-'+filename.slice(0,-4)).remove();
+				$('#image-preview-'+filename.slice(0,-4)).remove();
+			},
+			error: function(){
+				alert('failed');
+			}
+		});
+	}
+</script>
+
+@endsection

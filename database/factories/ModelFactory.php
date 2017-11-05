@@ -73,7 +73,7 @@ $factory->define(App\Models\Boat::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Models\Brand::class, function (Faker\Generator $faker) {
     $location = 'public/'.App\Models\Brand::IMAGE_LOCATION;
-    $image = App\Helpers\Helper::uploadImage($faker->imageUrl(200,200),$location);
+    $image = App\Helpers\Helper::uploadImage($faker->imageUrl(200,120),$location);
     $filename = $image->getData()->filename;
 
     $title =  $faker->word;
@@ -90,6 +90,31 @@ $factory->define(App\Models\Brand::class, function (Faker\Generator $faker) {
        'status'          => 'active',
     ];
 });
+
+
+
+$factory->define(App\Models\Product::class, function (Faker\Generator $faker) {
+    $location = 'public/'.App\Models\Product::IMAGE_LOCATION;
+    $image = App\Helpers\Helper::uploadImage($faker->imageUrl(200,120),$location);
+    $filename = $image->getData()->filename;
+
+    $title =  $faker->word;
+    $slug = str_slug($title);
+        $brandId = App\Models\Brand::inRandomOrder()->first()->id;
+    return [
+        'brand_id'         => $brandId,
+       'name'           => $title,
+       'slug'            => $slug,
+       'url'             => $faker->url,
+       'image'           => $filename,
+       'description'     => $faker->sentence($nbWords = 6, $variableNbWords = true),
+       'is_featured'     => $faker->boolean,
+       'is_published'    => $faker->boolean,
+       'listing_order'   => $faker->randomNumber(1),
+       'status'          => 'active',
+    ];
+});
+
 
 
 

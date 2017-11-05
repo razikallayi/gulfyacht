@@ -27,123 +27,123 @@
  @endif
 
  <div class="col-md-12 no-padding">
-<form id="searchForm">
-  <div class="row">
-   <div class="col-md-4">
-    <div id="collapse-menu" class="collapse-container">
-     @if($page=='buy')
-     <h3>Brands <span class="arrow-r"></span></h3>
-     <div>
-      <input type="checkbox" class="read-more-state" id="post-2" />
-      <ul class="filt read-more-wrap">
-        @foreach($brands->take(3) as $brand)
-        <li class="filt__item">
-          <label class="label--checkbox"><input name="brands[]" value="{{$brand->name}}" type="checkbox" class="checkbox" >{{$brand->name}}</label>
-        </li>
-        @endforeach
-        <div class="read-more-target">
-        @foreach($brands->slice(3) as $brand)
-         <li class="filt__item">
-          <label class="label--checkbox"><input name="brands[]" value="{{$brand->name}}" type="checkbox" class="checkbox" >{{$brand->name}}</label>
-        </li>
-        @endforeach
+  <form id="searchForm">
+    <div class="row">
+     <div class="col-md-4">
+      <div id="collapse-menu" class="collapse-container">
+       {{-- @if($page=='buy') --}}
+       <h3>Brands <span class="arrow-r"></span></h3>
+       <div>
+        <input type="checkbox" class="read-more-state" id="post-2" />
+        <ul class="filt read-more-wrap">
+          @foreach($brands->take(3) as $brand)
+          <li class="filt__item">
+            <label class="label--checkbox"><input name="brands[]" value="{{$brand->name}}" type="checkbox" class="checkbox" >{{$brand->name}}</label>
+          </li>
+          @endforeach
+          <div class="read-more-target">
+            @foreach($brands->slice(3) as $brand)
+            <li class="filt__item">
+              <label class="label--checkbox"><input name="brands[]" value="{{$brand->name}}" type="checkbox" class="checkbox" >{{$brand->name}}</label>
+            </li>
+            @endforeach
+          </div>
+        </ul>
+        <label for="post-2" class="read-more-trigger"></label>  
+      </div>
+      {{-- @endif --}}
+    </div>
+
+    <div class="fby clearfix">
+      <div class="col-md-12 no-padding">
+        <h4>Filter By Length</h4>
+        <div class="slider-labels">
+          <div class="col-xs-6 caption no-padding">
+            From <span id="sliderLength-lower" class="orange-color"></span>
+            <input type="hidden" name="min-length" id="min-length" value="{{$filterLimits['min_length']}}">
+          </div>
+          <div class="col-xs-6 caption no-padding">
+            To <span id="sliderLength-upper" class="orange-color"></span>
+            <input type="hidden" name="max-length" id="max-length" value="{{$filterLimits['max_length']}}">
+          </div>
         </div>
+        <div id="sliderLength"></div>
+      </div>
+
+    </div>
+
+    <div class="fby clearfix">
+      <div class="col-md-12 no-padding">
+        <h4>Filter By Year</h4>
+        <div class="slider-labels">
+          <div class="col-xs-6 caption no-padding">
+            From <span id="sliderYear-lower" class="orange-color"></span>
+            <input type="hidden" name="min-year" id="min-year" value="{{$filterLimits['min_year']}}">
+          </div>
+          <div class="col-xs-6 caption no-padding">
+            To <span id="sliderYear-upper" class="orange-color"></span>
+            <input type="hidden" name="max-year" id="max-year" value="{{$filterLimits['max_year']}}">
+          </div>
+        </div>
+        <div id="sliderYear"></div>
+      </div>
+
+    </div>
+
+    <div class="fby fbs clearfix">
+      <div class="col-md-12 no-padding">
+        <h4>Filter By Price</h4>
+        <div class="slider-labels">
+          <div class="col-xs-6 caption no-padding">
+            QAR <span id="sliderPrice-lower" class="orange-color"></span>
+            <input type="hidden" name="min-price" id="min-price" value="{{$filterLimits['min_price']}}">
+          </div>
+          <div class="col-xs-6 caption no-padding">
+            QAR <span id="sliderPrice-upper" class="orange-color"></span>
+            <input type="hidden" name="max-price" id="max-price" value="{{$filterLimits['max_price']}}">
+          </div>
+        </div>
+        <div id="sliderPrice"></div>
+      </div>
+    </div>
+
+    <div class="sbbs">
+      <h2>SELL / BUY BOATS ?</h2>
+      <ul>
+        <li><a href="tel:+974 5581 3565"> <img src="{{url('project/images/phn.png')}}"> +974 5581 3565</a></li>
+        <li><a href="mailto:ec@gulf-yachts.com"> <img src="{{url('project/images/mail.png')}}"> ec@gulf-yachts.com</a></li>
       </ul>
-      <label for="post-2" class="read-more-trigger"></label>  
+      <div class="bs"><a href="#">BUY</a></div>
+      <div class="bs"><a href="#">SELL</a></div>
+      <div class="sbbs-img"><img src="{{url('project/images/sbbs.png')}}"></div>
     </div>
-    @endif
-</div>
+  </div>
 
-<div class="fby clearfix">
-  <div class="col-md-12 no-padding">
-    <h4>Filter By Length</h4>
-    <div class="slider-labels">
-      <div class="col-xs-6 caption no-padding">
-        From <span id="sliderLength-lower" class="orange-color"></span>
-        <input type="hidden" name="min-length" id="min-length" value="{{$filterLimits['min_length']}}">
-      </div>
-      <div class="col-xs-6 caption no-padding">
-        To <span id="sliderLength-upper" class="orange-color"></span>
-        <input type="hidden" name="max-length" id="max-length" value="{{$filterLimits['max_length']}}">
-      </div>
+
+  <div class="col-md-8">
+   <div class="srt">
+     <div class="sel sel--black-panther">
+      <select name="sort" id="sort">
+        <option value="popularity-desc" disabled>Sort By</option>
+        <option value="popularity-desc">Popularity</option>
+        <option value="price-asc">Price--Low to High</option>
+        <option value="price-desc">Price--High to Low</option>
+        <option value="new-desc">Newest First</option>
+      </select>
     </div>
-    <div id="sliderLength"></div>
+
+    {{-- {{ $boats->links('vendor.pagination.project-pagination') }} --}}
   </div>
-
-</div>
-
-<div class="fby clearfix">
-  <div class="col-md-12 no-padding">
-    <h4>Filter By Year</h4>
-    <div class="slider-labels">
-      <div class="col-xs-6 caption no-padding">
-        From <span id="sliderYear-lower" class="orange-color"></span>
-        <input type="hidden" name="min-year" id="min-year" value="{{$filterLimits['min_year']}}">
-      </div>
-      <div class="col-xs-6 caption no-padding">
-        To <span id="sliderYear-upper" class="orange-color"></span>
-        <input type="hidden" name="max-year" id="max-year" value="{{$filterLimits['max_year']}}">
-      </div>
+  <div class="buy-mn nb">
+   <div class="row">
+    <div id="boatContent">
     </div>
-    <div id="sliderYear"></div>
-  </div>
 
-</div>
-
-<div class="fby fbs clearfix">
-  <div class="col-md-12 no-padding">
-    <h4>Filter By Price</h4>
-    <div class="slider-labels">
-      <div class="col-xs-6 caption no-padding">
-        QAR <span id="sliderPrice-lower" class="orange-color"></span>
-        <input type="hidden" name="min-price" id="min-price" value="{{$filterLimits['min_price']}}">
-      </div>
-      <div class="col-xs-6 caption no-padding">
-        QAR <span id="sliderPrice-upper" class="orange-color"></span>
-        <input type="hidden" name="max-price" id="max-price" value="{{$filterLimits['max_price']}}">
-      </div>
+    <div class="col-md-12">
+      {{-- <div class="btm-pagi">{{ $boats->links('vendor.pagination.project-pagination') }}</div> --}}
     </div>
-    <div id="sliderPrice"></div>
+
   </div>
-</div>
-
-<div class="sbbs">
-  <h2>SELL / BUY BOATS ?</h2>
-  <ul>
-    <li><a href="tel:+974 5581 3565"> <img src="{{url('project/images/phn.png')}}"> +974 5581 3565</a></li>
-    <li><a href="mailto:ec@gulf-yachts.com"> <img src="{{url('project/images/mail.png')}}"> ec@gulf-yachts.com</a></li>
-  </ul>
-  <div class="bs"><a href="#">BUY</a></div>
-  <div class="bs"><a href="#">SELL</a></div>
-  <div class="sbbs-img"><img src="{{url('project/images/sbbs.png')}}"></div>
-</div>
-</div>
-
-
-<div class="col-md-8">
- <div class="srt">
-   <div class="sel sel--black-panther">
-    <select name="sort" id="sort">
-      <option value="popularity-desc" disabled>Sort By</option>
-      <option value="popularity-desc">Popularity</option>
-      <option value="price-asc">Price--Low to High</option>
-      <option value="price-desc">Price--High to Low</option>
-      <option value="new-desc">Newest First</option>
-    </select>
-  </div>
-
-  {{-- {{ $boats->links('vendor.pagination.project-pagination') }} --}}
-</div>
-<div class="buy-mn nb">
- <div class="row">
-<div id="boatContent">
-</div>
-
-  <div class="col-md-12">
-    {{-- <div class="btm-pagi">{{ $boats->links('vendor.pagination.project-pagination') }}</div> --}}
-  </div>
-
-</div>
 </div>
 </div>
 </div>
@@ -271,7 +271,7 @@
 
     sliderLength.noUiSlider.on('end', function(values, handle) {
      $('#searchForm').submit();
-    });
+   });
 
 
 
@@ -304,11 +304,11 @@
       document.getElementById('max-year').value = Math.ceil(values[1]);
     });
 
-      sliderYear.noUiSlider.on('end', function(values, handle) {
+    sliderYear.noUiSlider.on('end', function(values, handle) {
      $('#searchForm').submit();
-    });
+   });
 
- 
+    
 
 
 
@@ -324,15 +324,15 @@
       prefix: ''
     });
     noUiSlider.create(sliderPrice, {
-       start: [min_price, max_price],
-      step: 100,
-      range: {
-        'min': [ Math.floor(min_price / 100) * 100],
-        'max': [ Math.ceil(max_price / 100) * 100]
-      },
-      format: moneyFormat,
-      connect: true
-    });
+     start: [min_price, max_price],
+     step: 100,
+     range: {
+      'min': [ Math.floor(min_price / 100) * 100],
+      'max': [ Math.ceil(max_price / 100) * 100]
+    },
+    format: moneyFormat,
+    connect: true
+  });
     
     
     sliderPrice.noUiSlider.on('update', function(values, handle) {
@@ -342,9 +342,9 @@
       document.getElementById('min-price').value = parseInt(Math.floor(values[0].replace(/\,/g,'')));
       document.getElementById('max-price').value = parseInt(Math.ceil(values[1].replace(/\,/g,'')));
     });
-      sliderPrice.noUiSlider.on('end', function(values, handle) {
+    sliderPrice.noUiSlider.on('end', function(values, handle) {
      $('#searchForm').submit();
-    });
+   });
 
   });
 
@@ -372,15 +372,23 @@
         if(!$.trim(retData.boats.data)){
           content = "<h4>No data to display</h4>";
         }
+
         if(retData.page == 'buy'){
-          $.each(retData.boats.data, function(key,data){
-            content += getHalfWidthView(data);
-          });
-        } else {
-          $.each(retData.boats.data, function(key,data){
-            content += getFullWidthView(data);
-          });
+          getView = getHalfWidthView;
+        }else{
+          getView = getFullWidthView;
         }
+
+        $.each(retData.boats.data, function(key,data){
+          var boat={};
+          boat.detailPageUrl = data.detailPageUrl==null?'':data.detailPageUrl;
+          boat.imageUrl  = data.imageUrl==null?'':data.imageUrl;
+          boat.title  = data.title==null?'':data.title;
+          boat.location  = data.location==null?'':data.location;
+          boat.price  = data.price==null?'':data.price.toLocaleString();
+          boat.currency  = data.currency==null?'':data.currency;
+          content += getView(data);
+        });
         $('#boatContent').html(content);
       },
       error:function(e){
@@ -392,13 +400,13 @@
     });
   });
 
-  function getFullWidthView(data){
-    return '<div class="col-md-12 no-padding"><a href="'+data.detailPageUrl+'" class="clearfix"><div class="col-md-5"><div class="buy-img"><img src="'+data.imageUrl+'"></div></div><div class="col-md-7"><h4>'+data.title+'</h4><p>'+data.description+'</p><div class="ap clearfix"><div class="a">'+data.location+'</div><div class="p">'+data.price.toLocaleString()+' '+ data.currency+'</div></div></div></a></div>';
+  getFullWidthView = function(boat){
+    return '<div class="col-md-12 no-padding"><a href="'+boat.detailpageUrl+'" class="clearfix"><div class="col-md-5"><div class="buy-img"><img src="'+boat.imageUrl+'"></div></div><div class="col-md-7"><h4>'+boat.title+'</h4><p>'+boat.description+'</p><div class="ap clearfix"><div class="a">'+boat.location+'</div><div class="p">'+boat.price.toLocaleString()+' '+ boat.currency+'</div></div></div></a></div>';
 
   }
 
-  function getHalfWidthView(data){
-  return '<div class="col-md-6"><a href="'+data.detailPageUrl+'"><div class="buy-img"><img src="'+data.imageUrl+'"></div><h4>'+data.title+'</h4><div class="ap clearfix"><div class="a">'+data.price.toLocaleString()+' '+ data.currency+'</div></div></a></div>';
+  getHalfWidthView = function(boat){
+    return '<div class="col-md-6"><a href="'+boat.detailpageUrl+'"><div class="buy-img"><img src="'+boat.imageUrl+'"></div><h4>'+boat.title+'</h4><div class="ap clearfix"><div class="a">'+boat.location+'</div><div class="p">'+boat.price+' '+ boat.currency+'</div></div></a></div>';
   }
 
 </script>

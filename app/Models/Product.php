@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Brand extends Model
+class Product extends Model
 {
 
-	const IMAGE_LOCATION = 'uploads/brands';
+	const IMAGE_LOCATION = 'uploads/products';
 
         protected $fillable = [
+        'brand_id',
         'name',
         'slug',
         'url',
@@ -29,13 +30,8 @@ class Brand extends Model
         return self::whereIn('name',$names)->pluck('id');
     }
 
-
-    public function boats(){
-        return $this->hasmany('App\Models\Boat','brand_id','id');
-    }
-
-    public function products(){
-        return $this->hasmany('App\Models\Product','brand_id','id')->orderBy('created_at','desc');
+    public function brand(){
+        return $this->belongsTo('App\Models\Brand','brand_id','id');
     }
 
     public function imageUrl($imageName=null,$width=null,$height=null){

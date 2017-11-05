@@ -52,9 +52,9 @@ Route::group([
 	Route::get('boats/add','BoatController@create');
 	Route::post('boats','BoatController@store');
 	Route::get('boats/edit/{id}','BoatController@create');
-	Route::put('boats/edit/{id}','BoatController@update');
+	Route::put('boats/edit/{id}','BoatController@store');
 	Route::get('boats/sort','BoatController@boatsCardView');
-	Route::post('boats/sort','BoatController@sort');
+	// Route::post('boats/sort','BoatController@sort');
 	Route::delete('boats/image','BoatController@deleteImage');
 	Route::post('boats/image/sort','BoatController@sortImage');
 	Route::post('boats/image','BoatController@saveImage');
@@ -65,13 +65,22 @@ Route::group([
 	Route::get('brands/add','BrandController@create');
 	Route::post('brands','BrandController@store');
 	Route::get('brands/edit/{id}','BrandController@create');
-	Route::get('brands/sort','BrandController@brandsCardView');
-	Route::post('brands/sort','BrandController@sort');
-	Route::delete('brands/image','BrandController@deleteImage');
-	Route::post('brands/image/sort','BrandController@sortImage');
+	Route::put('brands/edit/{id}','BrandController@store');
+	// Route::get('brands/sort','BrandController@brandsCardView');
+	// Route::post('brands/sort','BrandController@sort');
 	Route::post('brands/image','BrandController@saveImage');
-	Route::put('brands/{id}','BrandController@update');
 	Route::delete('brands/{id}','BrandController@destroy');
+
+
+	Route::get('products','ProductController@index');
+	Route::get('products/add','ProductController@create');
+	Route::post('products','ProductController@store');
+	Route::get('products/edit/{id}','ProductController@create');
+	Route::put('products/edit/{id}','ProductController@store');
+	// Route::get('products/sort','ProductController@productsCardView');
+	// Route::post('products/sort','ProductController@sort');
+	Route::post('products/image','ProductController@saveImage');
+	Route::delete('products/{id}','ProductController@destroy');
 
 
 
