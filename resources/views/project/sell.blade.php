@@ -19,54 +19,75 @@
             YOUR <br>
             FORM</h2>
           <p>Mandatory fields are marked with an asterisk (*)</p>
+
+          @if (count($errors) > 0)
+          <div class="alert alert-danger">
+            <ul>
+              @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+          @endif
+
+
+          @if (session()->has('message'))
+          <div class="alert {{session()->get('status')}}">
+            <ul>
+              <li>{!!session()->get('message')!!}</li>
+            </ul>
+          </div>
+          @endif
+
         </div>
         <div class="col-md-9 no-padding">
-          <form>
+          <form method="post" action="{{url('sell')}}" enctype="multipart/form-data">
+            {{csrf_field()}}
             <div class="form-group clearfix">
               <div class="col-md-12">
-                <input type="text" class="form-control" placeholder="Your Name">
+                <input type="text" class="form-control" placeholder="Your Name" name="name" value="{{old('name')}}">
               </div>
             </div>
             <div class="form-group clearfix">
               <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="E-mail *">
+                <input type="text" class="form-control" placeholder="E-mail *" name="email" value="{{old('email')}}">
               </div>
               <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Phone No:">
-              </div>
-            </div>
-            <div class="form-group clearfix">
-              <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Yatch Makes & Model *">
-              </div>
-              <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Yatch Length *">
+                <input type="text" class="form-control" placeholder="Phone No:" name="phone" value="{{old('phone')}}">
               </div>
             </div>
             <div class="form-group clearfix">
               <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Yatch Build Year *">
+                <input type="text" class="form-control" placeholder="Yatch Makes & Model *" name="makes_n_model" value="{{old('makes_n_model')}}">
               </div>
               <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Location of Yatch *">
+                <input type="text" class="form-control" placeholder="Yatch Length *" name="length" value="{{old('length')}}">
               </div>
             </div>
             <div class="form-group clearfix">
               <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Yatch Condition *">
+                <input type="text" class="form-control" placeholder="Yatch Build Year *" name="year" value="{{old('year')}}">
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Location of Yatch *" name="location" value="{{old('location')}}">
+              </div>
+            </div>
+            <div class="form-group clearfix">
+              <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Yatch Condition *" name="condition" value="{{old('condition')}}">
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <div class="input-group input-file" name="Fichier1">
+                  <div class="input-group input-file">
                     <span class="input-group-btn"><button class="attach-btn" type="button">&nbsp;</button></span>
-                    <input type="text" class="form-control" placeholder='No Files Choosen' />
+                    <input type="file" class="form-control" placeholder='No Files Choosen'  name="file"/>
                    </div>
                 </div>
               </div>
             </div>
             <div class="form-group clearfix">
               <div class="col-md-12">
-                <textarea class="form-control" placeholder="Remarks"></textarea>
+                <textarea class="form-control" placeholder="Remarks" name="remarks">{{old('remarks')}}</textarea>
               </div>
             </div>
             <div class="form-group clearfix">

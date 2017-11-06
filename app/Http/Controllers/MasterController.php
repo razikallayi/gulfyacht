@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Mail\ContactMail;
-use App\Mail\CareerMail;
+use App\Mail\SellBoat;
 use Mail;
 use Session;
 use Redirect;
@@ -183,13 +183,30 @@ class MasterController extends Controller
         }
 
 
-        public function career_mail(Request $request)
-        {
+        public function sellBoatMail(Request $request){
 
-            Mail::to(CareerMail::getDestinationEmails)->send(new CareerMail($request));
-            Session::flash('mail_success','Thank You!! We will contact you soon!!');
-            return Redirect::to('career');
+           $this->validate($request, [
+            'name'  => 'nullable',
+            'email'  => 'required|email',
+            'phone'  => 'nullable',
+            'makes_n_model'  => 'required',
+            'length'  => 'required|numeric',
+            'year'  => 'required|numeric|date_format:Y',
+            'location'  => 'required',
+            'condition'  => 'required',
+            'file' => 'nullable|mimes:doc,docx,pdf,ppt,pptx,png,jpg,jpeg,bmp,gif',
+          ]);
+  
+           Mail::to(SellBoat::getDestinationEmails())
+           ->send(new SellBoat($request));
+
+  // return view('emails.sell-boat')->with(['request'=> $request]);
+        if( count(Mail::failures()) > 0 ) {
+            return response()->json(["status"=>"failed"]);
+        } else {
+            return response()->json(["status"=>"success"]);
         }
+    }
 
 
 }
