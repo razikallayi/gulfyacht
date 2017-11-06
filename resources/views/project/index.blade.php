@@ -157,7 +157,7 @@
 @foreach($brands as $brand)
           <div class="item">
             <span class="tooltip tooltip-effect-1">
-              <span class="tooltip-item"><a href="{{$brand->detailPageUrl()}}"><img src="{{$brand->imageUrl()}}"></a></span>
+              <span class="tooltip-item"><a href="{{$brand->detailPageUrl()}}"  target="_blank"><img src="{{$brand->imageUrl()}}"></a></span>
               <span class="tooltip-content clearfix">
                 <span class="tooltip-text">
                   @foreach($brand->products->take(2) as $product)
