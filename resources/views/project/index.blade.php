@@ -161,7 +161,7 @@
               <span class="tooltip-content clearfix">
                 <span class="tooltip-text">
                   @foreach($brand->products->take(2) as $product)
-                  <a href="{{$product->detailPageUrl()}}"><img src="{{$product->imageUrl()}}" class="img-responsive"><p>{{$product->name}}</p></a>
+                  <a href="{{$product->detailPageUrl()}}" target="_blank"><img src="{{$product->imageUrl()}}" class="img-responsive"><p>{{$product->name}}</p></a>
                   @endforeach
                 </span>
               </span>

@@ -20,7 +20,7 @@
   <div class="col-md-12 no-padding bnds">
     <div id="owl-demo" class="owl-carousel ">
      @foreach($brands as $brand)
-     <div class="item"><a href="{{$brand->detailPageUrl()}}"><img src="{{$brand->imageUrl()}}"></a></div>
+     <div class="item"><a href="{{$brand->detailPageUrl()}}"  target="_blank"><img src="{{$brand->imageUrl()}}"></a></div>
      @endforeach
    </div>     
  </div>
