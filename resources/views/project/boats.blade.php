@@ -361,7 +361,6 @@
     var formData = $('#searchForm').serialize();
     var page = '{{$page or 'new'}}';
     formData=formData+"&type="+page;
-    console.log(formData);
     $.ajax({
       method:'get',
       url:'{{url('boats')}}',
@@ -401,12 +400,12 @@
   });
 
   getFullWidthView = function(boat){
-    return '<div class="col-md-12 no-padding"><a href="'+boat.detailpageUrl+'" class="clearfix"><div class="col-md-5"><div class="buy-img"><img src="'+boat.imageUrl+'"></div></div><div class="col-md-7"><h4>'+boat.title+'</h4><p>'+boat.description+'</p><div class="ap clearfix"><div class="a">'+boat.location+'</div><div class="p">'+boat.price.toLocaleString()+' '+ boat.currency+'</div></div></div></a></div>';
+    return '<div class="col-md-12 no-padding"><a href="'+boat.detailPageUrl+'" class="clearfix"><div class="col-md-5"><div class="buy-img"><img src="'+boat.imageUrl+'"></div></div><div class="col-md-7"><h4>'+boat.title+'</h4><p>'+boat.description+'</p><div class="ap clearfix"><div class="a">'+boat.location+'</div><div class="p">'+boat.price.toLocaleString()+' '+ boat.currency+'</div></div></div></a></div>';
 
   }
 
   getHalfWidthView = function(boat){
-    return '<div class="col-md-6"><a href="'+boat.detailpageUrl+'"><div class="buy-img"><img src="'+boat.imageUrl+'"></div><h4>'+boat.title+'</h4><div class="ap clearfix"><div class="a">'+boat.location+'</div><div class="p">'+boat.price+' '+ boat.currency+'</div></div></a></div>';
+    return '<div class="col-md-6"><a href="'+boat.detailPageUrl+'"><div class="buy-img"><img src="'+boat.imageUrl+'"></div><h4>'+boat.title+'</h4><div class="ap clearfix"><div class="a">'+boat.location+'</div><div class="p">'+boat.price+' '+ boat.currency+'</div></div></a></div>';
   }
 
 </script>
