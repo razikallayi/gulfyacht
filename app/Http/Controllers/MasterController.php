@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Mail\ContactMail;
+use App\Mail\CareerMail;
 use App\Mail\SellBoat;
 use Mail;
 use Session;
@@ -138,7 +139,7 @@ class MasterController extends Controller
 
 
         $boats = $boats->select('id','title','description','price','currency','slug','location')
-                ->paginate($this->itemCount);
+        ->paginate($this->itemCount);
 
         foreach($boats->items() as $boat){
             $boat->imageUrl = $boat->imageUrl();
@@ -150,14 +151,14 @@ class MasterController extends Controller
         $search = [ 
             'boats'=> $boats,
             'page'=>$request->type?strtolower($request->type):'buy'];
-        return $search;
+            return $search;
         }
 
 
-    public function contact()
-    {
-        return view('project.contact');
-    }
+        public function contact()
+        {
+            return view('project.contact');
+        }
 
 
         public function getFilterLimits(){
@@ -177,36 +178,72 @@ class MasterController extends Controller
 
         public function contact_mail(Request $request)
         {
-            Mail::to(ContactMail::getDestinationEmails)->send(new ContactMail($request));
-            Session::flash('mail_success','Thank You!! We will contact you soon!!');
-            return Redirect::to('contact');
+            $this->validate($request, [
+              'name'  => 'required',
+              'email'  => 'required|email',
+              'phone'  => 'nullable',
+              'message'  => 'nullable'
+          ]);
+            Mail::to(ContactMail::getDestinationEmails())->send(new ContactMail($request));
+            if( count(Mail::failures()) > 0 ) {
+                session()->flash('status','alert-danger');
+                session()->flash('message', 'Failed!');
+            }else{
+                session()->flash('status','alert-success');
+                session()->flash('message','<b>Thank you!</b> We will get in touch with you soon.');
+            }
+            return back();
         }
 
 
-        public function sellBoatMail(Request $request){
-
+        public function career_mail(Request $request)
+        {
            $this->validate($request, [
-            'name'  => 'nullable',
-            'email'  => 'required|email',
-            'phone'  => 'nullable',
-            'makes_n_model'  => 'required',
-            'length'  => 'required|numeric',
-            'year'  => 'required|numeric|date_format:Y',
-            'location'  => 'required',
-            'condition'  => 'required',
-            'file' => 'nullable|mimes:doc,docx,pdf,ppt,pptx,png,jpg,jpeg,bmp,gif',
+              'name'  => 'required',
+              'email'  => 'required|email',
+              'phone'  => 'nullable',
+              'message'  => 'nullable',
+              'file' => 'nullable|mimes:doc,docx,pdf,ppt,pptx,png,jpg,jpeg,bmp,gif',
           ]);
-  
-           Mail::to(SellBoat::getDestinationEmails())
-           ->send(new SellBoat($request));
+           Mail::to(ContactMail::getDestinationEmails())->send(new CareerMail($request));
+           if( count(Mail::failures()) > 0 ) {
+             session()->flash('status','alert-danger');
+             session()->flash('message', 'Failed!');
+         }else{
+            session()->flash('status','alert-success');
+            session()->flash('message','<b>Thank you!</b> We will get in touch with you soon.');
+        }
+        return back();
+    }
+
+
+    public function sellBoatMail(Request $request){
+
+     $this->validate($request, [
+        'name'  => 'nullable',
+        'email'  => 'required|email',
+        'phone'  => 'nullable',
+        'makes_n_model'  => 'required',
+        'length'  => 'required|numeric',
+        'year'  => 'required|numeric|date_format:Y',
+        'location'  => 'required',
+        'condition'  => 'required',
+        'file' => 'nullable|mimes:doc,docx,pdf,ppt,pptx,png,jpg,jpeg,bmp,gif',
+    ]);
+     
+     Mail::to(SellBoat::getDestinationEmails())
+     ->send(new SellBoat($request));
 
   // return view('emails.sell-boat')->with(['request'=> $request]);
-        if( count(Mail::failures()) > 0 ) {
-            return response()->json(["status"=>"failed"]);
-        } else {
-            return response()->json(["status"=>"success"]);
-        }
+     if( count(Mail::failures()) > 0 ) {
+         session()->flash('status','alert-danger');
+         session()->flash('message', 'Failed!');
+     }else{
+        session()->flash('status','alert-success');
+        session()->flash('message','<b>Thank you!</b> We will get in touch with you soon.');
     }
+    return back();
+}
 
 
 }

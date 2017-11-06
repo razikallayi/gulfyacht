@@ -37,7 +37,7 @@ class SellBoat extends Mailable
 
     public static function getDestinationEmails()
     {
-        return ['razi@whytecreations.in'];
+        return ['razi@whytecreations.in','razikallayi@gmail.com'];
     }
 
 

@@ -14,7 +14,11 @@ class CareerMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    const DESTINATION_EMAIL= "info@gulfavanues.com";
+    
+    public static function getDestinationEmails()
+    {
+        return ['razi@whytecreations.in','razikallayi@gmail.com'];
+    }
 
     public $request;
 
@@ -37,12 +41,13 @@ class CareerMail extends Mailable
     {
        $request = $this->request;
 
-       $fileContent = File::get($request->file_source->getRealPath());
-      
-       $fileExtension = $request->file_source->getClientOriginalExtension();
-
-       $attachmentName = str_slug($request->file_source)."_resume.".$fileExtension;
-       
-       return $this->view('emails.career-mail')->attachData($fileContent,$attachmentName);
+       if($request->file !=null){
+           $fileContent = File::get($request->file->getRealPath());
+           $fileExtension = $request->file->getClientOriginalExtension();
+           $attachmentName = str_slug($request->name)."-ressume.".$fileExtension;
+           return $this->view('emails.career-mail')
+             ->attachData($fileContent,$attachmentName);
+       }
+       return $this->view('emails.career-mail');
     }
 }

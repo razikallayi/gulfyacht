@@ -13,7 +13,10 @@ class ContactMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    const DESTINATION_EMAIL= "info@gulfavanues.com";
+    public static function getDestinationEmails()
+    {
+        return ['razi@whytecreations.in','razikallayi@gmail.com'];
+    }
 
     public $request;
     /**

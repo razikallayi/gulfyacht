@@ -31,12 +31,9 @@ Route::get('sell', 'MasterController@sell');
 Route::post('sell', 'MasterController@sellBoatMail');
 
 Route::get('contact', 'MasterController@contact');
+Route::post('contact', 'MasterController@contact_mail');
+Route::post('career', 'MasterController@career_mail');
 
-Route::post('subscribe', 'MasterController@subscribe');
-Route::get('property-locations', 'MasterController@populateLocations');
-Route::post('contact_us', 'MasterController@contact_us');
-Route::post('career_mail', 'MasterController@career_mail');
-Route::post('sendmail','MasterController@send_email');
 
 Auth::routes();
 
