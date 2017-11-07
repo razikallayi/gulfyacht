@@ -23,18 +23,21 @@ class MasterController extends Controller
     public function index()
     {
         $brands = Brand::orderBy('listing_order','desc')->with('boats')->orderBy('updated_at','desc')->get();
-        return view('project.index',compact('brands'));
+        $filterLimits=$this->getFilterLimits();
+        return view('project.index',compact('brands','filterLimits'));
     }
 
 
     public function about()
     {
-        return view('project.about');
+        $filterLimits=$this->getFilterLimits();
+        return view('project.about',compact('filterLimits'));
     }
 
     public function sell()
     {
-        return view('project.sell');
+        $filterLimits=$this->getFilterLimits();
+        return view('project.sell',compact('filterLimits'));
     }
 
 
@@ -63,7 +66,8 @@ class MasterController extends Controller
             default:
             $boat = Boat::where('slug',$slug)->firstOrFail();
             $boat->increasePopularity();
-            return view('project.details',compact('boat'));
+            $filterLimits=$this->getFilterLimits();
+            return view('project.details',compact('boat','filterLimits'));
             break;
         }
     }
@@ -71,11 +75,14 @@ class MasterController extends Controller
 
     public function search(Request $request)
     {
+        // $request['has-search'] = false;
         if (!$request->ajax()) {
+            // $request['has-search'] = true;
             $brands = $brands = Brand::orderBy('listing_order','desc')->orderBy('updated_at','desc')->get();
             return view('project.boats')->with([
                 'brands'=>$brands,
                 'page'=>strtolower($request->get('type','buy')),
+                // 'filter' => json_encode($request->only(['has-search','max-length','brands','max-price','max-year','min-length','min-price','min-year','sort','type'])),
                 'filterLimits'=>$this->getFilterLimits()
             ]);
         }
@@ -157,7 +164,8 @@ class MasterController extends Controller
 
         public function contact()
         {
-            return view('project.contact');
+            $filterLimits=$this->getFilterLimits();
+            return view('project.contact',compact('filterLimits'));
         }
 
 

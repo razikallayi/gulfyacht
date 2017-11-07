@@ -83,13 +83,7 @@
             @foreach($boat->images as $image)
             <li><img src="{{$boat->imageUrl($image->file_name)}}" class="img-responsive" /></li>
             @endforeach
-           {{--  <li><img src="{{url('project/images/ever1.jpg')}}" class="img-responsive" /></li>
-            <li><img src="{{url('project/images/ever2.jpg')}}" class="img-responsive" /></li>
-            <li><img src="{{url('project/images/ever3.jpg')}}" class="img-responsive" /></li>
-            <li><img src="{{url('project/images/ever4.jpg')}}" class="img-responsive" /></li>
-            <li><img src="{{url('project/images/ever1.jpg')}}" class="img-responsive" /></li>
-            <li><img src="{{url('project/images/ever2.jpg')}}" class="img-responsive" /></li>
-            <li><img src="{{url('project/images/ever3.jpg')}}" class="img-responsive" /></li> --}}
+
           </ul>
         </div>
         <div id="carousel" class="flexslider">
@@ -97,13 +91,7 @@
             @foreach($boat->images as $image)
             <li><img src="{{$boat->imageUrl($image->file_name)}}" class="img-responsive" /></li>
             @endforeach
-            {{-- <li><img src="{{url('project/images/ever1.jpg')}}" /></li>
-            <li><img src="{{url('project/images/ever2.jpg')}}" /></li>
-            <li><img src="{{url('project/images/ever3.jpg')}}" /></li>
-            <li><img src="{{url('project/images/ever4.jpg')}}" /></li>
-            <li><img src="{{url('project/images/ever1.jpg')}}" /></li>
-            <li><img src="{{url('project/images/ever2.jpg')}}" /></li>
-            <li><img src="{{url('project/images/ever3.jpg')}}" /></li> --}}
+           
           </ul>
         </div>
         <div class="pm">
@@ -193,6 +181,7 @@
         controlNav: false,
         animationLoop: false,
         slideshow: false,
+        smoothHeight:true,
         sync: "#carousel",
         start: function(slider){
           $('body').removeClass('loading');

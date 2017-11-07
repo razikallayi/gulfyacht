@@ -36,89 +36,6 @@
 </nav>
 
 
-<div id="somedialog" class="dialog">
-          <div class="dialog__overlay"></div>
-          <div class="dialog__content">
-            <div class="morph-shape" data-morph-open="M0,33.699V0c0,0,13.458,0,40.125,0C66.793,0,80,0,80,0v33.974v0.103V60c0,0-13.333,0-40,0c-26.667,0-40,0-40,0V33.699" data-morph-close="M0,33.699V0c0,0,13.208,11,39.875,11C66.543,11,80,0,80,0v33.974v0.103v13.111C80,47.188,66.667,60,40,60
-  C13.333,60,0,47.062,0,47.062V33.699">
-              <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 80 60" preserveAspectRatio="none">
-                <path d="M0,33.699V0c0,0,13.208,11,39.875,11C66.543,11,80,0,80,0v33.974v0.103v13.111C80,47.188,66.667,60,40,60
-  C13.333,60,0,47.062,0,47.062V33.699"></path>
-              </svg>
-            </div>
-            <div class="dialog-inner">
-              <h2>Boats for Sale</h2>
-                             <form>
-                               <div class="form-group clearfix">
-                                    <div class="col-md-4">
-                                        <select class="cs-select cs-skin-border">
-                                            <option value="" disabled selected>New / Used</option>
-                                            <option value="">New</option>
-                                            <option value="">Pre Owned</option>
-                                        </select>
-                                    </div>
-                                 <div class="col-md-4">
-                                        <select class="cs-select cs-skin-border">
-                                            <option value="" disabled selected>Manufacturer</option>
-                                            <option value="">Prestige</option>
-                                            <option value="">Everglades</option>
-                                            <option value="">jeanneau</option>
-                                            <option value="">Bayliner</option>
-                                        </select>
-                                    </div>
-                                 <div class="col-md-4">
-                                        <select class="cs-select cs-skin-border">
-                                            <option value="" disabled selected>Category</option>
-                                            <option value="">Power</option>
-                                            <option value="">Sail</option>
-                                        </select>
-                                    </div>
-                               </div>
-                               
-                               <div class="form-group clearfix">
-                                    <div class="col-md-4">
-                                        <select class="cs-select cs-skin-border">
-                                            <option value="" disabled selected>Length</option>
-                                            <option value="">50 Meter</option>
-                                            <option value="">80 Meter</option>
-                                        </select>
-                                    </div>
-                                 <div class="col-md-4">
-                                    <div class="col-md-12 no-padding">
-                                      <h4>Year</h4>
-                                        <div id="slider-range"></div>
-                                    </div>
-                                        <div class="slider-labels">
-                                        <div class="col-xs-6 text-left caption no-padding">
-                                        From: <span id="slider-range-value1"></span>
-                                        </div>
-                                        <div class="col-xs-6 text-right caption no-padding">
-                                        To: <span id="slider-range-value2"></span>
-                                        </div>
-                                        </div>   
-                                 </div>
-                                 <div class="col-md-4">
-                                    <div class="col-md-12 no-padding">
-                                      <h4>Price</h4>
-                                        <div id="slider-range1"></div>
-                                    </div>
-                                        <div class="slider-labels">
-                                        <div class="col-xs-6 text-left caption no-padding">
-                                        <span id="slider-range1-value1"></span>
-                                        </div>
-                                        <div class="col-xs-6 text-right caption no-padding">
-                                        <span id="slider-range1-value2"></span>
-                                        </div>
-                                        </div>   
-                                 </div>
-                               </div>
-                               <div class="form-group clearfix"><button class="sear-btn">SEARCH </button></div>
-                             </form>
-                            
-                            <div><button class="action" data-dialog-close>Close</button></div>
-            </div>
-          </div>
-        </div>
 
 
 <div class="abt-bg">
@@ -196,6 +113,8 @@
 
 @show
 
+  @include('project.layout.partials.search')
+
 @section('banner-script')
 <script src="{{url('project/js/bootsnav.js')}}" type="text/javascript"></script>
 <script type="text/javascript" src="{{url('project/js/jquery.themepunch.tools.min.js')}}"></script>
@@ -216,44 +135,104 @@
   }); 
 </script>
 @show
-
-
 @section('scripts')
-<script src="{{url('project/js/owl.carousel.js')}}"></script>
+<script type="text/javascript" src="{{url('project/js/price.js')}}"></script>
 <script>
-$(document).ready(function() {
-  $("#owl-demo").owlCarousel({
-  autoPlay: 3000,
-  items : 6,
-  itemsDesktop : [1199,3],
-  itemsDesktopSmall : [979,1],
-  navigation : false,
-  pagination: false,
+  $(document).ready(function() {
+    filterLimits = {};
+    filterLimits.min_length = {{$filterLimits['min_length']}};
+    filterLimits.max_length = {{$filterLimits['max_length']}};
+
+    filterLimits.min_year = {{$filterLimits['min_year']}};
+    filterLimits.max_year = {{$filterLimits['max_year']}};
+
+    filterLimits.min_price = {{$filterLimits['min_price']}};
+    filterLimits.max_price = {{$filterLimits['max_price']}};
+
+
+    $('.noUi-handle').on('click', function() {
+      $(this).width();
+    });
+    var sliderYearModal = document.getElementById('sliderYearModal');
+    var moneyFormat = wNumb({
+      decimals: 0,
+      thousand: ',',
+      prefix: ' '
+    });
+    noUiSlider.create(sliderYearModal, {
+      start: [ filterLimits.min_year,  filterLimits.max_year],
+      step: 1,
+      range: {
+        'min': [ filterLimits.min_year],
+        'max': [ filterLimits.max_year]
+      },at: moneyFormat,
+      connect: true
+    });
+    
+    
+    sliderYearModal.noUiSlider.on('update', function(values, handle) {
+      document.getElementById('sliderYearModal-lower').innerHTML = Math.floor(values[0]);
+      document.getElementById('sliderYearModal-upper').innerHTML = Math.ceil(values[1]);
+      // document.getElementById('min-year').value =Math.floor(values[0]);
+      // document.getElementById('max-year').value = Math.ceil(values[1]);
+    }); 
+
+
+
+
+      var sliderPriceModal = document.getElementById('sliderPriceModal');
+      var moneyFormat = wNumb({
+        decimals: 0,
+        thousand: ',',
+        prefix: ''
+      });
+      noUiSlider.create(sliderPriceModal, {
+       start: [ filterLimits.min_price,  filterLimits.max_price],
+       step: 100,
+       range: {
+        'min': [ Math.floor( filterLimits.min_price / 100) * 100],
+        'max': [ Math.ceil( filterLimits.max_price / 100) * 100]
+      },
+      format: moneyFormat,
+      connect: true
+    });
+      
+      
+      sliderPriceModal.noUiSlider.on('update', function(values, handle) {
+        document.getElementById('sliderPriceModal-lower').innerHTML = values[0];
+        document.getElementById('sliderPriceModal-upper').innerHTML = values[1];
+      });
+
+
+      var sliderLengthModal = document.getElementById('sliderLengthModal');
+
+      noUiSlider.create(sliderLengthModal, {
+        start: [filterLimits.min_length, filterLimits.max_length],
+        step: 10,
+        range: {
+          'min': [filterLimits.min_length],
+          'max': [filterLimits.max_length]
+        },
+        connect: true
+      });
+
+
+
+      sliderLengthModal.noUiSlider.on('update', function(values, handle) {
+        document.getElementById('sliderLengthModal-lower').innerHTML = Math.floor(values[0])+"Ft";
+        document.getElementById('sliderLengthModal-upper').innerHTML = Math.ceil(values[1])+"Ft";
+      });
+
   });
-});
+
 </script>
 
-
-<script>
-  window.Laravel = {!! json_encode([
-    'csrfToken' => csrf_token(),
-    ]) !!};
-  </script>
-
-<script type="text/javascript">
-$.ajaxSetup({
-  headers: {
-    'X-CSRF-Token': Laravel.csrfToken
-  }
-});
-</script>
 
 <script src="{{url('project/js/snap.svg-min.js')}}"></script>
 <script src="{{url('project/js/classie.js')}}"></script>
 <script src="{{url('project/js/dialogFx.js')}}"></script>
 <script>
   (function() {
-
     var dlgtrigger = document.querySelector( '[data-dialog]' ),
 
       somedialog = document.getElementById( dlgtrigger.getAttribute( 'data-dialog' ) ),
@@ -288,6 +267,21 @@ $.ajaxSetup({
       new SelectFx(el);
     } );
   })();
+</script>
+
+
+<script>
+  window.Laravel = {!! json_encode([
+    'csrfToken' => csrf_token(),
+    ]) !!};
+  </script>
+
+<script type="text/javascript">
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-Token': Laravel.csrfToken
+  }
+});
 </script>
 
 @show

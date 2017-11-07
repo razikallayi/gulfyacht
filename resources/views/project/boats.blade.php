@@ -155,7 +155,7 @@
 @endsection
 
 @section('scripts')
-
+@parent
 <script src="{{url('project/js/jquery.collapsible.js')}}"></script> 
 <script>
   $('#accordion-menu').collapsible({
@@ -236,25 +236,17 @@
 <script type="text/javascript" src="{{url('project/js/price.js')}}"></script>
 <script type="text/javascript">
   $(document).ready(function() {
-    $('.noUi-handle').on('click', function() {
-      $(this).width();
-    });
+
+
+
     var sliderLength = document.getElementById('sliderLength');
-    var min_length = {{$filterLimits['min_length']}};
-    var max_length = {{$filterLimits['max_length']}};
-
-    var min_year = {{$filterLimits['min_year']}};
-    var max_year = {{$filterLimits['max_year']}};
-
-    var min_price = {{$filterLimits['min_price']}};
-    var max_price = {{$filterLimits['max_price']}};
 
     noUiSlider.create(sliderLength, {
-      start: [min_length, max_length],
+      start: [filterLimits.min_length, filterLimits.max_length],
       step: 10,
       range: {
-        'min': [min_length],
-        'max': [max_length]
+        'min': [filterLimits.min_length],
+        'max': [filterLimits.max_length]
       },
       connect: true
     });
@@ -277,9 +269,6 @@
 
 
 
-    $('.noUi-handle').on('click', function() {
-      $(this).width();
-    });
     var sliderYear = document.getElementById('sliderYear');
     var moneyFormat = wNumb({
       decimals: 0,
@@ -287,11 +276,11 @@
       prefix: ' '
     });
     noUiSlider.create(sliderYear, {
-      start: [min_year, max_year],
+      start: [filterLimits.min_year, filterLimits.max_year],
       step: 1,
       range: {
-        'min': [min_year],
-        'max': [max_year]
+        'min': [filterLimits.min_year],
+        'max': [filterLimits.max_year]
       },at: moneyFormat,
       connect: true
     });
@@ -311,12 +300,6 @@
     
 
 
-
-
-
-    $('.noUi-handle').on('click', function() {
-      $(this).width();
-    });
     var sliderPrice = document.getElementById('sliderPrice');
     var moneyFormat = wNumb({
       decimals: 0,
@@ -324,11 +307,11 @@
       prefix: ''
     });
     noUiSlider.create(sliderPrice, {
-     start: [min_price, max_price],
+     start: [filterLimits.min_price, filterLimits.max_price],
      step: 100,
      range: {
-      'min': [ Math.floor(min_price / 100) * 100],
-      'max': [ Math.ceil(max_price / 100) * 100]
+      'min': [ Math.floor(filterLimits.min_price / 100) * 100],
+      'max': [ Math.ceil(filterLimits.max_price / 100) * 100]
     },
     format: moneyFormat,
     connect: true
@@ -357,12 +340,25 @@
 
   $('#searchForm').submit(function(e){
     e.preventDefault();
+    var page = '{{$page or 'new'}}';
+
+    // formData = {
+    //   'min-length': $('input[name=min-length]').val(),
+    //   'max-length': $('input[name=max-length]').val(),
+    //   'min-year'  : $('input[name=min-year]').val(),
+    //   'max-year'  : $('input[name=max-year]').val(),
+    //   'min-price' : $('input[name=min-price]').val(),
+    //   'max-price' : $('input[name=max-price]').val(),
+    //   'sort'      : $('select[name=sort]').val(),
+    //   'brands'    : $('input[name=brands\\[\\]').val(),
+    //   'type'      : page
+    // };
 
     var formData = $('#searchForm').serialize();
-    var page = '{{$page or 'new'}}';
     formData=formData+"&type="+page;
+
     $.ajax({
-      method:'get',
+      method:'post',
       url:'{{url('boats')}}',
       data:formData,
       dataType    : 'json',

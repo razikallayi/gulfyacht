@@ -26,7 +26,11 @@ class Brand extends Model
     }
 
     public static function getIdByName($names){
-        return self::whereIn('name',$names)->pluck('id');
+        if(is_array($names)){
+            return self::whereIn('name',$names)->pluck('id');
+        }else{
+            return self::where('name',$names)->pluck('id');
+        }
     }
 
 
