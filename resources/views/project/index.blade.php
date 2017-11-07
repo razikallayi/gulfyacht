@@ -186,3 +186,24 @@
 
 </div>
 @endsection
+
+@section('banner-script')
+<script src="{{url('project/js/bootsnav.js')}}" type="text/javascript"></script>
+<script type="text/javascript" src="{{url('project/js/jquery.themepunch.tools.min.js')}}"></script>
+<script type="text/javascript" src="{{url('project/js/jquery.themepunch.revolution.min.js')}}"></script>
+<script type="text/javascript">
+  var revapi;
+  jQuery(document).ready(function() {
+       revapi = jQuery('.tp-banner').revolution(
+      {
+        delay:15000,
+        startwidth:1170,
+        startheight:500,
+        hideThumbs:10,
+        fullWidth:"off",
+        fullScreen:"on",
+        fullScreenOffsetContainer: ""
+      });
+  }); 
+</script>
+@endsection

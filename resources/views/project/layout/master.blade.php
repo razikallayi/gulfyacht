@@ -196,7 +196,7 @@
 
 @show
 
-
+@section('banner-script')
 <script src="{{url('project/js/bootsnav.js')}}" type="text/javascript"></script>
 <script type="text/javascript" src="{{url('project/js/jquery.themepunch.tools.min.js')}}"></script>
 <script type="text/javascript" src="{{url('project/js/jquery.themepunch.revolution.min.js')}}"></script>
@@ -215,6 +215,7 @@
       });
   }); 
 </script>
+@show
 
 
 @section('scripts')
