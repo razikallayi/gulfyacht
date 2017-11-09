@@ -13,7 +13,7 @@
                 <li><a class="link link--surinami" href="{{url('/')}}"><span data-letters-l="Ho" data-letters-r="me">Home</span></a></li>                    
                 <li class="dropdown"><a class="link link--surinami dropdown-toggle" href="#" data-toggle="dropdown"><span data-letters-l="Boa" data-letters-r="ts">Boats</span></a>
                 <ul class="dropdown-menu">
-                        <li><a href="{{url('boats/new')}}">New Boats</a></li>
+                        <li><a href="{{url('brands/new')}}">New Boats</a></li>
                         <li><a href="{{url('boats/used')}}">Used Boats</a></li>
                     </ul>
                 </li>

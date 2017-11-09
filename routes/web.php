@@ -27,6 +27,7 @@ Route::get('/', 'MasterController@index');
 Route::get('about', 'MasterController@about');
 Route::any('boats', 'MasterController@search');
 Route::get('boats/{slug}', 'MasterController@boats');
+Route::get('brands/{slug?}', 'MasterController@brands');
 Route::get('sell', 'MasterController@sell');
 Route::post('sell', 'MasterController@sellBoatMail');
 
@@ -64,8 +65,8 @@ Route::group([
 	Route::post('brands','BrandController@store');
 	Route::get('brands/edit/{id}','BrandController@create');
 	Route::put('brands/edit/{id}','BrandController@store');
-	// Route::get('brands/sort','BrandController@brandsCardView');
-	// Route::post('brands/sort','BrandController@sort');
+	Route::get('brands/sort','BrandController@sortView');
+	Route::post('brands/sort','BrandController@sort');
 	Route::post('brands/image','BrandController@saveImage');
 	Route::delete('brands/{id}','BrandController@destroy');
 

@@ -18,7 +18,7 @@
 <div class="col-sm-12 mode" id="ListMode">
 	<div class="card">
 		<div class="header bg-project">
-			<h2 class="">Manage Brand</h2>
+			<h2 class="">Manage Brand<a style="color: #FFF" href="{{url('admin/brands/sort')}}"><i class="material-icons pull-right">view_module</i></a></h2>
 		</div>
 
 		<div class="body table-wrapper">

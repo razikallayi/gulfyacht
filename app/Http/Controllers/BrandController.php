@@ -21,6 +21,16 @@ class BrandController extends Controller
     }
 
 
+    public function sortView(Request $request)
+    {
+        $brands = Brand::orderBy('listing_order','desc')
+        ->orderBy('updated_at','desc')->get();
+
+        return view('admin.brand.sort-brand',compact('brands'));
+    }
+
+
+
     public function create($id=null)
     {
         if($id != null){
@@ -114,8 +124,7 @@ class BrandController extends Controller
     public function sort(Request $request)
     {
         $this->validate($request, [
-            'sort' => 'required|array',
-            'page' => 'required'
+            'sort' => 'required|array'
         ]);
         $counter = Brand::count();
         foreach ($request->sort as $id) {

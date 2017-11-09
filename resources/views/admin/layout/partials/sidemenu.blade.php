@@ -22,6 +22,11 @@
       <span>Manage Brand</span>
     </a>
   </li>
+  <li  class="sort">
+    <a href="{{url('admin/brands/sort')}}" class="">
+      <span>Sort Brand</span>
+    </a>
+  </li>
   <li  class="add-product">
     <a href="{{url('admin/products/add')}}" class="">
       <span>Add Product</span>

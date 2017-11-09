@@ -32,17 +32,9 @@ class Helper {
    ini_set('post_max_size', '2000M');
    ini_set('max_execution_time',36000);
 
-   try 
-   {
-     $image = Image::make($uploadImage,'png');
-   }
-   catch(NotReadableException $e)
-   {
-    response()->json([
-     'status' => 'failed',
-     'message' => 'Image source not readable',
-     ]);
-  }
+
+   $image = Image::make($uploadImage,'png');
+
   
    if($width!=null){
    // prevent possible upsizing

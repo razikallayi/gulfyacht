@@ -40,6 +40,13 @@ class MasterController extends Controller
         return view('project.sell',compact('filterLimits'));
     }
 
+    public function brands($slug=null)
+    {
+        $brands=Brand::orderBy('listing_order','desc')->get();
+        $filterLimits=$this->getFilterLimits();
+        return view('project.brands',compact('filterLimits','brands'));
+    }
+
 
     public function boats($slug,Request $request)
     {

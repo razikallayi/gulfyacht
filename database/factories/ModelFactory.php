@@ -73,7 +73,7 @@ $factory->define(App\Models\Boat::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Models\Brand::class, function (Faker\Generator $faker) {
     $location = 'public/'.App\Models\Brand::IMAGE_LOCATION;
-    $image = App\Helpers\Helper::uploadImage($faker->imageUrl(200,120),$location);
+    $image = App\Helpers\Helper::uploadImage($faker->imageUrl(300,240),$location);
     $filename = $image->getData()->filename;
 
     $title =  $faker->word;
