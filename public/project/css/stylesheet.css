@@ -1367,7 +1367,7 @@ nav.navbar.bootsnav ul.nav > li > a{padding: 30px 13px;}
 
 }
 
-@media (min-width:768px){
+@media (min-width:768px) and  (max-width:990px){
 
 .button-wrap{position: absolute; right: 0; top: 0;}
 .abt-bg{height:auto}

@@ -11,35 +11,7 @@
 <div class="tp-banner-container">
     <div class="tp-banner" >
         <ul>
-        <li data-transition="fade" data-slotamount="7" data-masterspeed="1000" >
-            
-            <img src="{{url('project/images/slider/video.jpg')}}"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
-            <div class="tp-caption fullscreenvideo"
-              data-x="0"
-              data-y="0"
-              data-speed="1000"
-              data-start="1100"
-              data-easing="Power4.easeOut"
-              data-endspeed="1500"
-              data-endeasing="Power4.easeIn"
-              data-autoplay="true"
-              data-autoplayonlyfirsttime="false"
-              data-nextslideatend="true"
-              data-forceCover="1"
-              data-aspectratio="16:9"
-              data-forcerewind="on"
-                            data-muted="true"
-              style="z-index: 2">
-             <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='{{url('project/images/slider/video.jpg')}}' data-setup="{}" muted>
-            <source src='{{url('project/images/slider/video.mp4')}}' type='video/mp4' />
-            <source src='{{url('project/images/slider/video.webm')}}' type='video/webm' />
-            <source src='{{url('project/images/slider/video.ogv')}}' type='video/ogg' />
-            </video>
-            </div>
-                        
-                        
-                        
-          </li> 
+        
              <li data-transition="fade" data-slotamount="7" data-masterspeed="1000" >
             
 						<img src="{{url('project/images/slider/princess.jpg')}}"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
