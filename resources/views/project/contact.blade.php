@@ -80,7 +80,7 @@
             @endif
 
 
-          <div class="col-md-3">
+          <div class="col-md-4 col-lg-3">
             <h4>Contact Details</h4>
             <ul>
               <li><img src="{{url('project/images/map.svg')}}">Palm Tower B, Office 3205  <br> West Bay, P.O BOX 11093 <br> Doha - Qatar </li>
@@ -89,7 +89,7 @@
             </ul>
           </div>
           
-          <div class="col-md-9 no-padding">
+          <div class="col-md-8 col-lg-9 no-padding">
             <form action="{{url('contact')}}" method="post">
                           {{csrf_field()}}
              <div class="col-md-6">

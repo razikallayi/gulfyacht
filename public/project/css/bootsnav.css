@@ -38,7 +38,7 @@ nav.navbar.bootsnav ul.nav li.megamenu-fw > a:hover, nav.navbar.bootsnav ul.nav 
 	background-color: transparent;
 }
 nav.navbar.bootsnav .navbar-toggle {
-	background-color: #fff !important;
+	background-color: transparent !important;
 	border: none;
 	padding: 0;
 	font-size: 18px;
@@ -819,7 +819,7 @@ nav.navbar.bootsnav .navbar-toggle {
 	display: inline-block;
 	float: left;
 	margin-right: -200px;
-	margin-top: 10px;
+	margin-top: 25px;
 }
 nav.navbar.bootsnav .navbar-collapse {
 	border: none;
@@ -828,6 +828,7 @@ nav.navbar.bootsnav .navbar-collapse {
 nav.navbar.bootsnav.no-full .navbar-collapse {
 	max-height: 350px;
 	overflow-y: auto !important;
+    background: #fff;
 }
 nav.navbar.bootsnav .navbar-collapse.collapse {
 	display: none !important;

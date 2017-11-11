@@ -5,9 +5,9 @@
             </button>
             <a class="navbar-brand" href="{{url('/')}}"><img src="{{url('project/images/logo.png')}}" class="logo" alt=""></a>
         </div>
-
+<div class="button-wrap"><button data-dialog="somedialog" class="sear"><i class="fa fa-search"></i></button></div>
         <div class="collapse navbar-collapse" id="navbar-menu">
-            <div class="button-wrap"><button data-dialog="somedialog" class="sear"><i class="fa fa-search"></i></button></div>
+            
             <ul class="nav navbar-nav navbar-right">
 
                 <li><a class="link link--surinami" href="{{url('/')}}"><span data-letters-l="Ho" data-letters-r="me">Home</span></a></li>                    

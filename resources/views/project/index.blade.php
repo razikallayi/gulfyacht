@@ -40,18 +40,118 @@
                         
                         
           </li> 
-            <li data-transition="fade" data-slotamount="1" data-masterspeed="1500" data-thumb="" data-delay="8000"  data-saveperformance="off"  data-title="">
-                <img src="{{url('project/images/slider/slider2.jpg')}}" alt=""  data-bgposition="left center" data-kenburns="on" data-duration="14000" data-ease="Linear.easeNone" data-bgfit="100" data-bgfitend="130" data-bgpositionend="right center"  >
-            </li>
-            <li data-transition="fade" data-slotamount="1" data-masterspeed="1500" data-thumb="" data-delay="8000"  data-saveperformance="off"  data-title="">
-                <img src="{{url('project/images/slider/slider3.jpg')}}" alt=""  data-bgposition="left center" data-kenburns="on" data-duration="14000" data-ease="Linear.easeNone" data-bgfit="100" data-bgfitend="130" data-bgpositionend="right center"  >
-            </li>
-            <li data-transition="fade" data-slotamount="1" data-masterspeed="1500" data-thumb="" data-delay="8000"  data-saveperformance="off"  data-title="">
-                <img src="{{url('project/images/slider/slider4.jpg')}}" alt=""  data-bgposition="left center" data-kenburns="on" data-duration="14000" data-ease="Linear.easeNone" data-bgfit="100" data-bgfitend="130" data-bgpositionend="right center"  >
-            </li>
-            <li data-transition="fade" data-slotamount="1" data-masterspeed="1500" data-thumb="" data-delay="8000"  data-saveperformance="off"  data-title="">
-                <img src="{{url('project/images/slider/slider1.jpg')}}" alt=""  data-bgposition="left center" data-kenburns="on" data-duration="14000" data-ease="Linear.easeNone" data-bgfit="100" data-bgfitend="130" data-bgpositionend="right center"  >
-            </li>
+             <li data-transition="fade" data-slotamount="7" data-masterspeed="1000" >
+            
+						<img src="{{url('project/images/slider/princess.jpg')}}"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+						<div class="tp-caption fullscreenvideo"
+							data-x="0"
+							data-y="0"
+							data-speed="1000"
+							data-start="1100"
+							data-easing="Power4.easeOut"
+							data-endspeed="1500"
+							data-endeasing="Power4.easeIn"
+							data-autoplay="true"
+							data-autoplayonlyfirsttime="false"
+							data-nextslideatend="true"
+							data-forceCover="1"
+							data-aspectratio="16:9"
+							data-forcerewind="on"
+                            data-muted="true"
+							style="z-index: 2">
+						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='images/slider/video.jpg' data-setup="{}" muted>
+						<source src='{{url('project/images/slider/princess.mp4')}}' type='video/mp4' />
+						<source src='{{url('project/images/slider/princess.webm')}}' type='video/webm' />
+						<source src='{{url('project/images/slider/princess.ogv')}}' type='video/ogg' />
+						</video>
+						</div>
+                        
+					</li>
+                    
+           <li data-transition="fade" data-slotamount="7" data-masterspeed="1000" >
+            
+						<img src="{{url('project/images/slider/bayliner.jpg')}}"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+						<div class="tp-caption fullscreenvideo"
+							data-x="0"
+							data-y="0"
+							data-speed="1000"
+							data-start="1100"
+							data-easing="Power4.easeOut"
+							data-endspeed="1500"
+							data-endeasing="Power4.easeIn"
+							data-autoplay="true"
+							data-autoplayonlyfirsttime="false"
+							data-nextslideatend="true"
+							data-forceCover="1"
+							data-aspectratio="16:9"
+							data-forcerewind="on"
+                            data-muted="true"
+							style="z-index: 2">
+						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='images/slider/video.jpg' data-setup="{}" muted>
+						<source src='{{url('project/images/slider/bayliner.mp4')}}' type='video/mp4' />
+						<source src='{{url('project/images/slider/bayliner.webm')}}' type='video/webm' />
+						<source src='{{url('project/images/slider/bayliner.ogv')}}' type='video/ogg' />
+						</video>
+						</div>
+                        
+					</li>     
+                        	
+             <li data-transition="fade" data-slotamount="7" data-masterspeed="1000" >
+            
+						<img src="{{url('project/images/slider/quicksilver.jpg')}}"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+						<div class="tp-caption fullscreenvideo"
+							data-x="0"
+							data-y="0"
+							data-speed="1000"
+							data-start="1100"
+							data-easing="Power4.easeOut"
+							data-endspeed="1500"
+							data-endeasing="Power4.easeIn"
+							data-autoplay="true"
+							data-autoplayonlyfirsttime="false"
+							data-nextslideatend="true"
+							data-forceCover="1"
+							data-aspectratio="16:9"
+							data-forcerewind="on"
+                            data-muted="true"
+							style="z-index: 2">
+						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='images/slider/video.jpg' data-setup="{}" muted>
+						<source src='{{url('project/images/slider/quicksilver.mp4')}}' type='video/mp4' />
+						<source src='{{url('project/images/slider/quicksilver.webm')}}' type='video/webm' />
+						<source src='{{url('project/images/slider/quicksilver.ogv')}}' type='video/ogg' />
+						</video>
+						</div>
+                        
+					</li>    
+                    
+                       
+           <li data-transition="fade" data-slotamount="7" data-masterspeed="1000" >
+            
+						<img src="{{url('project/images/slider/everglades.jpg')}}"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+						<div class="tp-caption fullscreenvideo"
+							data-x="0"
+							data-y="0"
+							data-speed="1000"
+							data-start="1100"
+							data-easing="Power4.easeOut"
+							data-endspeed="1500"
+							data-endeasing="Power4.easeIn"
+							data-autoplay="true"
+							data-autoplayonlyfirsttime="false"
+							data-nextslideatend="true"
+							data-forceCover="1"
+							data-aspectratio="16:9"
+							data-forcerewind="on"
+                            data-muted="true"
+							style="z-index: 2">
+						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='images/slider/video.jpg' data-setup="{}" muted>
+						<source src='{{url('project/images/slider/everglades.mp4')}}' type='video/mp4' />
+						<source src='{{url('project/images/slider/everglades.webm')}}' type='video/webm' />
+						<source src='{{url('project/images/slider/everglades.ogv')}}' type='video/ogg' />
+						</video>
+						</div>
+                        
+					</li>      
         </ul>
 <div class="tp-bannertimer"></div>  </div>
 </div>
@@ -135,11 +235,11 @@ $(document).ready(function() {
   items : 6,
   itemsDesktop : [1199,3],
   itemsDesktopSmall : [979,1],
-  navigation : false,
+  navigation : true,
   pagination: false,
   });
-  $( ".owl-prev").html('');
-  $( ".owl-next").html('');
+  $( ".owl-prev").html('<i class="fa fa-angle-left"></i>');
+ $( ".owl-next").html('<i class="fa fa-angle-right"></i>');
 });
 </script>
 @endsection
