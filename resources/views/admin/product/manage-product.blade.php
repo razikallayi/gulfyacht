@@ -49,12 +49,10 @@
 					<tr>
 						<td>{{$loop->iteration}}</td>
 						<td>
-						@if($product->imageUrl() != null)
-						<img height="50px" src="{{$product->imageUrl()}}">
-						@endif
+						<img height="50px" src="{{@$product->imageUrl()}}">
 						</td>
 						{{-- <td>{{@$product->name}}</td> --}}
-						<td>{{$product->brand->name}}</td>
+						<td>{{@$product->brand->name}}</td>
 						<td><a href="{{$product->detailPageUrl()}}" target="_blank">{{$product->url}}</a></td>
 						<td><a href="{{url('admin/products/edit/'.$product->id)}}"><i class="material-icons">edit</i></a></td>
 						<td width="5px"><a href="{{url('admin/products/'.$product->id)}}" onclick="if(!confirm('Are you sure want to delete?')) return false;event.preventDefault();
