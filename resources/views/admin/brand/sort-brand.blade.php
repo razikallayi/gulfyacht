@@ -16,6 +16,14 @@
 			<h2 class="">Manage Brand<a style="color: #FFF"  href="{{url('admin/brands')}}"><i class="material-icons pull-right">view_list</i></a></h2>
 		</div>
 	</div>
+
+	@if (session()->has('message'))
+	<div class="alert {{session()->get('status')}}">
+		<ul>
+			<li>{!!session()->get('message')!!}</li>
+		</ul>
+	</div>
+	@endif
 	
 	<div class="connectedSortable">
 	@foreach($brands as $brand)
