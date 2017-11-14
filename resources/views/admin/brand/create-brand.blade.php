@@ -62,6 +62,16 @@
 								</div>
 							</div>
 
+
+							<div class="col-sm-12">
+								<label>Description</label>
+								<div class="form-group ">
+									<div class="form-line">
+										<textarea type="text" rows="3" name="description" class="form-control" >{{$brand->description or old('description')}}</textarea>
+									</div>
+								</div>
+							</div>
+
 							<div class="col-sm-12">
 								<div class="form-group">
 									<label>Upload Image<code>*</code></label>

@@ -16,7 +16,7 @@
 
 <div class="buy-sec">
  <div class="container">
-  @if($page!='buy')
+  @if($page=='new')
   <div class="col-md-12 no-padding bnds">
     <div id="owl-demo" class="owl-carousel ">
      @foreach($brands as $brand)

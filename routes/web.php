@@ -69,6 +69,7 @@ Route::group([
 	Route::post('brands/sort','BrandController@sort');
 	Route::post('brands/image','BrandController@saveImage');
 	Route::delete('brands/{id}','BrandController@destroy');
+	Route::delete('brands/delete/{id}','BrandController@forceDestroy');
 
 
 	Route::get('products','ProductController@index');
