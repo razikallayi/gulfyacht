@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Validator;
 use App\Models\Brand;
+use App\Models\Product;
 use App\Models\Media;
 use App\Helpers\Helper;
 
@@ -96,10 +97,55 @@ class BrandController extends Controller
     }
 
 
-
     public function destroy($id=null){
         if($id!=null){
+            $count = Product::where('brand_id',$id)->count();
+            if($count > 0){
+
+
+                $deleteButton ='<a href="#" class="pull-right btn btn-lg btn-default close" data-dismiss="alert" aria-label="close">X</a> <a class="btn btn-danger btn-xs" onclick="if(!confirm(\'Are you sure want to delete. All products under this brand will be removed?\')) return false;event.preventDefault();
+                document.getElementById(\'f-delete-form-'.$id.'\').submit();">
+                <form id="f-delete-form-'.$id.'" action="'.url('admin/brands/delete/'. $id).'" method="post" style="display: none;">
+                '. csrf_field() . method_field("DELETE") .'
+                </form><i class="material-icons">delete</i> Delete Brand & Products</a>';
+
+                $product = ' products';
+                $arbiterry = ' are ';
+                if($count==1){$product = ' product';$arbiterry=' is ';}
+                session()->flash('status','alert-warning');
+                session()->flash('message','There '.$arbiterry.$count.$product.'  in this brand. Please remove the '.$product.' before category  '.$deleteButton);
+                return back();
+            }
+
+            $Brand = Brand::findOrFail($id);
+            $isDeleted =  $Brand->delete();
+            if($isDeleted){
+                session()->flash('status','alert-success');
+                session()->flash('message','Successfully Removed!');
+            }else{
+                session()->flash('status','alert-danger');
+                session()->flash('message', 'Deleting Failed!');
+            }
+        }
+        return back();
+    }
+
+
+    public function forceDestroy($id=null){
+        if($id!=null){
             $brand = Brand::findOrFail($id);
+            $products = Product::where("brand_id",$brand->id);
+            foreach($products->get(['id','name','image']) as $product){
+                $location = str_finish(Product::IMAGE_LOCATION, '/');
+                $filename = $product->image;
+                if($filename!=null){
+                    if(file_exists($location.$filename)){
+                        unlink($location.$filename);
+                    }
+                }
+            }
+            $products->delete();
+
             $location = str_finish(Brand::IMAGE_LOCATION, '/');
             $filename = $brand->image;
             if($filename!=null){
