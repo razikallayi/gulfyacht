@@ -14,14 +14,14 @@
         
              <li data-transition="fade" data-slotamount="7" data-masterspeed="1000" >
             
-						<img src="{{url('project/images/slider/princess.jpg')}}"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+						
 						<div class="tp-caption fullscreenvideo"
 							data-x="0"
 							data-y="0"
 							data-speed="1000"
-							data-start="1100"
+							data-start="0"
 							data-easing="Power4.easeOut"
-							data-endspeed="1500"
+							data-endspeed="0"
 							data-endeasing="Power4.easeIn"
 							data-autoplay="true"
 							data-autoplayonlyfirsttime="false"
@@ -31,7 +31,7 @@
 							data-forcerewind="on"
                             data-muted="true"
 							style="z-index: 2">
-						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='images/slider/video.jpg' data-setup="{}" muted>
+						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='images/slider/princess.jpg' data-setup="{}" muted>
 						<source src='{{url('project/images/slider/princess.mp4')}}' type='video/mp4' />
 						<source src='{{url('project/images/slider/princess.webm')}}' type='video/webm' />
 						<source src='{{url('project/images/slider/princess.ogv')}}' type='video/ogg' />
@@ -42,14 +42,14 @@
                     
            <li data-transition="fade" data-slotamount="7" data-masterspeed="1000" >
             
-						<img src="{{url('project/images/slider/bayliner.jpg')}}"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+						
 						<div class="tp-caption fullscreenvideo"
 							data-x="0"
 							data-y="0"
 							data-speed="1000"
-							data-start="1100"
+							data-start="0"
 							data-easing="Power4.easeOut"
-							data-endspeed="1500"
+							data-endspeed="0"
 							data-endeasing="Power4.easeIn"
 							data-autoplay="true"
 							data-autoplayonlyfirsttime="false"
@@ -59,7 +59,7 @@
 							data-forcerewind="on"
                             data-muted="true"
 							style="z-index: 2">
-						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='images/slider/video.jpg' data-setup="{}" muted>
+						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='images/slider/bayliner.jpg' data-setup="{}" muted>
 						<source src='{{url('project/images/slider/bayliner.mp4')}}' type='video/mp4' />
 						<source src='{{url('project/images/slider/bayliner.webm')}}' type='video/webm' />
 						<source src='{{url('project/images/slider/bayliner.ogv')}}' type='video/ogg' />
@@ -70,14 +70,14 @@
                         	
              <li data-transition="fade" data-slotamount="7" data-masterspeed="1000" >
             
-						<img src="{{url('project/images/slider/quicksilver.jpg')}}"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+						
 						<div class="tp-caption fullscreenvideo"
 							data-x="0"
 							data-y="0"
 							data-speed="1000"
-							data-start="1100"
+							data-start="0"
 							data-easing="Power4.easeOut"
-							data-endspeed="1500"
+							data-endspeed="0"
 							data-endeasing="Power4.easeIn"
 							data-autoplay="true"
 							data-autoplayonlyfirsttime="false"
@@ -87,7 +87,7 @@
 							data-forcerewind="on"
                             data-muted="true"
 							style="z-index: 2">
-						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='images/slider/video.jpg' data-setup="{}" muted>
+						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='images/slider/quicksilver.jpg' data-setup="{}" muted>
 						<source src='{{url('project/images/slider/quicksilver.mp4')}}' type='video/mp4' />
 						<source src='{{url('project/images/slider/quicksilver.webm')}}' type='video/webm' />
 						<source src='{{url('project/images/slider/quicksilver.ogv')}}' type='video/ogg' />
@@ -99,14 +99,14 @@
                        
            <li data-transition="fade" data-slotamount="7" data-masterspeed="1000" >
             
-						<img src="{{url('project/images/slider/everglades.jpg')}}"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+						
 						<div class="tp-caption fullscreenvideo"
 							data-x="0"
 							data-y="0"
 							data-speed="1000"
-							data-start="1100"
+							data-start="0"
 							data-easing="Power4.easeOut"
-							data-endspeed="1500"
+							data-endspeed="0"
 							data-endeasing="Power4.easeIn"
 							data-autoplay="true"
 							data-autoplayonlyfirsttime="false"
@@ -116,7 +116,7 @@
 							data-forcerewind="on"
                             data-muted="true"
 							style="z-index: 2">
-						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='images/slider/video.jpg' data-setup="{}" muted>
+						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='images/slider/everglades.jpg' data-setup="{}" muted>
 						<source src='{{url('project/images/slider/everglades.mp4')}}' type='video/mp4' />
 						<source src='{{url('project/images/slider/everglades.webm')}}' type='video/webm' />
 						<source src='{{url('project/images/slider/everglades.ogv')}}' type='video/ogg' />
