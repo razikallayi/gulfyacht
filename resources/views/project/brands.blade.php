@@ -35,8 +35,11 @@
     <div id="boatContent">
     <div class="row">
       @foreach($brands as $brand)
-           <div class="col-md-12 no-padding"><a target="_blank" href="{{$brand->detailPageUrl()}}" class="clearfix"><div class="col-md-4"><div class="buy-img"><img src="{{$brand->imageUrl()}}"></div></div><div class="col-md-8"><h4>{{str_limit($brand->description,80,' ....')}}</h4><p>{{str_limit($brand->detailPageUrl())}}</p>
-            <div class="ap clearfix">
+           <div class="col-md-12 no-padding"><a target="_blank" href="{{$brand->detailPageUrl()}}" class="clearfix"><div class="col-md-4"><div class="buy-img"><img src="{{$brand->imageUrl()}}"></div></div><div class="col-md-8"><h4>{{$brand->name}}</h4>{{str_limit($brand->detailPageUrl())}}
+
+            <div class=" clearfix">
+              <br>
+              <p>{{str_limit($brand->description,200,' ....')}}</p>
               {{-- <div class="a">Doha - Qatar</div><div class="p">1,350, 000 QAR</div> --}}
             </div>
            </div></a></div>
