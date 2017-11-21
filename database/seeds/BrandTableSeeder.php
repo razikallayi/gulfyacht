@@ -13,6 +13,6 @@ class BrandTableSeeder extends Seeder
     {
         File::deleteDirectory(public_path(App\Models\Brand::IMAGE_LOCATION));
 
-        factory(App\Models\Brand::class, 10)->create();
+        factory(App\Models\Brand::class,10)->create();
     }
 }
