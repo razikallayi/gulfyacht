@@ -56,7 +56,7 @@
 <div class="con-sec">
   <div class="container">
      <div class="col-md-12 no-padding">
-        <div class="gmap"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d66687.66019237443!2d51.567188886037854!3d25.286120630942946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sqa!4v1506842908713" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe></div>
+         <div class="gmap"><div id="map_canvas"></div></div>
         
         <div class="contact clearfix">
           <div class="col-md-12 no-padding">

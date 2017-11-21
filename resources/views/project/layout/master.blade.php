@@ -268,6 +268,13 @@
     } );
   })();
 </script>
+<script src="{{url('project/js/jquery.mapit.js')}}"></script>
+<script>
+ $(document).ready(function() {
+	$('#map_canvas').mapit();
+ });
+</script>
+
 
 
 <script>
