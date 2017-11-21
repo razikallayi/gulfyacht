@@ -6,14 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class BoatType extends Model
 {
-       protected $fillable = [
-        'name',
-        'is_published',
-        ];
+	protected $fillable = [
+		'name',
+		'is_published',
+	];
 
-        public static function getIdByName($slug){
-        	$first = self::where('name',$slug)->firstOrFail();
-        	return $first->id;
-        }
-
+	public static function getIdsByName($names){
+		if(is_array($names)){
+			return self::whereIn('name',$names)->pluck('id');
+		}else{
+			self::where('name',$names)->pluck('id');
+		}
+	}
 }

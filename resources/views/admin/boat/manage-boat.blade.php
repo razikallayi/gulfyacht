@@ -1,7 +1,7 @@
 @extends('admin.layout.app')
 
 @section('active_menu','mnu-boat')
-@section('active_submenu', 'manage')
+@section('active_submenu', 'manage-'.$menu)
 
 @section('styles')
 @parent
@@ -19,7 +19,7 @@
 <div class="col-sm-12 mode" id="ListMode">
 	<div class="card">
 		<div class="header bg-project">
-			<h2 class="">Manage Boat</h2>
+			<h2 class="">Manage {{title_case($menu)}}</h2>
 		</div>
 
 		<div class="body table-wrapper">
@@ -59,7 +59,7 @@
 						<td>{{@$boat->brand->name}}</td>
 						<td>{{@$boat->type->name}}</td>
 						<td>{{number_format($boat->price)}} {{$boat->currency}}</td>
-						<td><a href="{{url('admin/boats/edit/'.$boat->id)}}"><i class="material-icons">edit</i></a></td>
+						<td><a href="{{url('admin/boats/edit/'.$boat->id.'?menu='.$menu)}}"><i class="material-icons">edit</i></a></td>
 						<td width="5px"><a href="{{url('admin/boats/'.$boat->id)}}" onclick="if(!confirm('Are you sure want to delete?')) return false;event.preventDefault();
                                                  document.getElementById('delete-form-{{$boat->id}}').submit();">
                                                  <form id="delete-form-{{$boat->id}}" action="{{ url('admin/boats/'. $boat->id) }}" method="post" style="display: none;">
@@ -81,7 +81,7 @@
 			<div class="card">
 				<div class="body">
 					No data to display.
-					<a href="{{url('admin/boats/add')}}" class="btn btn-info pull-right">Add Boat</a>
+					<a href="{{url('admin/boats/add?menu='.$menu)}}" class="btn btn-info pull-right">Add {{title_case($menu)}}</a>
 				</div>
 			</div>
 		</div>
