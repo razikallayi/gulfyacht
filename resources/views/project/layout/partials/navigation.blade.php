@@ -14,7 +14,7 @@
                 <li class="dropdown"><a class="link link--surinami dropdown-toggle" href="#" data-toggle="dropdown"><span data-letters-l="Boa" data-letters-r="ts">Boats</span></a>
                 <ul class="dropdown-menu">
                         <li><a href="{{url('brands')}}">New Boats</a></li>
-                        <li><a href="{{url('boats')}}">Boats</a></li>
+                        <li><a href="{{url('boats')}}">Pre-owned Boats</a></li>
                     </ul>
                 </li>
                 <li><a class="link link--surinami" href="{{url('inventory')}}"><span data-letters-l="inventory" data-letters-r="">Inventory</span></a></li>

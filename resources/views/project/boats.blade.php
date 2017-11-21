@@ -20,6 +20,7 @@
   <form id="searchForm">
     <div class="row">
      <div class="col-md-4">
+      @if($brands->isNotEmpty())
       <div id="collapse-menu" class="collapse-container">
        <h3>Brands <span class="arrow-r"></span></h3>
        <div>
@@ -41,7 +42,9 @@
         <label for="post-2" class="read-more-trigger"></label>  
       </div>
     </div>
+    @endif
 
+    @if($menu=='inventory')
       <div id="collapse-menu" class="collapse-container">
        <h3>Type <span class="arrow-r"></span></h3>
        <div>
@@ -55,6 +58,7 @@
         </ul>
       </div>
     </div>
+    @endif
 
     <div class="fby clearfix">
       <div class="col-md-12 no-padding">
@@ -350,7 +354,6 @@
 
     var formData = $('#searchForm').serialize();
     formData=formData+"&menu="+menu;
-
     $.ajax({
       method:'post',
       url:'{{url('boats')}}',
@@ -361,22 +364,23 @@
         if(!$.trim(retData.boats.data)){
           content = "<h4>No data to display</h4>";
         }
-
+console.log('adas');
         if(retData.menu == 'inventory'){
           getView = getHalfWidthView;
         }else{
           getView = getFullWidthView;
         }
-
+console.log('ad');
         $.each(retData.boats.data, function(key,data){
           var boat={};
-          boat.detailPageUrl = data.detailPageUrl==null?'':data.detailPageUrl;
+          boat.detailPageUrl = data.detailPageUrl==null?' ':data.detailPageUrl;
           boat.imageUrl  = data.imageUrl==null?'':data.imageUrl;
-          boat.title  = data.title==null?'':data.title;
-          boat.location  = data.location==null?'':data.location;
-          boat.price  = data.price==null?'':data.price.toLocaleString();
-          boat.currency  = data.currency==null?'':data.currency;
-          content += getView(data);
+          boat.title  = data.title==null?' ':data.title;
+          boat.description  = data.description==null?' ':data.description;
+          boat.location  = data.location==null?' ':data.location;
+          boat.price  = data.price==null?'0':data.price.toLocaleString();
+          boat.currency  = data.currency==null?"QAR":data.currency;
+          content += getView(boat);
         });
         $('#boatContent').html(content);
       },
