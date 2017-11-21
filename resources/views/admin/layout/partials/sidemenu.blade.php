@@ -48,17 +48,28 @@
    <span>Boat</span>
  </a>
  <ul class="ml-menu">
-  <li  class="add">
+  <li  class="add-boats">
     <a href="{{url('admin/boats/add')}}" class="">
       <span>Add Boat</span>
     </a>
   </li>
-  <li  class="manage">
+  <li  class="manage-boats">
     <a href="{{url('admin/boats')}}" class="">
       <span>Manage Boat</span>
     </a>
   </li>
+
+  <li  class="add-inventory">
+    <a href="{{url('admin/boats/add?menu=inventory')}}" class="">
+      <span>Add Inventory</span>
+    </a>
+  </li>
+  <li  class="manage-inventory">
+    <a href="{{url('admin/boats?menu=inventory')}}" class="">
+      <span>Manage Inventory</span>
+    </a>
+  </li>
+
+
 </ul>
 </li>
-
-

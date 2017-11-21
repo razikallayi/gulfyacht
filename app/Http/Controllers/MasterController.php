@@ -40,70 +40,54 @@ class MasterController extends Controller
         return view('project.sell',compact('filterLimits'));
     }
 
-    public function brands($slug=null)
+    public function brands()
     {
         $brands=Brand::orderBy('listing_order','desc')->get();
         $filterLimits=$this->getFilterLimits();
         return view('project.brands',compact('filterLimits','brands'));
     }
 
-
-    public function boats($slug,Request $request)
+    public function boats()
     {
-        $boats=Boat::query();
-        $page = $slug = strtolower($slug);
-        $brands = $brands = Brand::orderBy('listing_order','desc')->orderBy('updated_at','desc')->get();
+        $request['menu'] = 'boats';
+        return $this->search($request);
+    }
 
-        switch ($slug) {
-            case 'buy':
-            $request['type']=$slug;
-            return $this->search($request);
-            break;
-            
-            case 'used':
-            $request['type']=$slug;
-            return $this->search($request);
-            break;
-
-            case 'new':
-            $request['type']=$slug;
-            return $this->search($request);
-            break;
-
-            default:
-            $boat = Boat::where('slug',$slug)->firstOrFail();
-            $boat->increasePopularity();
-            $filterLimits=$this->getFilterLimits();
-            return view('project.details',compact('boat','filterLimits'));
-            break;
-        }
+    public function inventory(Request $request)
+    {
+        $request['menu'] = 'inventory';
+        return $this->search($request);
     }
 
 
     public function search(Request $request)
     {
-        // $request['has-search'] = false;
         if (!$request->ajax()) {
-            // $request['has-search'] = true;
             $brands = $brands = Brand::orderBy('listing_order','desc')->orderBy('updated_at','desc')->get();
             return view('project.boats')->with([
                 'brands'=>$brands,
                 'page'=>strtolower($request->get('type','buy')),
-                // 'filter' => json_encode($request->only(['has-search','max-length','brands','max-price','max-year','min-length','min-price','min-year','sort','type'])),
+                'menu'=>$request->menu,
                 'filterLimits'=>$this->getFilterLimits()
             ]);
         }
 
         $boats = Boat::query();
 
-        if($request->has('type') && $request->get('type','buy') != 'buy'){
-            $typeId  = BoatType::getIdByName($request->type);
-            $boats= $boats->where('type_id',$typeId);
+        if($request->has('type')){
+            $types  = BoatType::getIdsByName($request->type);
+            if($types!=null){
+                $boats= $boats->whereIn('type_id',$types);
+            }
         }
-        
+
+
+        if($request->has('menu')){
+            $boats= $boats->where('menu',$request->menu);
+        }
 
         if($request->has('brands')){
-            $brands=  Brand::getIdByName($request->brands);
+            $brands=  Brand::getIdsByName($request->brands);
             if($brands != null){
                 $boats->whereIn('brand_id',$brands);
             }
@@ -136,6 +120,7 @@ class MasterController extends Controller
             $boats->where('price','<=',$request->get('max-price'));
         }
 
+
         if($request->has('sort')){
             $sort= explode('-',$request->sort);
             switch ($sort[0]){
@@ -164,7 +149,7 @@ class MasterController extends Controller
 
         $search = [ 
             'boats'=> $boats,
-            'page'=>$request->type?strtolower($request->type):'buy'];
+            'menu'=>$request->menu?strtolower($request->menu):'boats'];
             return $search;
         }
 
@@ -213,51 +198,51 @@ class MasterController extends Controller
 
         public function career_mail(Request $request)
         {
-           $this->validate($request, [
-              'name'  => 'required',
-              'email'  => 'required|email',
-              'phone'  => 'nullable',
-              'message'  => 'nullable',
-              'file' => 'nullable|mimes:doc,docx,pdf,ppt,pptx,png,jpg,jpeg,bmp,gif',
-          ]);
-           Mail::to(ContactMail::getDestinationEmails())->send(new CareerMail($request));
-           if( count(Mail::failures()) > 0 ) {
-             session()->flash('status','alert-danger');
-             session()->flash('message', 'Failed!');
-         }else{
-            session()->flash('status','alert-success');
-            session()->flash('message','<b>Thank you!</b> We will get in touch with you soon.');
-        }
-        return back();
-    }
-
-
-    public function sellBoatMail(Request $request){
-
-     $this->validate($request, [
-        'name'  => 'nullable',
-        'email'  => 'required|email',
-        'phone'  => 'nullable',
-        'makes_n_model'  => 'required',
-        'length'  => 'required|numeric',
-        'year'  => 'required|numeric|date_format:Y',
-        'location'  => 'required',
-        'condition'  => 'required',
-        'file' => 'nullable|mimes:doc,docx,pdf,ppt,pptx,png,jpg,jpeg,bmp,gif',
-    ]);
-     
-     Mail::to(SellBoat::getDestinationEmails())
-     ->send(new SellBoat($request));
-
-  // return view('emails.sell-boat')->with(['request'=> $request]);
-     if( count(Mail::failures()) > 0 ) {
-         session()->flash('status','alert-danger');
-         session()->flash('message', 'Failed!');
-     }else{
+         $this->validate($request, [
+          'name'  => 'required',
+          'email'  => 'required|email',
+          'phone'  => 'nullable',
+          'message'  => 'nullable',
+          'file' => 'nullable|mimes:doc,docx,pdf,ppt,pptx,png,jpg,jpeg,bmp,gif',
+      ]);
+         Mail::to(ContactMail::getDestinationEmails())->send(new CareerMail($request));
+         if( count(Mail::failures()) > 0 ) {
+           session()->flash('status','alert-danger');
+           session()->flash('message', 'Failed!');
+       }else{
         session()->flash('status','alert-success');
         session()->flash('message','<b>Thank you!</b> We will get in touch with you soon.');
     }
     return back();
+}
+
+
+public function sellBoatMail(Request $request){
+
+   $this->validate($request, [
+    'name'  => 'nullable',
+    'email'  => 'required|email',
+    'phone'  => 'nullable',
+    'makes_n_model'  => 'required',
+    'length'  => 'required|numeric',
+    'year'  => 'required|numeric|date_format:Y',
+    'location'  => 'required',
+    'condition'  => 'required',
+    'file' => 'nullable|mimes:doc,docx,pdf,ppt,pptx,png,jpg,jpeg,bmp,gif',
+]);
+
+   Mail::to(SellBoat::getDestinationEmails())
+   ->send(new SellBoat($request));
+
+  // return view('emails.sell-boat')->with(['request'=> $request]);
+   if( count(Mail::failures()) > 0 ) {
+       session()->flash('status','alert-danger');
+       session()->flash('message', 'Failed!');
+   }else{
+    session()->flash('status','alert-success');
+    session()->flash('message','<b>Thank you!</b> We will get in touch with you soon.');
+}
+return back();
 }
 
 

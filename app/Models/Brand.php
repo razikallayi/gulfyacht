@@ -9,7 +9,7 @@ class Brand extends Model
 
 	const IMAGE_LOCATION = 'uploads/brands';
 
-        protected $fillable = [
+    protected $fillable = [
         'name',
         'slug',
         'url',
@@ -19,13 +19,13 @@ class Brand extends Model
         'is_published',
         'listing_order',
         'status',
-        ];
+    ];
 
     public function detailPageUrl(){
         return $this->url;
     }
 
-    public static function getIdByName($names){
+    public static function getIdsByName($names){
         if(is_array($names)){
             return self::whereIn('name',$names)->pluck('id');
         }else{
@@ -56,15 +56,15 @@ class Brand extends Model
             $thumbName= $width."_".$height."_".substr($imageName,0,-4);
             $original = self::IMAGE_LOCATION."/".$imageName;
             if(file_exists($thumbName)) {
-                 $imageName= $thumbName;
-            }else{
-               if( !file_exists($original)){
-                   return;
-               }
-               $imageDetails = Helper::uploadImage($original,self::IMAGE_LOCATION,$thumbName,$width,$height);
-               $imageName =  $imageDetails->getData()->filename;
-            }
-        }
-        return url(self::IMAGE_LOCATION."/".$imageName);
-    }
+               $imageName= $thumbName;
+           }else{
+             if( !file_exists($original)){
+                 return;
+             }
+             $imageDetails = Helper::uploadImage($original,self::IMAGE_LOCATION,$thumbName,$width,$height);
+             $imageName =  $imageDetails->getData()->filename;
+         }
+     }
+     return url(self::IMAGE_LOCATION."/".$imageName);
+ }
 }

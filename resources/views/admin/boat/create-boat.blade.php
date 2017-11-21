@@ -2,7 +2,7 @@
 
 @section('active_menu','mnu-boat')
 
-@section('active_submenu','add')
+@section('active_submenu','add-'.$menu)
 
 @section('content')
 <div class="row">
@@ -10,16 +10,16 @@
 	<div class="col-sm-12">
 		<div class="card">
 			<div class="header bg-project">
-				<h2 class="">@if(isset($boat)) {{"Edit"}} @else {{"Add"}}  @endif Boat </h2>
+				<h2 class="">@if(isset($boat)) {{"Edit"}} @else {{"Add"}}  @endif {{title_case($menu)}} </h2>
 			</div>
 			<div class="body">
 				@if(isset($boat))
 				<form id="form_validation" method="POST" action="{{url('admin/boats/edit/'.$boat->id)}}" enctype="multipart/form-data">
-				{{method_field('PUT')}}
-				@else
-				<form id="form_validation" method="POST" action="{{url('admin/boats')}}" enctype="multipart/form-data">
-				@endif
-				{{csrf_field()}}
+					{{method_field('PUT')}}
+					@else
+					<form id="form_validation" method="POST" action="{{url('admin/boats')}}" enctype="multipart/form-data">
+						@endif
+						{{csrf_field()}}
 
 						@if (count($errors) > 0)
 						<div class="alert alert-danger">
@@ -62,7 +62,7 @@
 									<select name="brand_id"  class="form-control show-tick" required>
 										@if(isset($brands) != false)
 										@foreach($brands as $brand)
-											<option value="{{$brand->id}}" {{ (isset($boat) && @$boat->brand->id == $brand->id )?' selected ':''}} >{{$brand->name}}</option>
+										<option value="{{$brand->id}}" {{ (isset($boat) && @$boat->brand->id == $brand->id )?' selected ':''}} >{{$brand->name}}</option>
 										@endforeach
 										@endif
 									</select>
@@ -96,7 +96,7 @@
 								</div>
 							</div>
 
-								<div class="col-sm-4">
+							<div class="col-sm-4">
 								<label>Year</label>
 								<div class="form-group ">
 									<div class="form-line">
@@ -331,72 +331,72 @@
 										<div id="image-preview-{{substr($imageName,0,-4)}}" class="col-lg-3 col-md-4 col-sm-6 m-t-30" style="min-height:100px"><span>
 											{{-- <input name="is_thumbnail" type="radio" id="radio-{{$imageName}}" value="{{$imageName}}" class="radio-col-blue" {{old('is_thumbnail') == $imageName?" checked ":""}} ><label for="radio-{{$imageName}}">Set as Thumbnail</label> --}}
 											<img class="img-responsive" src="{{url(App\Models\Property::IMAGE_LOCATION)."/".$imageName}}"></span></div>
-										@endforeach
-										@endif
+											@endforeach
+											@endif
 
-										@if(isset($boat) && null != $boat->images)
-										@foreach($boat->images as $image)
-										<div id="image-preview-{{substr($image->file_name,0,-4)}}" class="col-lg-3 col-md-4 col-sm-6 m-t-30 sort_handle" style="min-height:100px">
-											<span>
-												<button type="button" style="float:right;" onclick="deleteImage('{{$image->file_name}}')" class="btn btn-xs  waves-effect btn-danger pull-right"><i class="material-icons">close</i></button>
+											@if(isset($boat) && null != $boat->images)
+											@foreach($boat->images as $image)
+											<div id="image-preview-{{substr($image->file_name,0,-4)}}" class="col-lg-3 col-md-4 col-sm-6 m-t-30 sort_handle" style="min-height:100px">
+												<span>
+													<button type="button" style="float:right;" onclick="deleteImage('{{$image->file_name}}')" class="btn btn-xs  waves-effect btn-danger pull-right"><i class="material-icons">close</i></button>
 
-												<img class="img-responsive sortable_image" style="width:100%" src="{{$boat->imageUrl($image->file_name)}}">
-											</span>
-										</div>
-										@endforeach
-										@endif
+													<img class="img-responsive sortable_image" style="width:100%" src="{{$boat->imageUrl($image->file_name)}}">
+												</span>
+											</div>
+											@endforeach
+											@endif
 										</div>
 
 									</div>
 								</div>
 
 
+								<input type="hidden" name="menu" value="{{$menu or 'boats'}}">
 
-
-							<div class="col-sm-12">
-								<div class="form-group">
-									<div class="">
-										<input type="submit" id="saveButton" name="save" value="Save" class="btn btn-lg btn-success waves-effect" >
+								<div class="col-sm-12">
+									<div class="form-group">
+										<div class="">
+											<input type="submit" id="saveButton" name="save" value="Save" class="btn btn-lg btn-success waves-effect" >
+										</div>
 									</div>
 								</div>
+
 							</div>
 
-						</div>
-
-					</form>			
+						</form>			
+					</div>
 				</div>
+
 			</div>
-
 		</div>
-	</div>
 
 
-	@endsection
-
-
-
-
-			@section('scripts')
-			@parent
-
-			<!-- Bootstrap Select Css -->
-			<link href="{{url('md/plugins/bootstrap-select/css/bootstrap-select.css')}}" rel="stylesheet" />
-			<!-- Select Plugin Js -->
-			<script src="{{url('md/plugins/bootstrap-select/js/bootstrap-select.js')}}"></script>
+		@endsection
 
 
 
-<script type="text/javascript">
-	window.onload = function () {
-		var fileUpload = document.getElementById("fileupload");
 
-		fileUpload.onchange = function () {
-			if (typeof (FileReader) != "undefined") {
-				var dvPreview = $("#result");
-				dvPreview.innerHTML = "";
-				var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
-				for (var i = 0; i < fileUpload.files.length; i++) {
-					var file = fileUpload.files[i];
+		@section('scripts')
+		@parent
+
+		<!-- Bootstrap Select Css -->
+		<link href="{{url('md/plugins/bootstrap-select/css/bootstrap-select.css')}}" rel="stylesheet" />
+		<!-- Select Plugin Js -->
+		<script src="{{url('md/plugins/bootstrap-select/js/bootstrap-select.js')}}"></script>
+
+
+
+		<script type="text/javascript">
+			window.onload = function () {
+				var fileUpload = document.getElementById("fileupload");
+
+				fileUpload.onchange = function () {
+					if (typeof (FileReader) != "undefined") {
+						var dvPreview = $("#result");
+						dvPreview.innerHTML = "";
+						var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+						for (var i = 0; i < fileUpload.files.length; i++) {
+							var file = fileUpload.files[i];
 					//alert(file.name);
 					if (regex.test(file.name.toLowerCase())) {
 
@@ -406,7 +406,7 @@
 							var img = '<div class="col-lg-3 col-md-4 col-sm-6 m-t-30" style="min-height:100px"><span><a href="#" class="btn btn-xs  waves-effect btn-danger pull-right remove_pict"><i class="material-icons">close</i></a><img class="img-responsive" src="' +  e.target.result + '"></span></div>';
 
 
-                      dvPreview.append(img);
+							dvPreview.append(img);
                         // dvPreview.appendChild(textbox);
                     }
                     reader.readAsDataURL(file);

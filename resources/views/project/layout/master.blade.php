@@ -93,8 +93,8 @@
          <ul>
            <li><a href="{{url('/')}}">Home</a></li>
            <li><a href="{{url('about')}}">About Us</a></li>
-           <li><a href="{{url('boats/new')}}">Boats</a></li>
-           <li><a href="{{url('boats')}}">Used Boats</a></li>
+           <li><a href="{{url('boats')}}">Boats</a></li>
+           <li><a href="{{url('inventory')}}">Inventory</a></li>
            <li><a href="{{url('sell')}}">Sell Your Boat</a></li>
            <li><a href="{{url('contact')}}">Contact Us</a></li>
          </ul>

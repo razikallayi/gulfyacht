@@ -6,7 +6,7 @@
   <div class="container">
     <div class="col-md-12 no-padding">
      <div class="abt-tp con">
-       <h3>{{$page}} BOATS</h3>
+       <h3>{{$menu or 'Boats'}}</h3>
      </div>
 
    </div>
@@ -16,22 +16,11 @@
 
 <div class="buy-sec">
  <div class="container">
-  @if($page=='new')
-  <div class="col-md-12 no-padding bnds">
-    <div id="owl-demo" class="owl-carousel ">
-     @foreach($brands as $brand)
-     <div class="item"><a href="{{$brand->detailPageUrl()}}"  target="_blank"><img src="{{$brand->imageUrl()}}"></a></div>
-     @endforeach
-   </div>     
- </div>
- @endif
-
  <div class="col-md-12 no-padding">
   <form id="searchForm">
     <div class="row">
      <div class="col-md-4">
       <div id="collapse-menu" class="collapse-container">
-       {{-- @if($page=='buy') --}}
        <h3>Brands <span class="arrow-r"></span></h3>
        <div>
         <input type="checkbox" class="read-more-state" id="post-2" />
@@ -51,7 +40,20 @@
         </ul>
         <label for="post-2" class="read-more-trigger"></label>  
       </div>
-      {{-- @endif --}}
+    </div>
+
+      <div id="collapse-menu" class="collapse-container">
+       <h3>Type <span class="arrow-r"></span></h3>
+       <div>
+        <ul class="filt read-more-wrap">
+          <li class="filt__item">
+            <label class="label--checkbox"><input name="type[]" value="new" type="checkbox"  class="checkbox" >New</label>
+          </li>
+          <li class="filt__item">
+            <label class="label--checkbox"><input name="type[]" value="used" type="checkbox" class="checkbox" >Used</label>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div class="fby clearfix">
@@ -338,24 +340,16 @@
    $('#searchForm').submit();
  });
 
+   $('input[name="type[]"').change(function() {
+   $('#searchForm').submit();
+ });
+
   $('#searchForm').submit(function(e){
     e.preventDefault();
-    var page = '{{$page or 'new'}}';
-
-    // formData = {
-    //   'min-length': $('input[name=min-length]').val(),
-    //   'max-length': $('input[name=max-length]').val(),
-    //   'min-year'  : $('input[name=min-year]').val(),
-    //   'max-year'  : $('input[name=max-year]').val(),
-    //   'min-price' : $('input[name=min-price]').val(),
-    //   'max-price' : $('input[name=max-price]').val(),
-    //   'sort'      : $('select[name=sort]').val(),
-    //   'brands'    : $('input[name=brands\\[\\]').val(),
-    //   'type'      : page
-    // };
+    var menu = '{{$menu or 'boats'}}';
 
     var formData = $('#searchForm').serialize();
-    formData=formData+"&type="+page;
+    formData=formData+"&menu="+menu;
 
     $.ajax({
       method:'post',
@@ -368,7 +362,7 @@
           content = "<h4>No data to display</h4>";
         }
 
-        if(retData.page == 'buy'){
+        if(retData.menu == 'inventory'){
           getView = getHalfWidthView;
         }else{
           getView = getFullWidthView;

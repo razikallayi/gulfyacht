@@ -39,6 +39,7 @@ class Boat extends Model
         'is_featured',
         'is_published',
         'listing_order',
+        'menu',
         'status',
         ];
 
