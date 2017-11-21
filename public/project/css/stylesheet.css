@@ -1229,6 +1229,7 @@ content: "";
 .con{padding:160px 270px 80px}
 .con h3{color:#fff; margin:0; text-transform:uppercase; font-size:24px; font-weight:400}
 .gmap{width:80%; margin:0 auto; height:360px; position:relative; z-index:1}
+.gmap icon{}
 #map_canvas {height: 360px; width: 100%; margin-left:0; margin-top:-50px}
 #map_canvas h2{font-size:16px !important}
 .contact{background:#333; padding:120px 15px 0 97px; 15px 0 100px; margin-top:-50px; position:relative; margin-bottom:120px}
@@ -1272,12 +1273,14 @@ label[for="file-upload"]:hover { background: #333;}
 .buy-mn{background:#fff; padding:35px 50px; border-top:3px solid #f4f4f4}
 .buy-img{overflow:hidden; height: 177px; position: relative;}
 .buy-img img{transition:all 0.5s ease; min-height: 100%; min-width: 100%; width: 100%; height:auto; max-width: none; max-height: none; top: 50%; left: 50%; transform: translate(-50%,-50%); position: absolute;}
+.new-img{overflow:hidden; height: 177px; position: relative; line-height: 177px; border: 1px solid #ddd; text-align: center;}
+.new-img img{max-width: 100%;}
 .buy-mn .col-md-6:hover .buy-img img, .buy-mn .col-md-12:hover .buy-img img{transform:scale(1.2) translate(-40%,-50%)}
 .buy-mn .col-md-6, .buy-mn .col-md-12{margin-bottom:50px}
 .buy-mn .col-md-6{min-height: 297px;}
 .buy-mn h4{color:#333;font-weight:400; font-size:16px; margin:25px 10px 15px; line-height:21px}
 .nb h4{margin:10px 0px 10px;}
-.nb p{color:#333;}
+.nb p{color:#333;margin-top: 55px;}
 .nb .ap{padding:15px 0 0 ; border-top:1px solid #dcdcdd}
 .a, .p{float:left; width:50%; padding-right:5px; margin-left:10px; position:relative; padding-left:25px; color:#333; font-size:15px}
 .a:before{position:absolute; left:0; top:-1px; width:17px; height:21px; background:url(../images/map.png) no-repeat; content:""}
@@ -1330,7 +1333,7 @@ label[for="file-upload"]:hover { background: #333;}
 .bs a{border:2px solid #fff; padding:7px 28px; display:block; color:#fff; font-size:15px; font-weight:600; transition:all 0.5s ease}
 .bs a:hover{background:#333; border-color:#333}
 .sbbs-img{position:absolute; left:-140px}
-.sb-tp h2{color: #fff; font-size: 24px; margin: 160px 270px 80px; font-weight: 400; text-align:center}
+.sb-tp h2{color: #fff; font-size: 24px; margin: 160px 270px 80px; font-weight: 400; text-align:center; text-transform: uppercase;}
 .fyf-sec{background:rgba(255, 114, 0, 0.9); position:relative; padding:60px; margin-bottom:70px}
 .fyf-sec h2{font-size:56px; color:#fff; margin:50px 0}
 .fyf-sec p{font-size:13px; color:#fff; margin:0 75px 0 0}
@@ -1382,7 +1385,7 @@ nav.navbar.bootsnav ul.nav > li > a{padding: 30px 13px;}
 .butn{float:none; margin:10px 0 30px; right:0}
 .cr .butn{right:0}
 .tooltip-item{padding:30px; height:auto}
-.owl-theme .owl-controls{bottom:180px}
+.owl-theme .owl-controls{bottom:120px}
 .owl-next{right:0}
 .owl-prev{left:0}
 .sbbs, .abt-ship{display:none}
@@ -1392,6 +1395,7 @@ nav.navbar.bootsnav ul.nav > li > a{padding: 30px 13px;}
 .abt-dection{padding: 0px 0px 60px 0px;}
 .owl-carousel .owl-wrapper{width: max-content !important;}
 .owl-carousel .owl-item {float: left; display: block;}
+.nb p{margin-top:0}
 }
 
 @media (max-width:767px){
@@ -1399,7 +1403,7 @@ nav.navbar.bootsnav ul.nav > li > a{padding: 30px 13px;}
 .button-wrap {position: absolute; top: 5px; right: 0;}
 .sear{padding: 6px 10px;}
 .tooltip-item{padding:30px; height:auto}
-.owl-theme .owl-controls{bottom:180px}
+.owl-theme .owl-controls{bottom:100px}
 .owl-next{right:0}
 .owl-prev{left:0}
 .ftr-left, .ftr-right{float:none; text-align:center; padding:5px 0 0}

@@ -31,7 +31,7 @@
 							data-forcerewind="on"
                             data-muted="true"
 							style="z-index: 2">
-						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='images/slider/princess.jpg' data-setup="{}" muted>
+						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='' data-setup="{}" muted>
 						<source src='{{url('project/images/slider/princess.mp4')}}' type='video/mp4' />
 						<source src='{{url('project/images/slider/princess.webm')}}' type='video/webm' />
 						<source src='{{url('project/images/slider/princess.ogv')}}' type='video/ogg' />
@@ -59,7 +59,7 @@
 							data-forcerewind="on"
                             data-muted="true"
 							style="z-index: 2">
-						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='images/slider/bayliner.jpg' data-setup="{}" muted>
+						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='' data-setup="{}" muted>
 						<source src='{{url('project/images/slider/bayliner.mp4')}}' type='video/mp4' />
 						<source src='{{url('project/images/slider/bayliner.webm')}}' type='video/webm' />
 						<source src='{{url('project/images/slider/bayliner.ogv')}}' type='video/ogg' />
@@ -87,7 +87,7 @@
 							data-forcerewind="on"
                             data-muted="true"
 							style="z-index: 2">
-						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='images/slider/quicksilver.jpg' data-setup="{}" muted>
+						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='' data-setup="{}" muted>
 						<source src='{{url('project/images/slider/quicksilver.mp4')}}' type='video/mp4' />
 						<source src='{{url('project/images/slider/quicksilver.webm')}}' type='video/webm' />
 						<source src='{{url('project/images/slider/quicksilver.ogv')}}' type='video/ogg' />
@@ -116,7 +116,7 @@
 							data-forcerewind="on"
                             data-muted="true"
 							style="z-index: 2">
-						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='images/slider/everglades.jpg' data-setup="{}" muted>
+						 <video class="video-js vjs-default-skin" preload="none" width="100%" height="100%" poster='' data-setup="{}" muted>
 						<source src='{{url('project/images/slider/everglades.mp4')}}' type='video/mp4' />
 						<source src='{{url('project/images/slider/everglades.webm')}}' type='video/webm' />
 						<source src='{{url('project/images/slider/everglades.ogv')}}' type='video/ogg' />

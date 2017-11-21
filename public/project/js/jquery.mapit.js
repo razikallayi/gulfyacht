@@ -1,4 +1,3 @@
-
 document.write('<scr'+'ipt type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkhmf6SNq5tB3HI7mGVoRUHHj3qgmVgug&callback=initMap" ></scr'+'ipt>');
 
 (function($, window, undefined) {
@@ -13,8 +12,8 @@ document.write('<scr'+'ipt type="text/javascript" src="https://maps.googleapis.c
 			type: 			 'ROADMAP',
 			scrollwheel: false,
 			marker: {
-				latitude: 	25.3182489,
-				longitude: 	51.5253109,
+				latitude: 	25.3181998,
+				longitude: 	51.5263420,
 				icon: 			'project/images/map-con.png',
 				title: 			'Gulf Yatch',
 				open: 			false,
