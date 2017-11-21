@@ -87,7 +87,7 @@
 									<label>Price</label>
 									<div class="form-group ">
 										<div class="form-line">
-											<input type="number" value="{{$boat->price or old('price')}}" name="price" maxlength="191" class="form-control" >
+											<input type="text" value="{{$boat->price or old('price')}}" name="price" maxlength="191" class="form-control" >
 										</div>
 									</div>
 								</div>
@@ -114,7 +114,7 @@
 									<label>Length (in Ft)</label>
 									<div class="form-group ">
 										<div class="form-line">
-											<input type="number" value="{{$boat->length or old('length')}}" name="length" class="form-control" >
+											<input type="text" value="{{$boat->length or old('length')}}" name="length" class="form-control" >
 										</div>
 									</div>
 								</div>
