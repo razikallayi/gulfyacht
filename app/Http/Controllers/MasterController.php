@@ -53,6 +53,14 @@ class MasterController extends Controller
         return $this->search($request);
     }
 
+    public function boatDetails($slug)
+    {
+        $boat = Boat::where('slug',$slug)->firstOrFail();
+        $boat->increasePopularity();
+        $filterLimits=$this->getFilterLimits();
+        return view('project.details',compact('boat','filterLimits'));
+    }
+
     public function inventory(Request $request)
     {
         $request['menu'] = 'inventory';

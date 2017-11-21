@@ -27,7 +27,7 @@ Route::get('/', 'MasterController@index');
 Route::get('about', 'MasterController@about');
 Route::any('boats', 'MasterController@search');
 Route::get('brands', 'MasterController@brands');
-Route::get('boats/{slug}', 'MasterController@boats');
+Route::get('boats/{slug}', 'MasterController@boatDetails');
 Route::get('inventory', 'MasterController@inventory');
 Route::get('sell', 'MasterController@sell');
 Route::post('sell', 'MasterController@sellBoatMail');
