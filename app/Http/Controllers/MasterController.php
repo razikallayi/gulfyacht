@@ -151,6 +151,7 @@ class MasterController extends Controller
         foreach($boats->items() as $boat){
             $boat->imageUrl = $boat->imageUrl();
             $boat['description'] = str_limit($boat->description);
+            $boat['price'] = number_format($boat->price, 2);
             unset($boat->images);
             $boat->detailPageUrl = $boat->detailPageUrl();
         };
