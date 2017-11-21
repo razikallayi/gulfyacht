@@ -59,7 +59,7 @@
 
 							<div class="col-sm-6">
 							@else
-								<input type="hidden" name="type_id" value="{{$boatTypes->where('name','used')->first()->id}}">
+								<input type="hidden" name="type_id" value="{{@$boatTypes->where('name','used')->first()->id}}">
 								<div class="col-sm-12">
 							@endif
 									<label>Brand<code>*</code> </label>

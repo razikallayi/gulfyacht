@@ -364,7 +364,7 @@
         if(!$.trim(retData.boats.data)){
           content = "<h4>No data to display</h4>";
         }
-console.log('adas');
+
         if(retData.menu == 'inventory'){
           getView = getHalfWidthView;
         }else{
@@ -381,7 +381,6 @@ console.log('adas');
           boat.price  = data.price==null?'0':data.price.toLocaleString();
           boat.currency  = data.currency==null?"QAR":data.currency;
           content += getView(boat);
-          console.log(boat);
         });
         $('#boatContent').html(content);
       },

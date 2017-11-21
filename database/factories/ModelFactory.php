@@ -67,7 +67,7 @@ $factory->define(App\Models\Boat::class, function (Faker\Generator $faker) {
         'is_featured'      => $faker->boolean,
         'is_published'     => $faker->boolean,
         'listing_order'    => $faker->randomNumber(1),
-        'menu'             => $menus[array_rand($menus)];
+        'menu'             => $menus[array_rand($menus)],
         'status'           => 'active',
     ];
 });
@@ -104,7 +104,7 @@ $factory->define(App\Models\Product::class, function (Faker\Generator $faker) {
     $slug = str_slug($title);
         $brandId = App\Models\Brand::inRandomOrder()->first()->id;
     return [
-        'brand_id'         => $brandId,
+      'brand_id'         => $brandId,
        'name'           => $title,
        'slug'            => $slug,
        'url'             => $faker->url,

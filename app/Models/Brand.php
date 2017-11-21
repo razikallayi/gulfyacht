@@ -18,7 +18,7 @@ class Brand extends Model
         'is_featured',
         'is_published',
         'listing_order',
-        'status',
+        'status'
     ];
 
     public function detailPageUrl(){
