@@ -394,7 +394,7 @@ console.log('ad');
   });
 
   getFullWidthView = function(boat){
-    return '<div class="col-md-12 no-padding"><a href="'+boat.detailPageUrl+'" class="clearfix"><div class="col-md-5"><div class="buy-img"><img src="'+boat.imageUrl+'"></div></div><div class="col-md-7"><h4>'+boat.title+'</h4><p>'+boat.description+'</p><div class="ap clearfix"><div class="a">'+boat.location+'</div><div class="p">'+boat.price.toLocaleString()+' '+ boat.currency+'</div></div></div></a></div>';
+    return '<div class="col-md-12 no-padding"><a href="'+boat.detailPageUrl+'" class="clearfix"><div class="col-md-5"><div class="buy-img"><img src="'+boat.imageUrl+'"></div></div><div class="col-md-7"><h4>'+boat.title+'</h4><p>'+boat.description+'</p><div class="ap clearfix"><div class="a">'+boat.location+'</div><div class="p">'+boat.price+' '+ boat.currency+'</div></div></div></a></div>';
 
   }
 
