@@ -370,7 +370,7 @@ console.log('adas');
         }else{
           getView = getFullWidthView;
         }
-console.log('ad');
+
         $.each(retData.boats.data, function(key,data){
           var boat={};
           boat.detailPageUrl = data.detailPageUrl==null?' ':data.detailPageUrl;
@@ -381,6 +381,7 @@ console.log('ad');
           boat.price  = data.price==null?'0':data.price.toLocaleString();
           boat.currency  = data.currency==null?"QAR":data.currency;
           content += getView(boat);
+          console.log(boat);
         });
         $('#boatContent').html(content);
       },
