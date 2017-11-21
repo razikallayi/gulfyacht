@@ -1,5 +1,16 @@
 @extends('project.layout.master')
 
+@section('styles')
+@parent
+<style>
+.p-20{
+  padding:20px;
+}
+.ml-20{
+  margin-left:20px;
+}
+</style>
+@endsection
 @section('content')
 
 <div class="abt ">
@@ -29,31 +40,55 @@
     <div class="row">
 
 
-  <div class="col-md-12">
-  <div class="buy-mn nb">
-   <div class="row">
-    <div id="boatContent">
-    <div class="row">
-      @foreach($brands as $brand)
-           <div class="col-md-12 no-padding"><a target="_blank" href="{{$brand->detailPageUrl()}}" class="clearfix"><div class="col-md-4"><div class="buy-img"><img src="{{$brand->imageUrl()}}"></div></div><div class="col-md-8"><h4>{{$brand->name}}</h4>{{str_limit($brand->detailPageUrl())}}
 
-            <div class=" clearfix">
-              <br>
-              <p>{{str_limit($brand->description,200,' ....')}}</p>
+      <div class="col-md-12">
+        <div class="buy-mn nb">
+         <div class="row">
+          <div id="boatContent">
+            <div class="row">
+              @foreach($brands as $brand)
+              <div class="col-md-12 no-padding"><div class="col-md-4"><div class="buy-img"><a target="_blank" href="{{$brand->detailPageUrl()}}" class="clearfix"><img src="{{$brand->imageUrl()}}"></a></div></div><div class="col-md-8">
+                <div class=" clearfix">
+                  <p>{{str_limit($brand->description,1000)}}</p>
+                </div>
+                @if(mb_strlen($brand->description)>1000)
+                <a class="pull-right" href="link" data-toggle="modal" data-target="#brand-{{$brand->slug}}">Read more</a>
+                @endif
+              </div></div>
+
+              @if(mb_strlen($brand->description)>1000)
+              <div id="brand-{{$brand->slug}}" class="modal fade" aria-labelledby="modalLabel" role="dialog" tabindex="-1">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">{{$brand->name}}</h4>
+                    </div>
+                    <div class="modal-body">
+                      
+                      <img class="ml-20" height="200px" src="{{$brand->imageUrl()}}" />
+                      <p class="p-20">{{$brand->description}}</p>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-sm" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              @endif
+              @endforeach
+
             </div>
-           </div></a></div>
-            @endforeach
-    </div>
-    </div>
+          </div>
 
-    <div class="col-md-12">
-     
-    </div>
+          <div class="col-md-12">
+           
+          </div>
 
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-</div>
-</div>
 </form>
 </div>
 </div>

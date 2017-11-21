@@ -85,7 +85,7 @@ $factory->define(App\Models\Brand::class, function (Faker\Generator $faker) {
        'slug'            => $slug,
        'url'             => $faker->url,
        'image'           => $filename,
-       'description'     => $faker->sentence($nbWords = 6, $variableNbWords = true),
+       'description'     => $faker->sentence($nbWords = 300, $variableNbWords = true),
        'is_featured'     => $faker->boolean,
        'is_published'    => $faker->boolean,
        'listing_order'   => $faker->randomNumber(1),

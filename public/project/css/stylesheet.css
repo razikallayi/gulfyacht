@@ -88,15 +88,18 @@
 	position: relative;
 	width: 100%;
 	-ms-touch-action: pan-y;
+text-align: center;
 }
 .owl-carousel .owl-wrapper{
 	display: none;
 	position: relative;
 	-webkit-transform: translate3d(0px, 0px, 0px);
+    width: auto !important;
 }
 .owl-carousel .owl-wrapper-outer{
 	position: relative;
 	width: 100%;
+    text-align: center;
    
 }
 
@@ -114,7 +117,8 @@
 }
 	
 .owl-carousel .owl-item{
-	float: left;
+	float: none;
+display: inline-block;
 }
 .owl-controls .owl-page,
 .owl-controls .owl-buttons div{

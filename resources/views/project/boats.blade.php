@@ -378,7 +378,7 @@
           boat.title  = data.title==null?' ':data.title;
           boat.description  = data.description==null?' ':data.description;
           boat.location  = data.location==null?' ':data.location;
-          boat.price  = data.price==null?'0':data.price.toLocaleString();
+          boat.price  = data.price==null?'0':data.price.toLocaleString('en-US');
           boat.currency  = data.currency==null?"QAR":data.currency;
           content += getView(boat);
         });
