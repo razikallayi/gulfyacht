@@ -1370,7 +1370,8 @@ nav.navbar.bootsnav ul.nav > li > a{padding: 30px 13px;}
 .sbbs ul li{font-size: 17px;}
 .a{width: 55%;}
 .p{width: 40%;}
-
+.owl-carousel .owl-wrapper{width: max-content !important;}
+.owl-carousel .owl-item {float: left; display: block;}
 }
 
 @media (min-width:768px) and  (max-width:990px){
@@ -1389,6 +1390,8 @@ nav.navbar.bootsnav ul.nav > li > a{padding: 30px 13px;}
 .sbb{position: relative; text-align: center;    margin: 0 0 40px;}
 .sbb img{display: inline-block;margin-top: 0;}
 .abt-dection{padding: 0px 0px 60px 0px;}
+.owl-carousel .owl-wrapper{width: max-content !important;}
+.owl-carousel .owl-item {float: left; display: block;}
 }
 
 @media (max-width:767px){
