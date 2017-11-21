@@ -6,7 +6,7 @@
   <div class="container">
     <div class="col-md-12 no-padding">
      <div class="abt-tp con">
-       <h3>{{$menu or 'Boats'}}</h3>
+       <h3>{{$menu or 'Pre-owned Boats'}}</h3>
      </div>
 
    </div>
