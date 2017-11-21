@@ -26,7 +26,7 @@ class CreateBoatsTable extends Migration
             $table->string('currency')->nullable();
             $table->string('location')->nullable();
             $table->integer('year')->default(0);
-            $table->integer('length')->default(0);
+            $table->double('length')->default(0);
             $table->string('condition')->nullable();
             
             $table->string('email')->nullable();
