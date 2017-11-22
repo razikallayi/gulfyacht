@@ -18,7 +18,7 @@
                     </ul>
                 </li>
                 <li><a class="link link--surinami" href="{{url('inventory')}}"><span data-letters-l="inventory" data-letters-r="">Inventory</span></a></li>
-                <li><a class="link link--surinami" href="{{url('sell')}}"><span data-letters-l="Sell Your" data-letters-r="Boats">Sell Your Boats</span></a></li>
+                <li><a class="link link--surinami" href="{{url('sell')}}"><span data-letters-l="Sell Your" data-letters-r="Boat">Sell Your Boat</span></a></li>
                 <li><a class="link link--surinami" href="{{url('about')}}"><span data-letters-l="About" data-letters-r="us">About Us</span></a></li>
                 <li><a class="link link--surinami" href="{{url('contact')}}"><span data-letters-l="Contact" data-letters-r="Us">Contact Us</span></a></li>
             </ul>

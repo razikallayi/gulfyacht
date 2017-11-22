@@ -23,7 +23,7 @@ It also represents Bayliner - the manufacturer of runabouts, cruisers, deck boat
            <div class="sbb clearfix">
              <div class="col-md-4"><img src="{{url('project/images/key.svg')}}" class="img-responsive"></div>
              <div class="col-md-8"><h3><span>Are You Looking</span> <br> SELL / BUY BOAT ?</h3><h5>Call Edward : <a href="tel:+974 5581 3565">+974 5581 3565</a> <br> Email : <a href="mailto:ec@gulf-yachts.com"> ec@gulf-yachts.com </a></h5></div>
-             <div class="col-md-12"><div class="syb"><a href="#">SELL YOUR BOAT</a></div><div class="syb"><a href="#">BUY YOUR BOAT</a></div></div>
+             <div class="col-md-12"><div class="syb"><a href="{{url('sell')}}">SELL YOUR BOAT</a></div><div class="syb"><a href="{{url('inventory')}}">BUY YOUR BOAT</a></div></div>
            </div>
          </div>
           <div class="col-md-6 no-padding pull-right">

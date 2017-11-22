@@ -10,7 +10,7 @@
 
     @section('styles')
     <!-- Favicon-->
-    <link rel="icon" href="{{url('md/favicon.ico')}}" type="image/x-icon">
+    <link rel="icon" href="{{url(config('whyte.project.favicon'))}}" type="image/x-icon">
     <meta name="theme-color" content="#00b5b3">
 
     <!-- Google Fonts -->

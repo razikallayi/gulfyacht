@@ -4,6 +4,7 @@ return [
     'project' => [
         'name' => 'Gulf Yacht',
         'logo' => 'project/images/logo.png',
+        'favicon' => 'project/images/favicon.ico',
         'link' => '/',
     ],
 
