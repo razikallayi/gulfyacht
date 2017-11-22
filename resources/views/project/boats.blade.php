@@ -1,5 +1,13 @@
 @extends('project.layout.master')
 
+@section('styles')
+@parent
+<style type="text/css">
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{
+  background-color: #ff7200;
+}
+</style>
+@endsection
 @section('content')
 
 <div class="abt ">
@@ -16,35 +24,35 @@
 
 <div class="buy-sec">
  <div class="container">
- <div class="col-md-12 no-padding">
-  <form id="searchForm">
-    <div class="row">
-     <div class="col-md-4">
-      @if($brands->isNotEmpty())
-      <div id="collapse-menu" class="collapse-container">
-       <h3>Brands <span class="arrow-r"></span></h3>
-       <div>
-        <input type="checkbox" class="read-more-state" id="post-2" />
-        <ul class="filt read-more-wrap">
-          @foreach($brands->take(3) as $brand)
-          <li class="filt__item">
-            <label class="label--checkbox"><input name="brands[]" value="{{$brand->name}}" type="checkbox" class="checkbox" >{{$brand->name}}</label>
-          </li>
-          @endforeach
-          <div class="read-more-target">
-            @foreach($brands->slice(3) as $brand)
+   <div class="col-md-12 no-padding">
+    <form id="searchForm" action="{{url('boats')}}">
+      <div class="row">
+       <div class="col-md-4">
+        @if($brands->isNotEmpty())
+        <div id="collapse-menu" class="collapse-container">
+         <h3>Brands <span class="arrow-r"></span></h3>
+         <div>
+          <input type="checkbox" class="read-more-state" id="post-2" />
+          <ul class="filt read-more-wrap">
+            @foreach($brands->take(3) as $brand)
             <li class="filt__item">
               <label class="label--checkbox"><input name="brands[]" value="{{$brand->name}}" type="checkbox" class="checkbox" >{{$brand->name}}</label>
             </li>
             @endforeach
-          </div>
-        </ul>
-        <label for="post-2" class="read-more-trigger"></label>  
+            <div class="read-more-target">
+              @foreach($brands->slice(3) as $brand)
+              <li class="filt__item">
+                <label class="label--checkbox"><input name="brands[]" value="{{$brand->name}}" type="checkbox" class="checkbox" >{{$brand->name}}</label>
+              </li>
+              @endforeach
+            </div>
+          </ul>
+          <label for="post-2" class="read-more-trigger"></label>  
+        </div>
       </div>
-    </div>
-    @endif
+      @endif
 
-    @if($menu=='inventory')
+      @if($menu=='inventory')
       <div id="collapse-menu" class="collapse-container">
        <h3>Type <span class="arrow-r"></span></h3>
        <div>
@@ -138,6 +146,8 @@
       </select>
     </div>
 
+    <span class="boatPagination"></span>
+
     {{-- {{ $boats->links('vendor.pagination.project-pagination') }} --}}
   </div>
   <div class="buy-mn nb">
@@ -145,7 +155,7 @@
     <div id="boatContent">
     </div>
 
-    <div class="col-md-12">
+    <div  class="boatPagination" class="col-md-12">
       {{-- <div class="btm-pagi">{{ $boats->links('vendor.pagination.project-pagination') }}</div> --}}
     </div>
 
@@ -344,19 +354,22 @@
    $('#searchForm').submit();
  });
 
-   $('input[name="type[]"').change(function() {
+  $('input[name="type[]"').change(function() {
    $('#searchForm').submit();
  });
+
+  pagination={};
 
   $('#searchForm').submit(function(e){
     e.preventDefault();
     var menu = '{{$menu or 'boats'}}';
+    var page = pagination.pageNumber == undefined?1:pagination.pageNumber;
 
     var formData = $('#searchForm').serialize();
-    formData=formData+"&menu="+menu;
+    formData=formData+"&menu="+menu+"&page="+page;
     $.ajax({
       method:'post',
-      url:'{{url('boats')}}',
+      url:$('#searchForm').attr('action'),
       data:formData,
       dataType    : 'json',
       success:function(retData){
@@ -382,6 +395,10 @@
           boat.currency  = data.currency==null?"QAR":data.currency;
           content += getView(boat);
         });
+
+        // $('#boatPagination').html(paginationView(retData.boats));
+        $('.boatPagination').html(retData.pagination);
+
         $('#boatContent').html(content);
       },
       error:function(e){
@@ -400,6 +417,25 @@
 
   getHalfWidthView = function(boat){
     return '<div class="col-md-6"><a href="'+boat.detailPageUrl+'"><div class="buy-img"><img src="'+boat.imageUrl+'"></div><h4>'+boat.title+'</h4><div class="ap clearfix"><div class="a">'+boat.location+'</div><div class="p">'+boat.price+' '+ boat.currency+'</div></div></a></div>';
+  }
+
+
+  $('body').on('click', '.pagination a', function(e) {
+    e.preventDefault();
+    var url = $(this).attr('href');
+    pagination.pageNumber = getPageNumber(url);
+    $('#searchForm').attr('action',url);
+    $('#searchForm').submit();
+    window.history.pushState("", "", url);
+  });
+
+  function getPageNumber(url) {
+    name = 'page';
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+    results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
   }
 
 </script>

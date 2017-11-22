@@ -17,9 +17,6 @@ use App\Models\Brand;
 class MasterController extends Controller
 {
 
-
-    public $itemCount = 50;
-
     public function index()
     {
         $brands = Brand::orderBy('listing_order','desc')->with('boats')->orderBy('updated_at','desc')->get();
@@ -70,11 +67,13 @@ class MasterController extends Controller
 
     public function search(Request $request)
     {
+        $menu = 'boats';
+        $itemCount = 6;
         if (!$request->ajax()) {
             $brands = $brands = Brand::orderBy('listing_order','desc')->orderBy('updated_at','desc')->get();
             return view('project.boats')->with([
                 'brands'=>$brands,
-                'page'=>strtolower($request->get('type','buy')),
+                'page'=>$request->get('page',1),
                 'menu'=>$request->menu,
                 'filterLimits'=>$this->getFilterLimits()
             ]);
@@ -91,6 +90,7 @@ class MasterController extends Controller
 
 
         if($request->has('menu')){
+            $menu = strtolower($request->menu);
             $boats= $boats->where('menu',$request->menu);
         }
 
@@ -101,6 +101,12 @@ class MasterController extends Controller
             }
         }
 
+
+        if($request->has('page')){
+            $pageNumber=$request->page;
+        }else{
+            $pageNumber=1;
+        }
 
         if($request->has('min-length')){
             $boats->where('length','>=',$request->get('min-length'));
@@ -144,21 +150,25 @@ class MasterController extends Controller
             }
         }
 
+        if($menu!='boats'){
+            $itemCount = 12;
+        }
 
-        $boats = $boats->select('id','title','description','price','currency','slug','location')
-        ->paginate($this->itemCount);
-
+        $columns=['id','title','description','price','currency','slug','location'];
+        $boats = $boats->paginate($itemCount,$columns,'page',$pageNumber);
+ 
         foreach($boats->items() as $boat){
             $boat->imageUrl = $boat->imageUrl();
             $boat['description'] = str_limit($boat->description);
-            $boat['price'] = number_format($boat->price, 2,'EN_US');
+            $boat['price'] = number_format($boat->price, 2);
             unset($boat->images);
             $boat->detailPageUrl = $boat->detailPageUrl();
         };
 
         $search = [ 
             'boats'=> $boats,
-            'menu'=>$request->menu?strtolower($request->menu):'boats'];
+            'menu'=> $menu,
+            'pagination' => (String) $boats->links('vendor.pagination.project-pagination')];
             return $search;
         }
 
@@ -207,51 +217,51 @@ class MasterController extends Controller
 
         public function career_mail(Request $request)
         {
-         $this->validate($request, [
-          'name'  => 'required',
-          'email'  => 'required|email',
-          'phone'  => 'nullable',
-          'message'  => 'nullable',
-          'file' => 'nullable|mimes:doc,docx,pdf,ppt,pptx,png,jpg,jpeg,bmp,gif',
-      ]);
-         Mail::to(ContactMail::getDestinationEmails())->send(new CareerMail($request));
-         if( count(Mail::failures()) > 0 ) {
-           session()->flash('status','alert-danger');
-           session()->flash('message', 'Failed!');
-       }else{
+           $this->validate($request, [
+              'name'  => 'required',
+              'email'  => 'required|email',
+              'phone'  => 'nullable',
+              'message'  => 'nullable',
+              'file' => 'nullable|mimes:doc,docx,pdf,ppt,pptx,png,jpg,jpeg,bmp,gif',
+          ]);
+           Mail::to(ContactMail::getDestinationEmails())->send(new CareerMail($request));
+           if( count(Mail::failures()) > 0 ) {
+             session()->flash('status','alert-danger');
+             session()->flash('message', 'Failed!');
+         }else{
+            session()->flash('status','alert-success');
+            session()->flash('message','<b>Thank you!</b> We will get in touch with you soon.');
+        }
+        return back();
+    }
+
+
+    public function sellBoatMail(Request $request){
+
+     $this->validate($request, [
+        'name'  => 'nullable',
+        'email'  => 'required|email',
+        'phone'  => 'nullable',
+        'makes_n_model'  => 'required',
+        'length'  => 'required|numeric',
+        'year'  => 'required|numeric|date_format:Y',
+        'location'  => 'required',
+        'condition'  => 'required',
+        'file' => 'nullable|mimes:doc,docx,pdf,ppt,pptx,png,jpg,jpeg,bmp,gif',
+    ]);
+
+     Mail::to(SellBoat::getDestinationEmails())
+     ->send(new SellBoat($request));
+
+  // return view('emails.sell-boat')->with(['request'=> $request]);
+     if( count(Mail::failures()) > 0 ) {
+         session()->flash('status','alert-danger');
+         session()->flash('message', 'Failed!');
+     }else{
         session()->flash('status','alert-success');
         session()->flash('message','<b>Thank you!</b> We will get in touch with you soon.');
     }
     return back();
-}
-
-
-public function sellBoatMail(Request $request){
-
-   $this->validate($request, [
-    'name'  => 'nullable',
-    'email'  => 'required|email',
-    'phone'  => 'nullable',
-    'makes_n_model'  => 'required',
-    'length'  => 'required|numeric',
-    'year'  => 'required|numeric|date_format:Y',
-    'location'  => 'required',
-    'condition'  => 'required',
-    'file' => 'nullable|mimes:doc,docx,pdf,ppt,pptx,png,jpg,jpeg,bmp,gif',
-]);
-
-   Mail::to(SellBoat::getDestinationEmails())
-   ->send(new SellBoat($request));
-
-  // return view('emails.sell-boat')->with(['request'=> $request]);
-   if( count(Mail::failures()) > 0 ) {
-       session()->flash('status','alert-danger');
-       session()->flash('message', 'Failed!');
-   }else{
-    session()->flash('status','alert-success');
-    session()->flash('message','<b>Thank you!</b> We will get in touch with you soon.');
-}
-return back();
 }
 
 
