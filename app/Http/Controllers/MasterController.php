@@ -68,7 +68,7 @@ class MasterController extends Controller
     public function search(Request $request)
     {
         $menu = 'boats';
-        $itemCount = 6;
+        $itemCount = 15;
         if (!$request->ajax()) {
             $brands = $brands = Brand::orderBy('listing_order','desc')->orderBy('updated_at','desc')->get();
             return view('project.boats')->with([

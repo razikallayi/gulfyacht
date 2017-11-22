@@ -163,7 +163,7 @@
       </div>
       
       <div class="col-md-12 no-padding">
-        <div class="ftr-left">© 2017 GULF YATCH . All Rights Reserved.</div>
+        <div class="ftr-left">© 2017 GULF YACHTS . All Rights Reserved.</div>
         <div class="ftr-right">Powered by <a href="http://www.whytecreations.com/" rel="dofollow" target="_blank"> Whytecreations </a></div>
       </div>
       
