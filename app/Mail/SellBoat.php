@@ -50,11 +50,12 @@ class SellBoat extends Mailable
     {
       $request = $this->request;
       $returnData = $this->view('emails.sell-boat');
-      if($request->files !=null){
-        foreach($request->files as $file){
+      if($request->file() !=null){
+        $fileBag = $request->file();
+        foreach($fileBag['files'] as $index => $file){
           $fileContent = File::get($file->getRealPath());
           $fileExtension = $file->getClientOriginalExtension();
-          $attachmentName = str_slug($request->email)."-boat_to_sell-".$loop->iteration.".".$fileExtension;
+          $attachmentName = str_slug($request->email)."-boat_to_sell-".($index+1).".".$fileExtension;
           $returnData->attachData($fileContent,$attachmentName);
         }
         return $returnData;
