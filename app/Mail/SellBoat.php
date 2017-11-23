@@ -13,7 +13,7 @@ use File;
 
 class SellBoat extends Mailable
 {
-    use Queueable, SerializesModels;
+  use Queueable, SerializesModels;
 
 
     /**
@@ -31,13 +31,13 @@ class SellBoat extends Mailable
      */
     public function __construct(Request $request)
     {
-        $this->request = $request;
+      $this->request = $request;
     }
 
 
     public static function getDestinationEmails()
     {
-        return ['razi@whytecreations.in','razikallayi@gmail.com'];
+      return ['razi@whytecreations.in','razikallayi@gmail.com'];
     }
 
 
@@ -49,13 +49,16 @@ class SellBoat extends Mailable
     public function build()
     {
       $request = $this->request;
-      if($request->file !=null){
-          $fileContent = File::get($request->file->getRealPath());
-          $fileExtension = $request->file->getClientOriginalExtension();
-          $attachmentName = str_slug($request->email)."-boat_to_sell.".$fileExtension;
-          return $this->view('emails.sell-boat')
-            ->attachData($fileContent,$attachmentName);
+      $returnData = $this->view('emails.sell-boat');
+      if($request->files !=null){
+        foreach($request->files as $file){
+          $fileContent = File::get($file->getRealPath());
+          $fileExtension = $file->getClientOriginalExtension();
+          $attachmentName = str_slug($request->email)."-boat_to_sell-".$loop->iteration.".".$fileExtension;
+          $returnData->attachData($fileContent,$attachmentName);
+        }
+        return $returnData;
       }
       return $this->view('emails.sell-boat');
+    }
   }
-}

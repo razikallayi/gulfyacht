@@ -80,7 +80,7 @@
                 <div class="form-group">
                   <div class="input-group input-file">
                     <span class="input-group-btn"><button class="attach-btn" type="button">&nbsp;</button></span>
-                    <input type="file" class="form-control" placeholder='No Files Choosen'  name="file"/>
+                    <input type="file" class="form-control" placeholder='No Files Choosen' multiple name="files[]"/>
                    </div>
                 </div>
               </div>
