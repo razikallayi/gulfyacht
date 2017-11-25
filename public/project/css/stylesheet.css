@@ -1324,7 +1324,8 @@ label[for="file-upload"]:hover { background: #333;}
 .fby .slider-labels{margin:0; position:absolute; top:20px; right:0; width:43%}
 .fbs .slider-labels{width:53%; right:15px}
 .fby .noUi-background {background: #000;}
-.sbbs{background:#ff7200; padding:51px 51px 157px}
+.sbbs{background:#ff7200; padding:51px 51px 157px;}
+.localnavi{padding-bottom: 50px;}
 .deta .sbbs{padding:51px 30px 157px}
 .sbbs h2{font-size:45px; color:#fff; margin:0 0 30px; font-weight:700}
 .sbbs ul li{color:#fff; font-size:19px; margin-bottom:20px; padding-left:35px; position:relative}
