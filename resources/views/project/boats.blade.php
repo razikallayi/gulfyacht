@@ -14,7 +14,7 @@
   <div class="container">
     <div class="col-md-12 no-padding">
      <div class="abt-tp con">
-       <h3>{{$menu or 'Pre-owned Boats'}}</h3>
+       <h3>{{$menu or 'Used Boats'}}</h3>
      </div>
 
    </div>
@@ -26,8 +26,10 @@
  <div class="container">
    <div class="col-md-12 no-padding">
     <form id="searchForm" action="{{url('boats')}}">
-      <div class="row">
+      <div class="row middle">
        <div class="col-md-4">
+         <div class="jq_sidebar_fix">
+            <div class="localnavi">
         @if($brands->isNotEmpty())
         <div id="collapse-menu" class="collapse-container">
          <h3>Brands <span class="arrow-r"></span></h3>
@@ -131,6 +133,8 @@
       <div class="bs"><a href="{{url('sell')}}">SELL</a></div>
       <div class="sbbs-img"><img src="{{url('project/images/sbbs.png')}}"></div>
     </div>
+       </div>
+        </div>
   </div>
 
 
@@ -440,5 +444,13 @@
 
 </script>
 
+<script src="{{url('project/js/jquery.sidebarFix.js')}}" type="text/javascript"></script>
+<script type="text/javascript">
+	$(window).load(function(){
+		$('.jq_sidebar_fix').sidebarFix({
+			frame: $('.middle')
+		});
+	});
+</script>
 
 @endsection

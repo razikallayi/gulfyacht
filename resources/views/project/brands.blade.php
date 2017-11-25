@@ -42,7 +42,7 @@
 
 
       <div class="col-md-12">
-        <div class="buy-mn nb">
+        <div class="buy-mn nb nbp">
          <div class="row">
           <div id="boatContent">
             <div class="row">

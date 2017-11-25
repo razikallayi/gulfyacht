@@ -1280,7 +1280,8 @@ label[for="file-upload"]:hover { background: #333;}
 .buy-mn .col-md-6{min-height: 297px;}
 .buy-mn h4{color:#333;font-weight:400; font-size:16px; margin:25px 10px 15px; line-height:21px}
 .nb h4{margin:10px 0px 10px;}
-.nb p{color:#333;margin-top: 55px;}
+.nb p{color:#333;}
+.nbp p{margin-top: 55px;}
 .nb .ap{padding:15px 0 0 ; border-top:1px solid #dcdcdd}
 .a, .p{float:left; width:50%; padding-right:5px; margin-left:10px; position:relative; padding-left:25px; color:#333; font-size:15px}
 .a:before{position:absolute; left:0; top:-1px; width:17px; height:21px; background:url(../images/map.png) no-repeat; content:""}
