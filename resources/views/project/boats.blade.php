@@ -367,7 +367,8 @@
   };
 
   function search(){
-    pagination.freshPage=true;
+    pagination.reset();
+
     $('#searchForm').submit();
   }
 
@@ -447,9 +448,19 @@
     pagination.last_page=boats.last_page;
     pagination.per_page=boats.per_page;
   }
+  pagination.reset = function(boats){
+    pagination.freshPage=true;
+    pagination.total=0;
+    pagination.current_page=0;
+    pagination.from=0;
+    pagination.to=0;
+    pagination.next_page_url=null;
+    pagination.last_page=0;
+    pagination.per_page=0;
+  }
 
   $(window).scroll(function() {
-   if($(window).scrollTop() + $(window).height() > $(document).height() - ($('footer')[0].scrollHeight+300)) {
+   if(isScrollAtBottom()) {
 
     if(pagination.loading){
       return;
@@ -467,15 +478,9 @@
     }
   });
 
-  function getPageNumber(url) {
-    name = 'page';
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-    results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
-  }
-
+  isScrollAtBottom = function(boats){
+     return ($(window).scrollTop() + $(window).height() > $(document).height() - ($('footer')[0].scrollHeight+300));
+   }
 </script>
 
 <script src="{{url('project/js/jquery.sidebarFix.js')}}" type="text/javascript"></script>
