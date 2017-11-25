@@ -108,7 +108,6 @@ class MasterController extends Controller
         }else{
             $pageNumber=1;
         }
-        dd(is_numeric($pageNumber));
 
         if($request->has('min-length')){
             $boats->where('length','>=',$request->get('min-length'));
