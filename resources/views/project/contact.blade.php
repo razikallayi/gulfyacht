@@ -84,7 +84,7 @@
             <h4>Contact Details</h4>
             <ul>
               <li><img src="{{url('project/images/map.svg')}}">Palm Tower B, Office 3205  <br> West Bay, P.O BOX 11093 <br> Doha - Qatar </li>
-              <li><a href="tel:+974 4414 6643"> <img src="{{url('project/images/phn.svg')}}">  +974 4482 0250</a></li>
+              <li><a href="tel:+974 5581 3565"> <img src="{{url('project/images/phn.svg')}}">  +974 5581 3565</a></li>
               <li><a href="mailto:mail@gulf-yachts.com"> <img src="{{url('project/images/mail.svg')}}">  mail@gulf-yachts.com</a></li>
             </ul>
           </div>

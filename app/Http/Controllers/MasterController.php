@@ -67,6 +67,7 @@ class MasterController extends Controller
 
     public function search(Request $request)
     {
+
         $menu = 'boats';
         $itemCount = 15;
         if (!$request->ajax()) {
@@ -156,7 +157,8 @@ class MasterController extends Controller
         }
 
         $columns=['id','title','description','price','currency','slug','location'];
-        $boats = $boats->paginate($itemCount,$columns,'page',$pageNumber);
+
+        $boats = $boats->paginate($itemCount,$columns,'page',$pageNumber or null);
 
         foreach($boats->items() as $boat){
             $boat->imageUrl = $boat->imageUrl();
