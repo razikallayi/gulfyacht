@@ -256,11 +256,7 @@
 <script type="text/javascript" src="{{url('project/js/price.js')}}"></script>
 <script type="text/javascript">
   $(document).ready(function() {
-
-
-
     var sliderLength = document.getElementById('sliderLength');
-
     noUiSlider.create(sliderLength, {
       start: [filterLimits.min_length, filterLimits.max_length],
       step: 10,
@@ -270,8 +266,6 @@
       },
       connect: true
     });
-    
-    
 
     sliderLength.noUiSlider.on('update', function(values, handle) {
       document.getElementById('sliderLength-lower').innerHTML = Math.floor(values[0])+"Ft";
@@ -284,7 +278,6 @@
     sliderLength.noUiSlider.on('end', function(values, handle) {
      search();
    });
-
 
 
 
@@ -304,8 +297,6 @@
       },at: moneyFormat,
       connect: true
     });
-    
-    
     sliderYear.noUiSlider.on('update', function(values, handle) {
       document.getElementById('sliderYear-lower').innerHTML = Math.floor(values[0]);
       document.getElementById('sliderYear-upper').innerHTML = Math.ceil(values[1]);
@@ -318,6 +309,7 @@
     });
 
     
+
 
 
     var sliderPrice = document.getElementById('sliderPrice');
@@ -355,12 +347,13 @@
    search();
  });
   $('input[name="brands[]"').change(function() {
-   $search();
+   search();
  });
 
   $('input[name="type[]"').change(function() {
     search();
   });
+  
   pagination={
     loading : false,
     freshPage:true
@@ -368,7 +361,6 @@
 
   function search(){
     pagination.reset();
-
     $('#searchForm').submit();
   }
 
