@@ -154,7 +154,7 @@ class MasterController extends Controller
         if($menu!='boats'){
             $itemCount = 12;
         }
-$itemCount=2;
+
         $columns=['id','title','description','price','currency','slug','location'];
         $boats = $boats->paginate($itemCount,$columns,'page',$pageNumber);
 

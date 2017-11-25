@@ -58,23 +58,23 @@
             </div>
             <div class="form-group clearfix">
               <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Yatch Make & Model *" name="makes_n_model" value="{{old('makes_n_model')}}">
+                <input type="text" class="form-control" placeholder="Yacht Make & Model *" name="makes_n_model" value="{{old('makes_n_model')}}">
               </div>
               <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Yatch Length *" name="length" value="{{old('length')}}">
-              </div>
-            </div>
-            <div class="form-group clearfix">
-              <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Yatch Build Year *" name="year" value="{{old('year')}}">
-              </div>
-              <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Location of Yatch *" name="location" value="{{old('location')}}">
+                <input type="text" class="form-control" placeholder="Yacht Length *" name="length" value="{{old('length')}}">
               </div>
             </div>
             <div class="form-group clearfix">
               <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Yatch Condition *" name="condition" value="{{old('condition')}}">
+                <input type="text" class="form-control" placeholder="Yacht Build Year *" name="year" value="{{old('year')}}">
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Location of Yacht *" name="location" value="{{old('location')}}">
+              </div>
+            </div>
+            <div class="form-group clearfix">
+              <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Yacht Condition *" name="condition" value="{{old('condition')}}">
               </div>
               <div class="col-md-6">
                 <div class="form-group">

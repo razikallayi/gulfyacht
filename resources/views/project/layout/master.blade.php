@@ -135,6 +135,9 @@
       });
   }); 
 </script>
+
+
+
 @show
 @section('scripts')
 <script type="text/javascript" src="{{url('project/js/price.js')}}"></script>
@@ -292,8 +295,8 @@ $.ajaxSetup({
 });
 </script>
 
-@show
 
+@show
 
 </body>
 </html>

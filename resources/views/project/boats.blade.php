@@ -14,7 +14,7 @@
   <div class="container">
     <div class="col-md-12 no-padding">
      <div class="abt-tp con">
-       <h3>{{$menu or 'Pre-owned Boats'}}</h3>
+       <h3>{{$menu or 'Used Boats'}}</h3>
      </div>
 
    </div>
@@ -26,110 +26,114 @@
  <div class="container">
    <div class="col-md-12 no-padding">
     <form id="searchForm" action="{{url('boats')}}">
-      <div class="row">
+      <div class="row middle">
        <div class="col-md-4">
-        @if($brands->isNotEmpty())
-        <div id="collapse-menu" class="collapse-container">
-         <h3>Brands <span class="arrow-r"></span></h3>
-         <div>
-          <input type="checkbox" class="read-more-state" id="post-2" />
-          <ul class="filt read-more-wrap">
-            @foreach($brands->take(3) as $brand)
-            <li class="filt__item">
-              <label class="label--checkbox"><input name="brands[]" value="{{$brand->name}}" type="checkbox" class="checkbox" >{{$brand->name}}</label>
-            </li>
-            @endforeach
-            <div class="read-more-target">
-              @foreach($brands->slice(3) as $brand)
-              <li class="filt__item">
-                <label class="label--checkbox"><input name="brands[]" value="{{$brand->name}}" type="checkbox" class="checkbox" >{{$brand->name}}</label>
-              </li>
-              @endforeach
+         <div class="jq_sidebar_fix">
+          <div class="localnavi">
+            @if($brands->isNotEmpty())
+            <div id="collapse-menu" class="collapse-container">
+             <h3>Brands <span class="arrow-r"></span></h3>
+             <div>
+              <input type="checkbox" class="read-more-state" id="post-2" />
+              <ul class="filt read-more-wrap">
+                @foreach($brands->take(3) as $brand)
+                <li class="filt__item">
+                  <label class="label--checkbox"><input name="brands[]" value="{{$brand->name}}" type="checkbox" class="checkbox" >{{$brand->name}}</label>
+                </li>
+                @endforeach
+                <div class="read-more-target">
+                  @foreach($brands->slice(3) as $brand)
+                  <li class="filt__item">
+                    <label class="label--checkbox"><input name="brands[]" value="{{$brand->name}}" type="checkbox" class="checkbox" >{{$brand->name}}</label>
+                  </li>
+                  @endforeach
+                </div>
+              </ul>
+              <label for="post-2" class="read-more-trigger"></label>  
             </div>
+          </div>
+          @endif
+
+          @if($menu=='inventory')
+          <div id="collapse-menu" class="collapse-container">
+           <h3>Type <span class="arrow-r"></span></h3>
+           <div>
+            <ul class="filt read-more-wrap">
+              <li class="filt__item">
+                <label class="label--checkbox"><input name="type[]" value="new" type="checkbox"  class="checkbox" >New</label>
+              </li>
+              <li class="filt__item">
+                <label class="label--checkbox"><input name="type[]" value="used" type="checkbox" class="checkbox" >Used</label>
+              </li>
+            </ul>
+          </div>
+        </div>
+        @endif
+
+        <div class="fby clearfix">
+          <div class="col-md-12 no-padding">
+            <h4>Filter By Length</h4>
+            <div class="slider-labels">
+              <div class="col-xs-6 caption no-padding">
+                From <span id="sliderLength-lower" class="orange-color"></span>
+                <input type="hidden" name="min-length" id="min-length" value="{{$filterLimits['min_length']}}">
+              </div>
+              <div class="col-xs-6 caption no-padding">
+                To <span id="sliderLength-upper" class="orange-color"></span>
+                <input type="hidden" name="max-length" id="max-length" value="{{$filterLimits['max_length']}}">
+              </div>
+            </div>
+            <div id="sliderLength"></div>
+          </div>
+
+        </div>
+
+        <div class="fby clearfix">
+          <div class="col-md-12 no-padding">
+            <h4>Filter By Year</h4>
+            <div class="slider-labels">
+              <div class="col-xs-6 caption no-padding">
+                From <span id="sliderYear-lower" class="orange-color"></span>
+                <input type="hidden" name="min-year" id="min-year" value="{{$filterLimits['min_year']}}">
+              </div>
+              <div class="col-xs-6 caption no-padding">
+                To <span id="sliderYear-upper" class="orange-color"></span>
+                <input type="hidden" name="max-year" id="max-year" value="{{$filterLimits['max_year']}}">
+              </div>
+            </div>
+            <div id="sliderYear"></div>
+          </div>
+
+        </div>
+
+        <div class="fby fbs clearfix">
+          <div class="col-md-12 no-padding">
+            <h4>Filter By Price</h4>
+            <div class="slider-labels">
+              <div class="col-xs-6 caption no-padding">
+                QAR <span id="sliderPrice-lower" class="orange-color"></span>
+                <input type="hidden" name="min-price" id="min-price" value="{{$filterLimits['min_price']}}">
+              </div>
+              <div class="col-xs-6 caption no-padding">
+                QAR <span id="sliderPrice-upper" class="orange-color"></span>
+                <input type="hidden" name="max-price" id="max-price" value="{{$filterLimits['max_price']}}">
+              </div>
+            </div>
+            <div id="sliderPrice"></div>
+          </div>
+        </div>
+
+        <div class="sbbs">
+          <h2>SELL / BUY BOATS ?</h2>
+          <ul>
+            <li><a href="tel:+974 4482 0250"> <img src="{{url('project/images/phn.png')}}"> +974 4482 0250</a></li>
+            <li><a href="mailto:mail@gulf-yachts.com"> <img src="{{url('project/images/mail.png')}}"> mail@gulf-yachts.com</a></li>
           </ul>
-          <label for="post-2" class="read-more-trigger"></label>  
+          <div class="bs"><a href="{{url('brands')}}">BUY</a></div>
+          <div class="bs"><a href="{{url('sell')}}">SELL</a></div>
+          <div class="sbbs-img"><img src="{{url('project/images/sbbs.png')}}"></div>
         </div>
       </div>
-      @endif
-
-      @if($menu=='inventory')
-      <div id="collapse-menu" class="collapse-container">
-       <h3>Type <span class="arrow-r"></span></h3>
-       <div>
-        <ul class="filt read-more-wrap">
-          <li class="filt__item">
-            <label class="label--checkbox"><input name="type[]" value="new" type="checkbox"  class="checkbox" >New</label>
-          </li>
-          <li class="filt__item">
-            <label class="label--checkbox"><input name="type[]" value="used" type="checkbox" class="checkbox" >Used</label>
-          </li>
-        </ul>
-      </div>
-    </div>
-    @endif
-
-    <div class="fby clearfix">
-      <div class="col-md-12 no-padding">
-        <h4>Filter By Length</h4>
-        <div class="slider-labels">
-          <div class="col-xs-6 caption no-padding">
-            From <span id="sliderLength-lower" class="orange-color"></span>
-            <input type="hidden" name="min-length" id="min-length" value="{{$filterLimits['min_length']}}">
-          </div>
-          <div class="col-xs-6 caption no-padding">
-            To <span id="sliderLength-upper" class="orange-color"></span>
-            <input type="hidden" name="max-length" id="max-length" value="{{$filterLimits['max_length']}}">
-          </div>
-        </div>
-        <div id="sliderLength"></div>
-      </div>
-
-    </div>
-
-    <div class="fby clearfix">
-      <div class="col-md-12 no-padding">
-        <h4>Filter By Year</h4>
-        <div class="slider-labels">
-          <div class="col-xs-6 caption no-padding">
-            From <span id="sliderYear-lower" class="orange-color"></span>
-            <input type="hidden" name="min-year" id="min-year" value="{{$filterLimits['min_year']}}">
-          </div>
-          <div class="col-xs-6 caption no-padding">
-            To <span id="sliderYear-upper" class="orange-color"></span>
-            <input type="hidden" name="max-year" id="max-year" value="{{$filterLimits['max_year']}}">
-          </div>
-        </div>
-        <div id="sliderYear"></div>
-      </div>
-
-    </div>
-
-    <div class="fby fbs clearfix">
-      <div class="col-md-12 no-padding">
-        <h4>Filter By Price</h4>
-        <div class="slider-labels">
-          <div class="col-xs-6 caption no-padding">
-            QAR <span id="sliderPrice-lower" class="orange-color"></span>
-            <input type="hidden" name="min-price" id="min-price" value="{{$filterLimits['min_price']}}">
-          </div>
-          <div class="col-xs-6 caption no-padding">
-            QAR <span id="sliderPrice-upper" class="orange-color"></span>
-            <input type="hidden" name="max-price" id="max-price" value="{{$filterLimits['max_price']}}">
-          </div>
-        </div>
-        <div id="sliderPrice"></div>
-      </div>
-    </div>
-
-    <div class="sbbs">
-      <h2>SELL / BUY BOATS ?</h2>
-      <ul>
-        <li><a href="tel:+974 4482 0250"> <img src="{{url('project/images/phn.png')}}"> +974 4482 0250</a></li>
-        <li><a href="mailto:mail@gulf-yachts.com"> <img src="{{url('project/images/mail.png')}}"> mail@gulf-yachts.com</a></li>
-      </ul>
-      <div class="bs"><a href="{{url('brands')}}">BUY</a></div>
-      <div class="bs"><a href="{{url('sell')}}">SELL</a></div>
-      <div class="sbbs-img"><img src="{{url('project/images/sbbs.png')}}"></div>
     </div>
   </div>
 
@@ -278,7 +282,7 @@
     });
 
     sliderLength.noUiSlider.on('end', function(values, handle) {
-     $('#searchForm').submit();
+     search();
    });
 
 
@@ -310,8 +314,8 @@
     });
 
     sliderYear.noUiSlider.on('end', function(values, handle) {
-     $('#searchForm').submit();
-   });
+      search();
+    });
 
     
 
@@ -342,31 +346,36 @@
       document.getElementById('max-price').value = parseInt(Math.ceil(values[1].replace(/\,/g,'')));
     });
     sliderPrice.noUiSlider.on('end', function(values, handle) {
-     $('#searchForm').submit();
+     search();
    });
 
   });
 
   $(document).ready(function() {
-   $('#searchForm').submit();
+   search();
  });
   $('input[name="brands[]"').change(function() {
-   $('#searchForm').submit();
+   $search();
  });
 
   $('input[name="type[]"').change(function() {
-   $('#searchForm').submit();
- });
-
+    search();
+  });
   pagination={
-    loading : false
+    loading : false,
+    freshPage:true
   };
+
+  function search(){
+    pagination.freshPage=true;
+    $('#searchForm').submit();
+  }
+
 
   $('#searchForm').submit(function(e){
     e.preventDefault();
     var menu = '{{$menu or 'boats'}}';
     var page = pagination.current_page;
-    console.log(pagination);
 
     var formData = $('#searchForm').serialize();
     formData=formData+"&menu="+menu+"&page="+page;
@@ -405,7 +414,11 @@
         pagination.loading=false;
         pagination.setPaginationData(retData.boats);
 
-        $('#boatContent').append(content);
+        if(pagination.freshPage){
+          $('#boatContent').html(content);
+        }else{
+          $('#boatContent').append(content);
+        }
       },
       error:function(e){
         console.log(e);
@@ -437,22 +450,22 @@
 
   $(window).scroll(function() {
    if($(window).scrollTop() + $(window).height() > $(document).height() - ($('footer')[0].scrollHeight+300)) {
-    
+
     if(pagination.loading){
       return;
     }
     if(pagination.current_page >= pagination.last_page){
       return;
     }
-      console.log('loading'+pagination.current_page);
-      pagination.loading = true;
-      var url = $(this).attr('href');
-      pagination.current_page++;
-      $('#searchForm').attr('action',url);
-      $('#searchForm').submit();
+    pagination.loading = true;
+    pagination.freshPage = false;
+    var url = $(this).attr('href');
+    pagination.current_page++;
+    $('#searchForm').attr('action',url);
+    $('#searchForm').submit();
       // window.history.pushState("", "", url);
-  }
-});
+    }
+  });
 
   function getPageNumber(url) {
     name = 'page';
@@ -465,5 +478,13 @@
 
 </script>
 
+<script src="{{url('project/js/jquery.sidebarFix.js')}}" type="text/javascript"></script>
+<script type="text/javascript">
+	$(window).load(function(){
+		$('.jq_sidebar_fix').sidebarFix({
+			frame: $('.middle')
+		});
+	});
+</script>
 
 @endsection
