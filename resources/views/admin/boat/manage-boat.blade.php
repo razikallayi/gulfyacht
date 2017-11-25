@@ -51,9 +51,7 @@
 					<tr>
 						<td>{{$loop->iteration}}</td>
 						<td>
-						@if($boat->imageUrl() != null)
-						<img height="50px" src="{{$boat->imageUrl()}}">
-						@endif
+						<img height="50px" src="{{$boat->imageUrl(null,95,50)}}">
 						</td>
 						<td><a href="{{$boat->detailPageUrl()}}" target="_blank">{{$boat->title}}</a></td>
 						<td>{{@$boat->brand->name}}</td>
