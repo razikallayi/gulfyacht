@@ -353,7 +353,6 @@
   $('input[name="type[]"').change(function() {
     search();
   });
-  
   pagination={
     loading : false,
     freshPage:true

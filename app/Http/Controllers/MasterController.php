@@ -108,6 +108,7 @@ class MasterController extends Controller
         }else{
             $pageNumber=1;
         }
+        dd(is_numeric($pageNumber));
 
         if($request->has('min-length')){
             $boats->where('length','>=',$request->get('min-length'));
@@ -158,7 +159,7 @@ class MasterController extends Controller
 
         $columns=['id','title','description','price','currency','slug','location'];
 
-        $boats = $boats->paginate($itemCount,$columns,'page',$pageNumber or null);
+        $boats = $boats->paginate($itemCount,$columns,'page',$pageNumber);
 
         foreach($boats->items() as $boat){
             $boat->imageUrl = $boat->imageUrl();
