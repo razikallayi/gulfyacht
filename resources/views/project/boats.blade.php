@@ -146,7 +146,7 @@
       </select>
     </div>
 
-    <span class="boatPagination"></span>
+    {{-- <span class="boatPagination"></span> --}}
 
     {{-- {{ $boats->links('vendor.pagination.project-pagination') }} --}}
   </div>
@@ -155,7 +155,7 @@
     <div id="boatContent">
     </div>
 
-    <div  class="boatPagination" class="col-md-12">
+    {{-- <div  class="boatPagination" class="col-md-12"> --}}
       {{-- <div class="btm-pagi">{{ $boats->links('vendor.pagination.project-pagination') }}</div> --}}
     </div>
 
@@ -358,12 +358,15 @@
    $('#searchForm').submit();
  });
 
-  pagination={};
+  pagination={
+    loading : false
+  };
 
   $('#searchForm').submit(function(e){
     e.preventDefault();
     var menu = '{{$menu or 'boats'}}';
-    var page = pagination.pageNumber == undefined?1:pagination.pageNumber;
+    var page = pagination.current_page;
+    console.log(pagination);
 
     var formData = $('#searchForm').serialize();
     formData=formData+"&menu="+menu+"&page="+page;
@@ -387,6 +390,7 @@
         $.each(retData.boats.data, function(key,data){
           var boat={};
           boat.detailPageUrl = data.detailPageUrl==null?' ':data.detailPageUrl;
+          boat.id = data.id==null?' ':data.id;
           boat.imageUrl  = data.imageUrl==null?'':data.imageUrl;
           boat.title  = data.title==null?' ':data.title;
           boat.description  = data.description==null?' ':data.description;
@@ -397,9 +401,11 @@
         });
 
         // $('#boatPagination').html(paginationView(retData.boats));
-        $('.boatPagination').html(retData.pagination);
+        // $('.boatPagination').html(retData.pagination);
+        pagination.loading=false;
+        pagination.setPaginationData(retData.boats);
 
-        $('#boatContent').html(content);
+        $('#boatContent').append(content);
       },
       error:function(e){
         console.log(e);
@@ -419,15 +425,34 @@
     return '<div class="col-md-6"><a href="'+boat.detailPageUrl+'"><div class="buy-img"><img src="'+boat.imageUrl+'"></div><h4>'+boat.title+'</h4><div class="ap clearfix"><div class="a">'+boat.location+'</div><div class="p">'+boat.price+' '+ boat.currency+'</div></div></a></div>';
   }
 
+  pagination.setPaginationData = function(boats){
+    pagination.total=boats.total;
+    pagination.current_page=boats.current_page;
+    pagination.from=boats.from;
+    pagination.to=boats.to;
+    pagination.next_page_url=boats.next_page_url;
+    pagination.last_page=boats.last_page;
+    pagination.per_page=boats.per_page;
+  }
 
-  $('body').on('click', '.pagination a', function(e) {
-    e.preventDefault();
-    var url = $(this).attr('href');
-    pagination.pageNumber = getPageNumber(url);
-    $('#searchForm').attr('action',url);
-    $('#searchForm').submit();
-    window.history.pushState("", "", url);
-  });
+  $(window).scroll(function() {
+   if($(window).scrollTop() + $(window).height() > $(document).height() - ($('footer')[0].scrollHeight+300)) {
+    
+    if(pagination.loading){
+      return;
+    }
+    if(pagination.current_page >= pagination.last_page){
+      return;
+    }
+      console.log('loading'+pagination.current_page);
+      pagination.loading = true;
+      var url = $(this).attr('href');
+      pagination.current_page++;
+      $('#searchForm').attr('action',url);
+      $('#searchForm').submit();
+      // window.history.pushState("", "", url);
+  }
+});
 
   function getPageNumber(url) {
     name = 'page';

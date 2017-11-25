@@ -13,7 +13,7 @@ class BoatTableSeeder extends Seeder
     {
         // File::deleteDirectory(public_path(App\Models\Boat::IMAGE_LOCATION));
 
-        factory(App\Models\Boat::class, 10)->create()->each(function($boat) {
+        factory(App\Models\Boat::class, 100)->create()->each(function($boat) {
              $boat->medias()->save(factory(App\Models\Media::class)->make());
          });
     }
