@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Helper;
 
 class Boat extends Model
 {
@@ -79,7 +80,7 @@ class Boat extends Model
         return $this->popularity;
     }
 
-    public function imageUrl($imageName=null,$width=null,$height=null){
+        public function imageUrl($imageName=null,$width=null,$height=null){
         if(is_null($imageName)){
             if(is_null($this->images) || $this->images->isEmpty()){
                 return;
@@ -90,16 +91,16 @@ class Boat extends Model
             }
         }
         if($width!=null && $height !=null){
-            $thumbName= $width."_".$height."_".substr($imageName,0,-4);
+            $thumbName= $width."_".$height."_".$imageName;
             $original = self::IMAGE_LOCATION."/".$imageName;
-            if(file_exists($thumbName)) {
-                 $imageName= $thumbName;
+            if(file_exists(self::IMAGE_LOCATION."/".$thumbName)) {
+                $imageName= $thumbName;
             }else{
-               if( !file_exists($original)){
-                   return;
-               }
-               $imageDetails = Helper::uploadImage($original,self::IMAGE_LOCATION,$thumbName,$width,$height);
-               $imageName =  $imageDetails->getData()->filename;
+                if( !file_exists($original)){
+                    return;
+                }
+                $imageDetails = Helper::uploadImage($original,self::IMAGE_LOCATION,substr($thumbName,0,-4),$width,$height);
+                $imageName =  $imageDetails->getData()->filename;
             }
         }
         return url(self::IMAGE_LOCATION."/".$imageName);
