@@ -324,7 +324,7 @@
 												<hr />
 												<b>Preview</b><br />
 												@if(isset($boat))
-												<p id="CropSizeInfo" class="small help-block">First image is shown in list views. Drag the image according to your preference</p>
+												<p id="CropSizeInfo" class="small help-block">First image is shown as thumbnail in list views. Drag the image according to your preference</p>
 												@endif
 											</div>
 										</div>
