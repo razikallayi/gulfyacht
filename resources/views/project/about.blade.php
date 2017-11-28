@@ -7,8 +7,7 @@
     <div class="col-md-12 no-padding">
        <div class="abt-tp">
          <h2>About Gulf Yachts Doha</h2>
-         <p>Gulf Yachts is the exclusive dealer for Prestige Luxury Yachts and Jeanneau Power and Sailing boats in Qatar and Bahrain.
-It also represents Bayliner - the manufacturer of runabouts, cruisers, deck boats and motor yachts. In 2013 the company was declared the official dealer for Everglades line of luxury family fishing boats.</p>
+         <p>Gulf Yachts is the exclusive dealer for Princess Yachts in Qatar. We also represents Bayliner - the manufacturer of runabouts, deck boats and motor boats. Quicksilver for cruisers and fishing boats and not to forget that 2013 the company was declared the official dealer for Everglades line of luxury family fishing boats</p>
        </div>
        
     </div>
