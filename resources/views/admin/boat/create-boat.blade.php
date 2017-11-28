@@ -70,6 +70,7 @@
 											<option value="{{$brand->id}}" {{ (isset($boat) && @$boat->brand->id == $brand->id )?' selected ':''}} >{{$brand->name}}</option>
 											@endforeach
 											@endif
+											{{-- <option value="null">Other</option> --}}
 										</select>
 									</div>
 								</div>
