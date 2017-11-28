@@ -126,7 +126,7 @@
         <div class="sbbs">
           <h2>SELL / BUY BOATS ?</h2>
           <ul>
-            <li><a href="tel:+974 4482 0250"> <img src="{{url('project/images/phn.png')}}"> +974 4482 0250</a></li>
+            <li><a href="tel:+974 5581 3565"> <img src="{{url('project/images/phn.png')}}"> +974 5581 3565</a></li>
             <li><a href="mailto:mail@gulf-yachts.com"> <img src="{{url('project/images/mail.png')}}"> mail@gulf-yachts.com</a></li>
           </ul>
           <div class="bs"><a href="{{url('brands')}}">BUY</a></div>
