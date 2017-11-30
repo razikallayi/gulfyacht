@@ -15,7 +15,7 @@ class ContactMail extends Mailable
 
     public static function getDestinationEmails()
     {
-        return ['razi@whytecreations.in','razikallayi@gmail.com'];
+        return 'mail@gulf-yachts.com';
     }
 
     public $request;
