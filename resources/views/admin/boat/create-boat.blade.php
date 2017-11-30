@@ -403,7 +403,15 @@
 							var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
 							for (var i = 0; i < fileUpload.files.length; i++) {
 								var file = fileUpload.files[i];
-					//alert(file.name);
+
+								var image = new Image();
+								image.onload = function() {
+									if (!file.width) {
+										alert("");
+									}
+								};
+
+					
 					if (regex.test(file.name.toLowerCase())) {
 
 						var reader = new FileReader();
