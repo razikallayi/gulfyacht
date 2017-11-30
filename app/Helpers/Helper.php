@@ -5,6 +5,7 @@ namespace App\Helpers;
 
 use Image;
 use File;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 
@@ -26,15 +27,19 @@ class Helper {
          }
     }
 
-   ini_set('memory_limit', '-1');
-   ini_set('gd.jpeg_ignore_warning', '1');
-   ini_set('upload_max_filesize', '2000M');
-   ini_set('post_max_size', '2000M');
-   ini_set('max_execution_time',36000);
 
-
-   $image = Image::make($uploadImage,'png');
-
+    try {
+      $image = Image::make($uploadImage,'png');
+    } catch (Exception $e) {
+      return response()->json([
+        'filename' => "",
+        'no_extension_filename' => "",
+        'location' => "",
+        'src'      => "",
+        'success' => false,
+        'message' => 'Unsupported image type',
+      ]);
+    }
   
    if($width!=null){
    // prevent possible upsizing
@@ -68,7 +73,7 @@ class Helper {
      'no_extension_filename' => rtrim($filename,'.png'),
      'location' => str_finish($location, '/'),
      'src'      => url($location."/".$filename),
-     'status' => 'success',
+     'success' => true,
      'message' => 'Image succesfully uploaded',
      ]);
  }

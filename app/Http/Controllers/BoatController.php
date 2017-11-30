@@ -134,11 +134,16 @@ class BoatController extends Controller
 
         if($request->hasFile('image')){
             $location=Boat::IMAGE_LOCATION;
+            $errorCount=0;
             foreach($request->file('image') as $img) 
             {
-
                 $imageDetails = Helper::uploadImage($img, $location);
-                $filename = $imageDetails->getData()->filename;
+                $uploadedImage = $imageDetails->getData();
+                if(!$uploadedImage->success){
+                    $errorCount++;
+                    continue;
+                }
+                $filename = $uploadedImage->filename;
 
                 $media = new Media;
                 $media->file_name = $filename;
@@ -147,6 +152,12 @@ class BoatController extends Controller
                 $media->table_name = $boat->getTable();
                 $media->item_id = $boat->id;
                 $media->save();
+            }
+            if($errorCount > 0){
+                $warningMessage = "<b>".$errorCount ."</b> images were not uploaded due to unsupported format/content.";
+                session()->flash('status','alert-warning');
+                session()->flash('message','Successfully '.$updated.' <b>'.$boat->title.'</b>!<br/>'.$warningMessage);
+                return back();
             }
         }
 
