@@ -33,6 +33,7 @@ $factory->define(App\Models\Boat::class, function (Faker\Generator $faker) {
     $brandId = App\Models\Brand::inRandomOrder()->first()->id;
     $typeId = App\Models\BoatType::inRandomOrder()->first()->id;
     $menus = ['boats','inventory'];
+    $lengthUnits = ['Metre','Feet'];
     return [
         'title'            => $title,
         'slug'             => $slug,
@@ -42,6 +43,9 @@ $factory->define(App\Models\Boat::class, function (Faker\Generator $faker) {
         'price'            => $faker->randomNumber(6),
         'currency'         => 'QAR',
         'length'           => $faker->randomNumber(3),
+        'length_in_unit'   => $faker->randomNumber(3),
+        'length_unit'      => $lengthUnits[array_rand($lengthUnits)],
+        'color'            => $faker->colorName,
         'year'             => $faker->year,
         'condition'        => $faker->word,
         
