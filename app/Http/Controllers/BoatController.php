@@ -73,7 +73,9 @@ class BoatController extends Controller
             'type_id'           =>'required',
             'brand_id'          =>'required',
 
-            'length'            =>'numeric|nullable',
+            'length_in_unit'    =>'numeric|nullable',
+            'length_unit'       =>'in:Metre,Feet',
+            'color'             =>'nullable',
             'price'             =>'numeric|nullable',
             'currency'          =>'nullable',
             'year'              =>'numeric|nullable|date_format:Y',
@@ -112,8 +114,12 @@ class BoatController extends Controller
             $request['price'] = 0;
         }
 
-        if($request->length == null){
+        if($request->length_in_unit == null){
             $request['length'] = 0;
+        }else if($request->length_unit == 'Metre'){
+            $request['length'] = $this->toFeet($request->length_in_unit);
+        }else{
+            $request['length'] = $request->length_in_unit;
         }
 
         if($request->currency == null){
@@ -173,6 +179,9 @@ class BoatController extends Controller
         return back();
     }
 
+    private function toFeet($valueInMetre){
+        return floatval($valueInMetre) * 3.2808399;
+    }
     public function destroy($id=null){
         if($id!=null){
             $boat = Boat::findOrFail($id);

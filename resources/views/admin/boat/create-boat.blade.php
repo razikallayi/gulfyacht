@@ -111,16 +111,35 @@
 									</div>
 								</div>
 
-								<div class="col-sm-6">
-									<label>Length (in Ft)</label>
+								<div class="col-sm-3">
+									<label>Length</label>
 									<div class="form-group ">
 										<div class="form-line">
-											<input type="text" value="{{$boat->length or old('length')}}" name="length" class="form-control" >
+											<input type="text" value="{{$boat->length_in_unit or old('length_in_unit')}}" name="length_in_unit" class="form-control" >
 										</div>
 									</div>
 								</div>
 
-								<div class="col-sm-6">
+								<div class="col-sm-3">
+									<label>Length Unit</label>
+									<div class="form-group ">
+											<select name="length_unit"  class="form-control show-tick">
+												<option {{ (isset($boat) && @$boat->length_unit == 'Feet')?' selected ':''}}>Feet</option>
+												<option {{ (isset($boat) && @$boat->length_unit == 'Metre' )?' selected ':''}}>Metre</option>	
+											</select>
+									</div>
+								</div>
+
+								<div class="col-sm-3">
+									<label>Color</label>
+									<div class="form-group ">
+										<div class="form-line">
+											<input type="text" value="{{$boat->color or old('color')}}" name="color" maxlength="191" class="form-control" >
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-3">
 									<label>Condition</label>
 									<div class="form-group ">
 										<div class="form-line">
