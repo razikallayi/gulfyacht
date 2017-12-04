@@ -23,16 +23,6 @@ Route::get('clear',function(){
 	dd('cleared cache files');
 });
 
-Route::get('patch',function(){
-	$boats = App\Models\Boat::all();
-	foreach ($boats as $key => $boat) {
-		$boat->length_in_unit 	= $boat->length;
-		$boat->length_unit 	= 'Feet';
-		$boat->save();
-	}
-	dd('updated Length');
-});
-
 
 Route::get('/', 'MasterController@index');
 Route::get('about', 'MasterController@about');
