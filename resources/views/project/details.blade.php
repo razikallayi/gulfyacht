@@ -44,7 +44,7 @@
   <div class="container">
     <div class="col-md-12 no-padding">
        <div class="abt-tp con">
-         <h3>{{@$boat->type->name}} BOAT DETAIL PAGE</h3>
+          <!--<h3>{{@$boat->type->name}} BOAT DETAIL PAGE</h3>-->
        </div>
        
     </div>
