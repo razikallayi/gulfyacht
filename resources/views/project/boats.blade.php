@@ -358,20 +358,15 @@
 
     window.pagination={
       loading : false,
-      freshPage:true
+      freshPage:true,
+      total:0,
+      current_page:0,
+      from:0,
+      to:0,
+      next_page_url:null,
+      last_page:0,
+      per_page:0
     };
-
-    window.pagination.resetToFresh = function(){
-      window.pagination.freshPage=true;
-      window.pagination.total=0;
-      window.pagination.current_page=0;
-      window.pagination.from=0;
-      window.pagination.to=0;
-      window.pagination.next_page_url=null;
-      window.pagination.last_page=0;
-      window.pagination.per_page=0;
-    }
-
 
 
     $('#searchForm').submit(function(e){
@@ -471,9 +466,21 @@
 
 
     function search(){
-      window.pagination.resetToFresh();
+      // window.pagination.resetToFresh();
       $('#searchForm').submit();
     }
+
+    window.pagination.resetToFresh = function(){
+      window.pagination.freshPage=true;
+      window.pagination.total=0;
+      window.pagination.current_page=0;
+      window.pagination.from=0;
+      window.pagination.to=0;
+      window.pagination.next_page_url=null;
+      window.pagination.last_page=0;
+      window.pagination.per_page=0;
+    }
+
 
     isScrollAtBottom = function(boats){
      return ($(window).scrollTop() + $(window).height() > $(document).height() - ($('footer')[0].scrollHeight+300));
