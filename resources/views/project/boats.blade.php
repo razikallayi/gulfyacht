@@ -358,10 +358,17 @@
     freshPage:true
   };
 
-  function search(){
-    window.pagination.reset();
-    $('#searchForm').submit();
+  window.pagination.reset = function(boats){
+    window.pagination.freshPage=true;
+    window.pagination.total=0;
+    window.pagination.current_page=0;
+    window.pagination.from=0;
+    window.pagination.to=0;
+    window.pagination.next_page_url=null;
+    window.pagination.last_page=0;
+    window.pagination.per_page=0;
   }
+
 
 
   $('#searchForm').submit(function(e){
@@ -439,16 +446,6 @@
     window.pagination.last_page=boats.last_page;
     window.pagination.per_page=boats.per_page;
   }
-  window.pagination.reset = function(boats){
-    window.pagination.freshPage=true;
-    window.pagination.total=0;
-    window.pagination.current_page=0;
-    window.pagination.from=0;
-    window.pagination.to=0;
-    window.pagination.next_page_url=null;
-    window.pagination.last_page=0;
-    window.pagination.per_page=0;
-  }
 
   $(window).scroll(function() {
    if(isScrollAtBottom()) {
@@ -468,6 +465,12 @@
       // window.history.pushState("", "", url);
     }
   });
+
+  
+  function search(){
+    window.pagination.reset();
+    $('#searchForm').submit();
+  }
 
   isScrollAtBottom = function(boats){
      return ($(window).scrollTop() + $(window).height() > $(document).height() - ($('footer')[0].scrollHeight+300));
