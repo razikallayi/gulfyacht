@@ -347,7 +347,7 @@
    search();
  });
 
-}
+
     $('input[name="brands[]]"').change(function() {
       search();
     });
@@ -355,7 +355,7 @@
     $('input[name="type[]]"').change(function() {
       search();
     });
-
+}
     window.pagination={
       loading : false,
       freshPage:true,
