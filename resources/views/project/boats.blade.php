@@ -355,13 +355,13 @@
     $('input[name="type[]]"').change(function() {
       search();
     });
-    
+
     window.pagination={
       loading : false,
       freshPage:true
     };
 
-    window.pagination.reset = function(){
+    window.pagination.resetToFresh = function(){
       window.pagination.freshPage=true;
       window.pagination.total=0;
       window.pagination.current_page=0;
@@ -471,7 +471,7 @@
 
 
     function search(){
-      window.pagination.reset();
+      window.pagination.resetToFresh();
       $('#searchForm').submit();
     }
 
