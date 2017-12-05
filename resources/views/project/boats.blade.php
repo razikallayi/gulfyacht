@@ -342,12 +342,12 @@
    });
 
   });
-
+ if (navigator.userAgent.indexOf('Safari') != -1)  { 
   $(document).ready(function() {
    search();
  });
 
-  if (navigator.userAgent.indexOf('Safari') != -1)  { 
+}
     $('input[name="brands[]]"').change(function() {
       search();
     });
@@ -355,7 +355,7 @@
     $('input[name="type[]]"').change(function() {
       search();
     });
-  }
+  
   pagination={
     loading : false,
     freshPage:true
@@ -471,7 +471,7 @@
 
 
   function search(){
-    // window.pagination.reset();
+    window.pagination.reset();
     $('#searchForm').submit();
   }
 
