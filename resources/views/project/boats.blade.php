@@ -346,11 +346,11 @@
   $(document).ready(function() {
    search();
  });
-  $('input[name="brands[]"').change(function() {
+  $('input[name="brands[]]"').change(function() {
    search();
  });
 
-  $('input[name="type[]"').change(function() {
+  $('input[name="type[]]"').change(function() {
     search();
   });
   pagination={
