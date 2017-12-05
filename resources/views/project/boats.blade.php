@@ -346,7 +346,8 @@
   $(document).ready(function() {
    search();
  });
-  if ($.browser.safari) {
+
+  if (navigator.userAgent.indexOf('Safari') != -1)  { 
     $('input[name="brands[]]"').change(function() {
       search();
     });
