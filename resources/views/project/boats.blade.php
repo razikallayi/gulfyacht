@@ -374,7 +374,7 @@
   $('#searchForm').submit(function(e){
     e.preventDefault();
     var menu = '{{$menu or 'boats'}}';
-    var page = window.pagination.current_page;
+    var page = window.pagination.current_page==undefined?0:window.pagination.current_page;
 
     var formData = $('#searchForm').serialize();
     formData=formData+"&menu="+menu+"&page="+page;
