@@ -343,16 +343,16 @@
 
   });
 
-  $(document).ready(function() {
-   search();
- });
-  $('input[name="brands[]]"').change(function() {
-   search();
- });
+ //  $(document).ready(function() {
+ //   search();
+ // });
+ //  $('input[name="brands[]]"').change(function() {
+ //   search();
+ // });
 
-  $('input[name="type[]]"').change(function() {
-    search();
-  });
+ //  $('input[name="type[]]"').change(function() {
+ //    search();
+ //  });
   pagination={
     loading : false,
     freshPage:true
