@@ -376,7 +376,6 @@ console.log($('input[name="type[]"]'),'type');
 
     $('#searchForm').submit(function(e){
       e.preventDefault();
-      if(window.pagination.loading){return;}
       var menu = '{{$menu or 'boats'}}';
       var page = window.pagination.current_page==undefined?0:window.pagination.current_page;
 
