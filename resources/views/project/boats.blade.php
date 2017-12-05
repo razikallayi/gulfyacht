@@ -355,61 +355,61 @@
     $('input[name="type[]]"').change(function() {
       search();
     });
-  
-  pagination={
-    loading : false,
-    freshPage:true
-  };
+    
+    window.pagination={
+      loading : false,
+      freshPage:true
+    };
 
-  window.pagination.reset = function(){
-    window.pagination.freshPage=true;
-    window.pagination.total=0;
-    window.pagination.current_page=0;
-    window.pagination.from=0;
-    window.pagination.to=0;
-    window.pagination.next_page_url=null;
-    window.pagination.last_page=0;
-    window.pagination.per_page=0;
-  }
+    window.pagination.reset = function(){
+      window.pagination.freshPage=true;
+      window.pagination.total=0;
+      window.pagination.current_page=0;
+      window.pagination.from=0;
+      window.pagination.to=0;
+      window.pagination.next_page_url=null;
+      window.pagination.last_page=0;
+      window.pagination.per_page=0;
+    }
 
 
 
-  $('#searchForm').submit(function(e){
-    e.preventDefault();
-    var menu = '{{$menu or 'boats'}}';
-    var page = window.pagination.current_page==undefined?0:window.pagination.current_page;
+    $('#searchForm').submit(function(e){
+      e.preventDefault();
+      var menu = '{{$menu or 'boats'}}';
+      var page = window.pagination.current_page==undefined?0:window.pagination.current_page;
 
-    var formData = $('#searchForm').serialize();
-    formData=formData+"&menu="+menu+"&page="+page;
-    $.ajax({
-      method:'post',
-      url:$('#searchForm').attr('action'),
-      data:formData,
-      dataType    : 'json',
-      success:function(retData){
-        var content = '';
-        if(!$.trim(retData.boats.data)){
-          content = "<h4>No data to display</h4>";
-        }
+      var formData = $('#searchForm').serialize();
+      formData=formData+"&menu="+menu+"&page="+page;
+      $.ajax({
+        method:'post',
+        url:$('#searchForm').attr('action'),
+        data:formData,
+        dataType    : 'json',
+        success:function(retData){
+          var content = '';
+          if(!$.trim(retData.boats.data)){
+            content = "<h4>No data to display</h4>";
+          }
 
-        if(retData.menu == 'inventory'){
-          getView = getHalfWidthView;
-        }else{
-          getView = getFullWidthView;
-        }
+          if(retData.menu == 'inventory'){
+            getView = getHalfWidthView;
+          }else{
+            getView = getFullWidthView;
+          }
 
-        $.each(retData.boats.data, function(key,data){
-          var boat={};
-          boat.detailPageUrl = data.detailPageUrl==null?' ':data.detailPageUrl;
-          boat.id = data.id==null?' ':data.id;
-          boat.imageUrl  = data.imageUrl==null?'':data.imageUrl;
-          boat.title  = data.title==null?' ':data.title;
-          boat.description  = data.description==null?' ':data.description;
-          boat.location  = data.location==null?' ':data.location;
-          boat.price  = data.price==null?'0':data.price.toLocaleString('en-US');
-          boat.currency  = data.currency==null?"QAR":data.currency;
-          content += getView(boat);
-        });
+          $.each(retData.boats.data, function(key,data){
+            var boat={};
+            boat.detailPageUrl = data.detailPageUrl==null?' ':data.detailPageUrl;
+            boat.id = data.id==null?' ':data.id;
+            boat.imageUrl  = data.imageUrl==null?'':data.imageUrl;
+            boat.title  = data.title==null?' ':data.title;
+            boat.description  = data.description==null?' ':data.description;
+            boat.location  = data.location==null?' ':data.location;
+            boat.price  = data.price==null?'0':data.price.toLocaleString('en-US');
+            boat.currency  = data.currency==null?"QAR":data.currency;
+            content += getView(boat);
+          });
 
         // $('#boatPagination').html(paginationView(retData.boats));
         // $('.boatPagination').html(retData.pagination);
@@ -429,53 +429,53 @@
 
       }
     });
-  });
+    });
 
-  getFullWidthView = function(boat){
-    return '<div class="col-md-12 no-padding"><a href="'+boat.detailPageUrl+'" class="clearfix"><div class="col-md-5"><div class="buy-img"><img src="'+boat.imageUrl+'"></div></div><div class="col-md-7"><h4>'+boat.title+'</h4><p>'+boat.description+'</p><div class="ap clearfix"><div class="a">'+boat.location+'</div><div class="p">'+boat.price+' '+ boat.currency+'</div></div></div></a></div>';
+    getFullWidthView = function(boat){
+      return '<div class="col-md-12 no-padding"><a href="'+boat.detailPageUrl+'" class="clearfix"><div class="col-md-5"><div class="buy-img"><img src="'+boat.imageUrl+'"></div></div><div class="col-md-7"><h4>'+boat.title+'</h4><p>'+boat.description+'</p><div class="ap clearfix"><div class="a">'+boat.location+'</div><div class="p">'+boat.price+' '+ boat.currency+'</div></div></div></a></div>';
 
-  }
-
-  getHalfWidthView = function(boat){
-    return '<div class="col-md-6"><a href="'+boat.detailPageUrl+'"><div class="buy-img"><img src="'+boat.imageUrl+'"></div><h4>'+boat.title+'</h4><div class="ap clearfix"><div class="a">'+boat.location+'</div><div class="p">'+boat.price+' '+ boat.currency+'</div></div></a></div>';
-  }
-
-  window.pagination.setPaginationData = function(boats){
-    window.pagination.total=boats.total;
-    window.pagination.current_page=boats.current_page;
-    window.pagination.from=boats.from;
-    window.pagination.to=boats.to;
-    window.pagination.next_page_url=boats.next_page_url;
-    window.pagination.last_page=boats.last_page;
-    window.pagination.per_page=boats.per_page;
-  }
-
-  $(window).scroll(function() {
-   if(isScrollAtBottom()) {
-
-    if(window.pagination.loading){
-      return;
     }
-    if(window.pagination.current_page >= window.pagination.last_page){
-      return;
+
+    getHalfWidthView = function(boat){
+      return '<div class="col-md-6"><a href="'+boat.detailPageUrl+'"><div class="buy-img"><img src="'+boat.imageUrl+'"></div><h4>'+boat.title+'</h4><div class="ap clearfix"><div class="a">'+boat.location+'</div><div class="p">'+boat.price+' '+ boat.currency+'</div></div></a></div>';
     }
-    window.pagination.loading = true;
-    window.pagination.freshPage = false;
-    var url = $(this).attr('href');
-    window.pagination.current_page++;
-    $('#searchForm').attr('action',url);
-    $('#searchForm').submit();
+
+    window.pagination.setPaginationData = function(boats){
+      window.pagination.total=boats.total;
+      window.pagination.current_page=boats.current_page;
+      window.pagination.from=boats.from;
+      window.pagination.to=boats.to;
+      window.pagination.next_page_url=boats.next_page_url;
+      window.pagination.last_page=boats.last_page;
+      window.pagination.per_page=boats.per_page;
+    }
+
+    $(window).scroll(function() {
+     if(isScrollAtBottom()) {
+
+      if(window.pagination.loading){
+        return;
+      }
+      if(window.pagination.current_page >= window.pagination.last_page){
+        return;
+      }
+      window.pagination.loading = true;
+      window.pagination.freshPage = false;
+      var url = $(this).attr('href');
+      window.pagination.current_page++;
+      $('#searchForm').attr('action',url);
+      $('#searchForm').submit();
       // window.history.pushState("", "", url);
     }
   });
 
 
-  function search(){
-    window.pagination.reset();
-    $('#searchForm').submit();
-  }
+    function search(){
+      window.pagination.reset();
+      $('#searchForm').submit();
+    }
 
-  isScrollAtBottom = function(boats){
+    isScrollAtBottom = function(boats){
      return ($(window).scrollTop() + $(window).height() > $(document).height() - ($('footer')[0].scrollHeight+300));
    }
 </script>
