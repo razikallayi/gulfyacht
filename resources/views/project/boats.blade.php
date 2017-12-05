@@ -343,13 +343,9 @@
 
   });
 
-var pageInitialized = false;
-$(function()
-{
-    if(pageInitialized) return;
-    pageInitialized = true;
-    search();
-});
+  $(window).load(function() {
+   search();
+ });
 
 
     // $('input[name="brands[]]"').change(function() {
