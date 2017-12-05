@@ -358,7 +358,7 @@
     freshPage:true
   };
 
-  window.pagination.reset = function(boats){
+  window.pagination.reset = function(){
     window.pagination.freshPage=true;
     window.pagination.total=0;
     window.pagination.current_page=0;
@@ -466,9 +466,9 @@
     }
   });
 
-  
+
   function search(){
-    window.pagination.reset();
+    // window.pagination.reset();
     $('#searchForm').submit();
   }
 
