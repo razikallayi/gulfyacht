@@ -359,7 +359,7 @@
   };
 
   function search(){
-    pagination.reset();
+    window.pagination.reset();
     $('#searchForm').submit();
   }
 
@@ -367,7 +367,7 @@
   $('#searchForm').submit(function(e){
     e.preventDefault();
     var menu = '{{$menu or 'boats'}}';
-    var page = pagination.current_page;
+    var page = window.pagination.current_page;
 
     var formData = $('#searchForm').serialize();
     formData=formData+"&menu="+menu+"&page="+page;
@@ -403,10 +403,10 @@
 
         // $('#boatPagination').html(paginationView(retData.boats));
         // $('.boatPagination').html(retData.pagination);
-        pagination.loading=false;
-        pagination.setPaginationData(retData.boats);
+        window.pagination.loading=false;
+        window.pagination.setPaginationData(retData.boats);
 
-        if(pagination.freshPage){
+        if(window.pagination.freshPage){
           $('#boatContent').html(content);
         }else{
           $('#boatContent').append(content);
@@ -430,39 +430,39 @@
     return '<div class="col-md-6"><a href="'+boat.detailPageUrl+'"><div class="buy-img"><img src="'+boat.imageUrl+'"></div><h4>'+boat.title+'</h4><div class="ap clearfix"><div class="a">'+boat.location+'</div><div class="p">'+boat.price+' '+ boat.currency+'</div></div></a></div>';
   }
 
-  pagination.setPaginationData = function(boats){
-    pagination.total=boats.total;
-    pagination.current_page=boats.current_page;
-    pagination.from=boats.from;
-    pagination.to=boats.to;
-    pagination.next_page_url=boats.next_page_url;
-    pagination.last_page=boats.last_page;
-    pagination.per_page=boats.per_page;
+  window.pagination.setPaginationData = function(boats){
+    window.pagination.total=boats.total;
+    window.pagination.current_page=boats.current_page;
+    window.pagination.from=boats.from;
+    window.pagination.to=boats.to;
+    window.pagination.next_page_url=boats.next_page_url;
+    window.pagination.last_page=boats.last_page;
+    window.pagination.per_page=boats.per_page;
   }
-  pagination.reset = function(boats){
-    pagination.freshPage=true;
-    pagination.total=0;
-    pagination.current_page=0;
-    pagination.from=0;
-    pagination.to=0;
-    pagination.next_page_url=null;
-    pagination.last_page=0;
-    pagination.per_page=0;
+  window.pagination.reset = function(boats){
+    window.pagination.freshPage=true;
+    window.pagination.total=0;
+    window.pagination.current_page=0;
+    window.pagination.from=0;
+    window.pagination.to=0;
+    window.pagination.next_page_url=null;
+    window.pagination.last_page=0;
+    window.pagination.per_page=0;
   }
 
   $(window).scroll(function() {
    if(isScrollAtBottom()) {
 
-    if(pagination.loading){
+    if(window.pagination.loading){
       return;
     }
-    if(pagination.current_page >= pagination.last_page){
+    if(window.pagination.current_page >= window.pagination.last_page){
       return;
     }
-    pagination.loading = true;
-    pagination.freshPage = false;
+    window.pagination.loading = true;
+    window.pagination.freshPage = false;
     var url = $(this).attr('href');
-    pagination.current_page++;
+    window.pagination.current_page++;
     $('#searchForm').attr('action',url);
     $('#searchForm').submit();
       // window.history.pushState("", "", url);
