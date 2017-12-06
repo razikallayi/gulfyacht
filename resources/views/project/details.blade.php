@@ -129,7 +129,7 @@
            <p>{{$boat->description}}</p>
 <h4>Specification</h4>
 <ul>
-              <li><span>Length Overall:</span><span>{{$boat->length_overall}}</span></li>
+              <li><span>Length Overall:</span><span>{{$boat->length_overall!=0?$boat->length_overall." ".$boat->overall_length_unit:""}}</span></li>
               <li><span>Beam: </span><span>{{$boat->beam}} </span></li>
               <li><span>Draft: </span><span>{{$boat->draft}}</span></li>
               <li><span>Engine: </span><span>{{$boat->engine}}</span></li>

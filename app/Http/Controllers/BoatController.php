@@ -116,6 +116,7 @@ class BoatController extends Controller
 
         if($request->length_in_unit == null){
             $request['length'] = 0;
+            $request['length_in_unit'] = 0;
         }else if($request->length_unit == 'Metre'){
             $request['length'] = $this->toFeet($request->length_in_unit);
         }else{

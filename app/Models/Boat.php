@@ -28,6 +28,7 @@ class Boat extends Model
         'phone',
         'description',
         'length_overall',
+        'overall_length_unit',
         'beam',
         'draft',
         'engine',

@@ -181,7 +181,7 @@
 									<h4 class="bg-project" style="padding:10px">Specification</h4>
 								</div>
 
-								<div class="col-sm-4">
+								<div class="col-sm-3">
 									<label>Length Overall</label>
 									<div class="form-group ">
 										<div class="form-line">
@@ -190,8 +190,18 @@
 									</div>
 								</div>
 
+								<div class="col-sm-3">
+									<label>Overall Length Unit</label>
+									<div class="form-group ">
+											<select name="overall_length_unit"  class="form-control show-tick">
+												<option {{ (isset($boat) && @$boat->overall_length_unit == 'Feet')?' selected ':''}}>Feet</option>
+												<option {{ (isset($boat) && @$boat->overall_length_unit == 'Metre' )?' selected ':''}}>Metre</option>	
+											</select>
+									</div>
+								</div>
 
-								<div class="col-sm-4">
+
+								<div class="col-sm-3">
 									<label>Beam</label>
 									<div class="form-group ">
 										<div class="form-line">
@@ -200,7 +210,7 @@
 									</div>
 								</div>
 
-								<div class="col-sm-4">
+								<div class="col-sm-3">
 									<label>Draft</label>
 									<div class="form-group ">
 										<div class="form-line">
