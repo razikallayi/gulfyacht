@@ -118,7 +118,7 @@
          
            <h2>{{$boat->title}}</h2>
            <ul>
-              <li><span>Price: </span><span class="orange-color">{{$boat->price}} {{$boat->currency}} </span></li>
+              <li><span>Price: </span><span class="orange-color">{{number_format($boat->price)}} {{$boat->currency}} </span></li>
               <li><span>Location:</span><span>{{$boat->location}} </span></li>
               <li><span>Year:</span><span>{{$boat->year}}</span></li>
               <li><span>Length :  </span><span>{{$boat->length_in_unit}} {{$boat->length_unit}}</span></li>
