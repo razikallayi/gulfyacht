@@ -131,19 +131,19 @@
 								</div>
 
 								<div class="col-sm-3">
-									<label>Color</label>
+									<label>Condition</label>
 									<div class="form-group ">
 										<div class="form-line">
-											<input type="text" value="{{$boat->color or old('color')}}" name="color" maxlength="191" class="form-control" >
+											<input type="text" value="{{$boat->condition or old('condition')}}" name="condition" maxlength="191" class="form-control" >
 										</div>
 									</div>
 								</div>
 
 								<div class="col-sm-3">
-									<label>Condition</label>
+									<label>Color</label>
 									<div class="form-group ">
 										<div class="form-line">
-											<input type="text" value="{{$boat->condition or old('condition')}}" name="condition" maxlength="191" class="form-control" >
+											<input type="text" value="{{$boat->color or old('color')}}" name="color" maxlength="191" class="form-control" >
 										</div>
 									</div>
 								</div>

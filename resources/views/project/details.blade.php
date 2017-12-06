@@ -122,8 +122,8 @@
               <li><span>Location:</span><span>{{$boat->location}} </span></li>
               <li><span>Year:</span><span>{{$boat->year}}</span></li>
               <li><span>Length :  </span><span>{{$boat->length_in_unit}} {{$boat->length_unit}}</span></li>
-              <li><span>Color :	</span><span>{{$boat->color}}</span></li>
               <li><span>Condition:</span><span>{{$boat->condition}}</span></li>
+              <li><span>Color :	</span><span>{{$boat->color}}</span></li>
            </ul>
            <h4>Description</h4>
            <p>{{$boat->description}}</p>
