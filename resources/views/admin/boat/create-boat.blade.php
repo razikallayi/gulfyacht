@@ -172,7 +172,7 @@
 									<label>Phone</label>
 									<div class="form-group ">
 										<div class="form-line">
-											<input type="number" value="{{$boat->phone or old('phone')}}" name="phone" maxlength="191" class="form-control" >
+											<input type="text" value="{{$boat->phone or old('phone')}}" name="phone" maxlength="191" class="form-control" >
 										</div>
 									</div>
 								</div>
